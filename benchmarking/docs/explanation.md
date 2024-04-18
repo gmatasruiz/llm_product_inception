@@ -1,3 +1,5 @@
+# TODO: Update docs
+
 # ChatGPTBenchmark
 The `ChatGPTBenchmark` class represents an integral tool developed for the purpose of evaluating and refining prompts utilized in the benchmarking of ChatGPT, along with other comparable Large Language Models (LLMs). This class amalgamates a variety of methods from the disciplines of Natural Language Processing (NLP) and Machine Learning (ML), aimed at scrutinizing and augmenting both the quality and diversity of prompts and their ensuing responses. The ensuing discussion delineates the components of this class and their pertinence in the context of benchmarking LLMs such as ChatGPT.
 
