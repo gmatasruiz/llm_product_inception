@@ -16,7 +16,7 @@ nltk.download("punkt")
 nltk.download("stopwords")
 
 
-class AbstractLLMBenchmark(ABC):
+class BaseLLMBenchmark(ABC):
 
     def __init__(self):
         self.vectorizer = TfidfVectorizer()

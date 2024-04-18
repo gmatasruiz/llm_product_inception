@@ -1,13 +1,13 @@
-from AbstractLLMBenchmark import AbstractLLMBenchmark
+from benchmarking.classes.BaseLLMBenchmark import BaseLLMBenchmark
 
 
-class ChatGPTBenchmark(AbstractLLMBenchmark):
+class ChatGPTBenchmark(BaseLLMBenchmark):
     NotImplemented
 
 
-class Mixtral8x7BBenchmark(AbstractLLMBenchmark):
+class Mixtral8x7BBenchmark(BaseLLMBenchmark):
     NotImplemented
 
 
-class LlamaV38BBenchmark(AbstractLLMBenchmark):
+class LlamaV38BBenchmark(BaseLLMBenchmark):
     NotImplemented
