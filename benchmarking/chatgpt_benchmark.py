@@ -1,4 +1,4 @@
-from classes.GPTBenchmark import ChatGPTBenchmark
+from benchmarking.classes.SpecificLLMBenchmark import ChatGPTBenchmark
 
 # Example usage
 benchmark = ChatGPTBenchmark()

@@ -10,12 +10,14 @@ import nltk
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from abc import ABC, abstractmethod
 
 nltk.download("punkt")
 nltk.download("stopwords")
 
 
-class ChatGPTBenchmark:
+class AbstractLLMBenchmark(ABC):
+
     def __init__(self):
         self.vectorizer = TfidfVectorizer()
         self.stop_words = set(stopwords.words("english"))
@@ -144,7 +146,7 @@ class ChatGPTBenchmark:
         """Plot all benchmarking metrics based on the history of evaluations."""
         metrics_df = pd.DataFrame(self.metrics_history)
         metrics_df.plot(kind="bar", figsize=(10, 6))
-        plt.title("ChatGPT Benchmarking Metrics")
+        plt.title("LLM Benchmarking Metrics")
         plt.ylabel("Scores")
         plt.xlabel("Evaluation Instance")
         plt.xticks(rotation=0)
