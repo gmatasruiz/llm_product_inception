@@ -27,18 +27,10 @@ examples = {
 }
 
 for k in examples.keys():
-    pprint(f" Case: {examples[k]['title']}")
+    pprint(f"Case: {examples[k]['title']}")
     evaluation = benchmark.evaluate_response(
         examples[k]["prompt"],
         examples[k]["expected_response"],
         examples[k]["chatgpt_response"],
     )
     pprint(evaluation)
-
-benchmark.plot_metrics()
-
-print(
-    benchmark.evaluate_sentiment_alignment(
-        "I hate this product!", "I do not think I like this product!"
-    )
-)

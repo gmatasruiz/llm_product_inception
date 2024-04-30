@@ -234,7 +234,7 @@ class BaseLLMBenchmark(ABC):
 
         return weighted_similarity
 
-    def bert_vectorize(self, text):
+    def bert_vectorize(self, text: str):
         """
         Vectorize the input text using BERT and return the vector representation.
 
