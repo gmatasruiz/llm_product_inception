@@ -1,4 +1,3 @@
-from classes.BaseLLMBenchmark import BaseLLMBenchmark
 from classes.SpecificLLMBenchmark import ChatGPTBenchmark
 
 # Example usage

@@ -9,7 +9,7 @@ from nltk.corpus import stopwords
 import nltk
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
 from abc import ABC, abstractmethod
 
 nltk.download("punkt")
@@ -22,8 +22,9 @@ class BaseLLMBenchmark(ABC):
         self.vectorizer = TfidfVectorizer()
         self.stop_words = set(stopwords.words("english"))
         self.metrics_history = []
+        self.prompt_vectors = []  # Added for storing prompt vectors
 
-    def preprocess(self, text):
+    def preprocess(self, text: str):
         # Tokenize, remove stopwords, and lowercase
         tokens = word_tokenize(text)
         filtered_tokens = [
@@ -41,10 +42,14 @@ class BaseLLMBenchmark(ABC):
         self.prompt_vectors.append(vector[0])
         return vector
 
-    def plot_prompt_centroids(self):
-        """Plot the centroids of the vectorized prompts in 2D space."""
+    def plot_prompt_centroids(self, n_components: int = 2):
+        """Plot the centroids of the vectorized prompts in 2D space using Plotly Express."""
         if not self.prompt_vectors:
             print("No prompts have been vectorized yet.")
+            return
+
+        if n_components not in [2, 3]:
+            print("Dimensions are not correct, please set to `2` or `3`")
             return
 
         # Convert the list of vectors to a matrix for PCA
@@ -54,22 +59,36 @@ class BaseLLMBenchmark(ABC):
         vectors_matrix = StandardScaler().fit_transform(vectors_matrix)
 
         # PCA to reduce to 2 dimensions
-        pca = PCA(n_components=2)
+        pca = PCA(n_components)
         principalComponents = pca.fit_transform(vectors_matrix)
+        pca_columns = [f"PC {i+1}" for i in range(n_components)]
 
         # Convert to a DataFrame for ease of plotting
-        df = pd.DataFrame(data=principalComponents, columns=["PC 1", "PC 2"])
+        df = pd.DataFrame(data=principalComponents, columns=pca_columns)
 
-        # Plotting
-        plt.figure(figsize=(8, 6))
-        plt.scatter(df["PC 1"], df["PC 2"], s=50, alpha=0.5)
-        plt.title("Centroids of Vectorized Prompts")
-        plt.xlabel("Principal Component 1")
-        plt.ylabel("Principal Component 2")
-        plt.grid(True)
-        plt.show()
+        # Plotting using Plotly Express
+        if n_components == 2:
+            fig = px.scatter(
+                df,
+                x=df.columns[0],
+                y=df.columns[1],
+                title="Centroids of Vectorized Prompts",
+            )
+        elif n_components == 3:
+            fig = px.scatter_3d(
+                df,
+                x=df.columns[0],
+                y=df.columns[1],
+                z=df.columns[2],
+                title="Centroids of Vectorized Prompts",
+            )
 
-    def semantic_similarity(self, model, tokens1, tokens2):
+        fig.update_traces(marker=dict(size=12, opacity=0.5))
+        fig.show()
+
+    def semantic_similarity(
+        self, model: Word2Vec, tokens1: list[str], tokens2: list[str]
+    ):
         # Calculates average similarity between two sets of tokens
         similarities = []
         for token1 in tokens1:
@@ -78,11 +97,11 @@ class BaseLLMBenchmark(ABC):
                     similarities.append(model.wv.similarity(token1, token2))
         return np.mean(similarities) if similarities else 0
 
-    def evaluate_accuracy(self, expected_response, chatgpt_response):
+    def evaluate_accuracy(self, expected_response: str, llm_response: str):
         # Placeholder for accuracy; consider domain-specific methods for real accuracy assessment
-        return 1 / (1 + np.abs(len(expected_response) - len(chatgpt_response)))
+        return 1 / (1 + np.abs(len(expected_response) - len(llm_response)))
 
-    def evaluate_coherence(self, response):
+    def evaluate_coherence(self, response: str):
         # Use TextBlob for a simple proxy of coherence through readability (sentence length and complexity)
         blob = TextBlob(response)
         sentence_lengths = [len(sentence.words) for sentence in blob.sentences]
@@ -92,7 +111,7 @@ class BaseLLMBenchmark(ABC):
         )
         return coherence_score
 
-    def evaluate_creativity(self, prompt_tokens, response_tokens):
+    def evaluate_creativity(self, prompt_tokens: str, response_tokens: str):
         # Creativity: lexical diversity in the response not present in the prompt
         unique_response_tokens = set(response_tokens) - set(prompt_tokens)
         if not response_tokens:
@@ -100,41 +119,39 @@ class BaseLLMBenchmark(ABC):
         return len(unique_response_tokens) / len(set(response_tokens))
 
     def evaluate_engagement(self, response):
-        # Placeholder for engagement; could be enhanced with more sophisticated NLP metrics
+        # TODO: Placeholder for engagement; could be enhanced with more sophisticated NLP metrics
         return len(response) / 1000  # Simple proxy based on length
 
-    def evaluate_sentiment_alignment(self, expected_response, chatgpt_response):
+    def evaluate_sentiment_alignment(self, expected_response: str, llm_response: str):
         expected_sentiment = TextBlob(expected_response).sentiment.polarity
-        response_sentiment = TextBlob(chatgpt_response).sentiment.polarity
+        response_sentiment = TextBlob(llm_response).sentiment.polarity
         return 1 - abs(expected_sentiment - response_sentiment)
 
     def evaluate_response(
-        self, prompt: str, expected_response: str, chatgpt_response: str
+        self, prompt: str, expected_response: str, llm_response: str
     ) -> dict:
         prompt_tokens = self.preprocess(prompt)
         expected_tokens = self.preprocess(expected_response)
-        response_tokens = self.preprocess(chatgpt_response)
+        response_tokens = self.preprocess(llm_response)
 
         # Train Word2Vec model on the combined corpus to get vectors for semantic similarity
         model = Word2Vec([prompt_tokens, expected_tokens, response_tokens], min_count=1)
 
-        # Semantic similarity between expected and ChatGPT response
+        # Semantic similarity between expected and LLM response
         relevance_score = self.semantic_similarity(
             model, expected_tokens, response_tokens
         )
 
         results = {
             "relevance_score": relevance_score,
-            "accuracy_score": self.evaluate_accuracy(
-                expected_response, chatgpt_response
-            ),
-            "coherence_score": self.evaluate_coherence(chatgpt_response),
+            "accuracy_score": self.evaluate_accuracy(expected_response, llm_response),
+            "coherence_score": self.evaluate_coherence(llm_response),
             "creativity_score": self.evaluate_creativity(
                 prompt_tokens, response_tokens
             ),
-            "engagement_score": self.evaluate_engagement(chatgpt_response),
+            "engagement_score": self.evaluate_engagement(llm_response),
             "sentiment_alignment": self.evaluate_sentiment_alignment(
-                expected_response, chatgpt_response
+                expected_response, llm_response
             ),
         }
 
@@ -143,12 +160,28 @@ class BaseLLMBenchmark(ABC):
         return results
 
     def plot_metrics(self):
-        """Plot all benchmarking metrics based on the history of evaluations."""
+        """Plot all benchmarking metrics based on the history of evaluations using Plotly Express."""
         metrics_df = pd.DataFrame(self.metrics_history)
-        metrics_df.plot(kind="bar", figsize=(10, 6))
-        plt.title("LLM Benchmarking Metrics")
-        plt.ylabel("Scores")
-        plt.xlabel("Evaluation Instance")
-        plt.xticks(rotation=0)
-        plt.legend(loc="upper right")
-        plt.show()
+        metrics_df = metrics_df.rename(
+            columns={
+                col_name: col_name.replace("_", " ").title()
+                for col_name in metrics_df.columns
+            }
+        )
+        fig = px.bar(
+            metrics_df,
+            y=metrics_df.columns,
+            barmode="group",
+            text_auto=".3f",
+            title="LLM Benchmarking Metrics",
+        )
+        fig.update_xaxes(
+            showticklabels=False,
+            type="category",
+        )
+        fig.update_layout(
+            xaxis_title="Evaluation Instance",
+            yaxis_title="Scores",
+            legend_title="Metrics",
+        )
+        fig.show()

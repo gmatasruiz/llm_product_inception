@@ -1,4 +1,4 @@
-from BaseLLMBenchmark import BaseLLMBenchmark
+from classes.BaseLLMBenchmark import BaseLLMBenchmark
 
 
 class ChatGPTBenchmark(BaseLLMBenchmark):
