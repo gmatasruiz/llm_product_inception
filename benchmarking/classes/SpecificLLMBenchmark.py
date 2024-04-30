@@ -1,6 +1,8 @@
+# --- Imports ---
 from classes.BaseLLMBenchmark import BaseLLMBenchmark
 
 
+# --- Classes ---
 class ChatGPTBenchmark(BaseLLMBenchmark):
     """
     ChatGPTBenchmark class for evaluating the performance of ChatGPT Language Model (LLM).
