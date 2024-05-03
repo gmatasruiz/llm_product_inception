@@ -15,7 +15,7 @@ MODEL_DEF = {
     "applesilicon_mixtral-8x7b": {
         "display_name": "(Apple Silicon) Mixtral 8x7B",
         "name": "AppleS_mixtral-8x-7b",
-        "hf_id": "mlx-community/Mixtral-8x7B-v0.1",
+        "hf_id": "mlx-community/Mixtral-8x7B-v0.1-hf-4bit-mlx",
     },
     "meta-llama-3-8b": {
         "display_name": "Meta Llama3 8B",
@@ -25,7 +25,7 @@ MODEL_DEF = {
     "applesilicon_meta-llama-3-8b": {
         "display_name": "(Apple Silicon) Meta Llama3 8B",
         "name": "AppleS_Meta-Llama-3-8B",
-        "hf_id": "mlx-community/Meta-Llama-3-8B-4bit",
+        "hf_id": "mlx-community/Meta-Llama-3-8B-Instruct-4bit",
     },
 }
 
@@ -127,13 +127,14 @@ class AppleSiliconMixtral8x7BInstance(AppleSiliconBaseLLMInstance):
 
     def process_prompt(self, prompt: str, **llm_kwargs):
         # From: https://medium.com/@xuer.chen.human/beginners-guide-to-running-llama-3-8b-on-a-macbook-air-ffb380aeef0c
-
-        messages = [{"role": "user", "content": prompt}]
-        input_ids = self.tokenizer.apply_chat_template(
-            messages, add_generation_prompt=True
+        messages = [
+            {"role": "user", "content": prompt},
+        ]
+        input_ids = self.tokenizer.apply_chat_template(messages)
+        prompt_ = self.tokenizer.decode([input_ids[0]])
+        response = mlx_lm.generate(
+            self.model, self.tokenizer, prompt=prompt, **llm_kwargs
         )
-        prompt = self.tokenizer.decode(input_ids[0].tolist())
-        response = mlx_lm.generate(self.model, self.tokenizer, prompt=prompt)
         return response
 
     def write_response(self, filepath: str, response: str):
@@ -172,7 +173,7 @@ class AppleSiliconLlamaV38BInstance(AppleSiliconBaseLLMInstance):
 
 if __name__ == "__main__":
     # Instantiate the model class with the desired LLM model name
-    model_instance = AppleSiliconLlamaV38BInstance()
+    model_instance = AppleSiliconMixtral8x7BInstance()
 
     # Process prompts given the paths to source and template JSON files
     prompt = "Provide a list of three states of the USA, only the names."
