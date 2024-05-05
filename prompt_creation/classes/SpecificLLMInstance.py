@@ -47,7 +47,45 @@ class ChatGPTInstance(BaseLLMInstance):
 
 
 class Mixtral8x7BInstance(BaseLLMInstance):
+    """
+    Mixtral8x7BInstance is a class that represents an instance of the Mixtral 8x7B language model in the MLX and Transformers libraries.
+
+    Attributes:
+        model_info (dict): Information about the model.
+            - display_name (str): The display name of the model.
+            - name (str): The name of the model.
+            - basemodel_hf_id (str): The Hugging Face ID of the base model.
+            - mlx_hf_id (str): The Hugging Face ID of the quantized MLX model.
+        model_id (str): The ID of the model to be used.
+
+    Methods:
+        __init__(self, use_mlx_model=True): Initializes a Mixtral8x7BInstance object.
+        get_model_device(self, device_map: str = "auto"): Returns the device on which the model is initialized.
+        init_model(self, model_kwargs: dict = {"torch_dtype": torch.float16}): Initializes the language model and tokenizer.
+        read_prompt(self, source_file_path: str, template_file_path: str): Reads and merges source and template JSON data.
+        process_prompt(self, prompt: str, **llm_kwargs): Generates a response by processing the prompt, using the language model.
+        write_response(self, filepath: str, response: str, meta: dict = {}): Writes the response to a file.
+    """
+
     def __init__(self, use_mlx_model=True):
+        """
+        Initialize a Mixtral8x7BInstance object.
+
+        Parameters:
+            use_mlx_model (bool, optional): Whether to use the quantized MLX model or the base model from Hugging Face. Defaults to True.
+
+        Attributes:
+            model_info (dict): Information about the model.
+                - display_name (str): The display name of the model.
+                - name (str): The name of the model.
+                - basemodel_hf_id (str): The Hugging Face ID of the base model.
+                - mlx_hf_id (str): The Hugging Face ID of the quantized MLX model.
+
+            model_id (str): The ID of the model to be used.
+
+        Returns:
+            None
+        """
         # Set model data
         self.model_info = MODEL_DEF["mixtral-8x7b"]
 
@@ -69,7 +107,19 @@ class Mixtral8x7BInstance(BaseLLMInstance):
             "torch_dtype": torch.float16,
         },
     ):
+        """
+        Initializes the language model and tokenizer.
 
+        Parameters:
+            model_kwargs (dict, optional): Keyword arguments for model initialization. Defaults to {"torch_dtype": torch.float16}.
+
+        Returns:
+            None
+
+        Notes:
+            - If CUDA is available and the device is set to CUDA, the model will be initialized with 4-bit quantization configuration.
+            - If CUDA is not available or the device is not CUDA, the model will be initialized with MLX configuration.
+        """
         # 4-bit quantization configuration -- Not available on devices with no CUDA support -
         if torch.cuda.is_available() and self.device == torch.device("cuda"):
             nf4_config = transformers.BitsAndBytesConfig(
@@ -100,19 +150,38 @@ class Mixtral8x7BInstance(BaseLLMInstance):
         return super().read_prompt(source_file_path, template_file_path)
 
     def process_prompt(self, prompt: str, **llm_kwargs):
+        """
+        Process the prompt by generating a response using the language model.
+
+        Parameters:
+            prompt (str): The prompt to be processed.
+            **llm_kwargs: Additional keyword arguments for generating the response.
+
+        Returns:
+            str: The generated response.
+
+        Notes:
+            - The prompt is converted into a list of messages, where each message has a role and content.
+            - The tokenizer applies a chat template to the messages and converts them into input IDs.
+            - If the device is set to 'mps', MLX is used for generating the response.
+            - If the device is not 'mps', transformers is used for generating the response.
+            - The generated response is decoded and returned as a string.
+        """
 
         messages = [{"role": "user", "content": prompt}]
         input_ids = self.tokenizer.apply_chat_template(messages)
 
         if self.device == torch.device("mps"):
             # Using MLX
+            # Decode and return the generated text
             prompt = self.tokenizer.decode(input_ids)
+
+            # Generate response using the model
             response = mlx_lm.generate(
                 self.model, self.tokenizer, prompt=prompt, **llm_kwargs
             )
         else:
             # Using transformers
-
             # Generate response using the model
             outputs = self.model.generate(input_ids, **llm_kwargs)
 
@@ -121,12 +190,46 @@ class Mixtral8x7BInstance(BaseLLMInstance):
 
         return response
 
-    def write_response(self, filepath: str, response: str):
-        super().write_response(filepath, response)
+    def write_response(self, filepath: str, response: str, meta: dict = {}):
+        super().write_response(filepath, response, meta)
 
 
 class LlamaV38BInstance(BaseLLMInstance):
+    """
+    LlamaV38BInstance is a class that extends the BaseLLMInstance abstract base class and provides specific functionality for the LlamaV38B language model.
+
+    Attributes:
+        model_info (dict): Information about the LlamaV38B model, including display name, name, base model Hugging Face ID, and MLX Hugging Face ID.
+
+    Methods:
+        __init__(self, use_mlx_model=True): Initializes the LlamaV38BInstance object.
+        get_model_device(self, device_map: str = "auto"): Returns the device on which the model is initialized.
+        init_model(self, model_kwargs: dict = {"torch_dtype": torch.bfloat16}): Initializes the language model and tokenizer.
+        read_prompt(self, source_file_path: str, template_file_path: str): Reads and merges source and template JSON data.
+        process_prompt(self, prompt: str, **llm_kwargs): Generates a response by processing the prompt using the LlamaV38B language model.
+        write_response(self, filepath: str, response: str, meta: dict = {}): Writes the response to a file.
+
+    """
+
     def __init__(self, use_mlx_model=True):
+        """
+        Initialize a LlamaV38BInstance object.
+
+        Parameters:
+            use_mlx_model (bool, optional): Whether to use the quantized MLX model or the base model from Hugging Face. Defaults to True.
+
+        Attributes:
+            model_info (dict): Information about the model.
+                - display_name (str): The display name of the model.
+                - name (str): The name of the model.
+                - basemodel_hf_id (str): The Hugging Face ID of the base model.
+                - mlx_hf_id (str): The Hugging Face ID of the quantized MLX model.
+
+            model_id (str): The ID of the model to be used.
+
+        Returns:
+            None
+        """
         # Set model data
         self.model_info = MODEL_DEF["meta-llama-3-8b"]
 
@@ -154,13 +257,34 @@ class LlamaV38BInstance(BaseLLMInstance):
         return super().read_prompt(source_file_path, template_file_path)
 
     def process_prompt(self, prompt: str, **llm_kwargs):
+        """
+        Process the prompt by generating a response using the language model.
+
+        Parameters:
+            prompt (str): The prompt to be processed.
+            **llm_kwargs: Additional keyword arguments for generating the response.
+
+        Returns:
+            str: The generated response.
+
+        Notes:
+            - The prompt is converted into a list of messages, where each message has a role and content.
+            - The tokenizer applies a chat template to the messages and converts them into input IDs.
+            - If the device is set to 'mps', MLX is used for generating the response.
+            - If the device is not 'mps', transformers is used for generating the response.
+            - The generated response is decoded and returned as a string.
+            - Algorithm from: https://medium.com/@xuer.chen.human/beginners-guide-to-running-llama-3-8b-on-a-macbook-air-ffb380aeef0c
+        """
+
         messages = [{"role": "user", "content": prompt}]
         input_ids = self.tokenizer.apply_chat_template(messages)
 
         if self.device == torch.device("mps"):
             # Using MLX
-            # From: https://medium.com/@xuer.chen.human/beginners-guide-to-running-llama-3-8b-on-a-macbook-air-ffb380aeef0c
+
+            # Decode and return the generated text
             prompt = self.tokenizer.decode(input_ids)
+            # Generate response using the model
             response = mlx_lm.generate(
                 self.model, self.tokenizer, prompt=prompt, **llm_kwargs
             )
@@ -173,8 +297,8 @@ class LlamaV38BInstance(BaseLLMInstance):
             response = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
         return response
 
-    def write_response(self, filepath: str, response: str):
-        super().write_response(filepath, response)
+    def write_response(self, filepath: str, response: str, meta: dict = {}):
+        super().write_response(filepath, response, meta)
 
 
 if __name__ == "__main__":
