@@ -1,0 +1,10 @@
+{
+    "__meta__": {
+        "template_filepath": "prompt_creation/results/Mixtral-8x7B/step1/templates/template1_step1.json",
+        "doctype": "prompt_template",
+        "step_number": "1",
+        "iteration_number": "1",
+        "comments": "This file should contain a template including the %%source placeholder>>"
+    },
+    "data": "Your task is to follow the user instructions: %%source"
+}

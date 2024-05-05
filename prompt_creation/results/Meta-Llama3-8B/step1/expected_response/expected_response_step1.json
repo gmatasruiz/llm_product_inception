@@ -1,0 +1,9 @@
+{
+    "__meta__": {
+        "source_filepath": "prompt_creation/results/Mixtral-8x7B/step1/source/source_step1.json",
+        "doctype": "expected_response",
+        "step_number": "1",
+        "comments": "Expected response as defined by the user"
+    },
+    "data": "3, 5, 7"
+}
