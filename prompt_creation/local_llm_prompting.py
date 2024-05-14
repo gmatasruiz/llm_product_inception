@@ -2,8 +2,8 @@
 import os
 import json
 import datetime
-from classes.SpecificLLMInstance import *
-from classes.BaseLLMInstance import BaseLLMInstance
+from prompt_creation.classes.SpecificLLMInstance import *
+from prompt_creation.classes.BaseLLMInstance import BaseLLMInstance
 
 
 # --- Functions ---
@@ -168,8 +168,6 @@ if __name__ == "__main__":
     5. Iterate through each step in the list of directories.
     6. Call the process_model_step function with the root_dir, current model name, and current step as arguments.
     """
-    # TODO: Evaluate if it's worth it modifying script to read from an unique source and write onto different paths per model
-    # TODO: Create Streamlit app with a main page with a dropdown:
         # - Overview: Run all prompts and benchmarks for any selected models -> Results overview
         # - Step_N: Run models and check benchmarks for any given step and models -> Detailed results per step plus prompt & response comparison
     for model in models:

@@ -4,7 +4,7 @@ import transformers
 import mlx_lm
 
 
-from classes.BaseLLMInstance import BaseLLMInstance
+from prompt_creation.classes.BaseLLMInstance import BaseLLMInstance
 
 
 # --- Constants ---
