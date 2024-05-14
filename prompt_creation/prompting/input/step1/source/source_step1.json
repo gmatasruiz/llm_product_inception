@@ -1,0 +1,10 @@
+{
+    "data": "Initial Prompt. Write 3 odd numbers.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
+        "doctype": "prompt_source",
+        "step_number": "1",
+        "iteration_number": 0,
+        "comments": "<<additional info about the source>>"
+    }
+}
