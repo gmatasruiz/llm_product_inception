@@ -102,7 +102,7 @@ def process_single_template(
     instance.write_response(os.path.join(output_path, output_filename), response, meta)
 
 
-def process_model_step(base_dir: str, model: str, step: str):
+def process_model_step(base_dir: str, model: str, step_dir: str):
     """
     Process a model step.
 
@@ -119,9 +119,17 @@ def process_model_step(base_dir: str, model: str, step: str):
     Raises:
         None
     """
-    source_path = os.path.join(base_dir, model, step, "source", f"source_{step}.json")
-    template_dir = os.path.join(base_dir, model, step, "templates")
-    output_dir = os.path.join(base_dir, model, step, "outputs")
+    input_dir = "input"
+    output_dir = "results"
+
+    # Input dirs
+    source_path = os.path.join(base_dir, input_dir, step_dir, "source", f"source_{step_dir}.json")
+    template_dir = os.path.join(base_dir, input_dir, step_dir, "templates" )
+    expected_response_dir = os.path.join(base_dir, input_dir, step_dir, "expected_response")
+    
+    # Outpur dirs
+    output_dir = os.path.join(base_dir, output_dir, model, step_dir, "output")
+    
     os.makedirs(output_dir, exist_ok=True)  # Ensure output directory exists
     instance = get_llm_instance(model)
 
@@ -147,7 +155,7 @@ if __name__ == "__main__":
     """
     # models = ["Mixtral-8x7B", "Meta-Llama3-8B"]
     models = ["Meta-Llama3-8B"]
-    root_dir = os.path.join(os.getcwd(), "prompt_creation", "results")
+    root_dir = os.path.join(os.getcwd(), "prompt_creation", "prompting")
 
     # Main Loop
     """
@@ -160,13 +168,17 @@ if __name__ == "__main__":
     5. Iterate through each step in the list of directories.
     6. Call the process_model_step function with the root_dir, current model name, and current step as arguments.
     """
+    # TODO: Evaluate if it's worth it modifying script to read from an unique source and write onto different paths per model
+    # TODO: Create Streamlit app with a main page with a dropdown:
+        # - Overview: Run all prompts and benchmarks for any selected models -> Results overview
+        # - Step_N: Run models and check benchmarks for any given step and models -> Detailed results per step plus prompt & response comparison
     for model in models:
-        model_path = os.path.join(root_dir, model)
-        if os.path.exists(model_path):
+        input_path = os.path.join(root_dir, "input")
+        if os.path.exists(input_path):
             steps = [
                 d
-                for d in os.listdir(model_path)
-                if os.path.isdir(os.path.join(model_path, d))
+                for d in os.listdir(input_path)
+                if os.path.isdir(os.path.join(input_path, d))
             ]
             for step in steps:
                 process_model_step(root_dir, model, step)
