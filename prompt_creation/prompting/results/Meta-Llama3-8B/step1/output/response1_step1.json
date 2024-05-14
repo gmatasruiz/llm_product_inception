@@ -1,12 +1,11 @@
 {
     "response": "Here are 3 odd numbers:\n\n1. 23\n2. 37\n3. 91",
     "__meta__": {
-        "source_filepath": "prompt_creation/results/Mixtral-8x7B/step1/source/source_step1.json",
-        "template_filepath": "prompt_creation/results/Mixtral-8x7B/step1/templates/template1_step1.json",
-        "output_generated_on": "2024-05-05T21:08:36.911794",
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template1_step1.json",
+        "output_generated_on": "2024-05-14T18:46:07.536458",
         "model_used": "Meta-Llama-3-8B",
         "step_number": "1",
-        "iteration_number": "1",
-        "comments": "This file should contain a template including the %%source placeholder>>"
+        "iteration_number": "1"
     }
 }
