@@ -6,7 +6,7 @@ from prompt_creation.local_llm_prompting import *
 
 
 # --- Functions ---
-@st.experimental_dialog("LLM Prompting")
+@st.experimental_dialog("LLM Prompting", width="large")
 def run_batch_prompting(models: list, root_dir: str, steps: list[str]):
     """
     Run batch prompting for a list of models and steps, with progress updates.
@@ -35,27 +35,46 @@ def run_batch_prompting(models: list, root_dir: str, steps: list[str]):
     """
 
     try:
+        # Assert at least one step has been selected
         assert len(steps) > 0
-        progress_bar = st.progress(0, text="Generating LLM responses...")
 
+        # Initialize progress bar
+        status = st.status(
+            label="Generating LLM responses...", state="running", expanded=False
+        )
+        progress_bar = st.progress(0)
+
+        # Define for loop for operations
         total_iter = len(models) * len(steps)
-
         for model in models:
             i = models.index(model) + 1
             for step in steps:  # Assuming steps 1, 2, 3; adjust range as needed
                 j = steps.index(step) + 1
                 step_dir = f"step{step}"
+
+                # Run the prompting process
                 process_model_step(root_dir, model, step_dir)
-                progress_bar.progress(
-                    value=i * j / total_iter, text="Generating LLM responses..."
+
+                # Update display elements (progress)
+                status.update(
+                    label="Generating LLM responses...", state="running", expanded=True
                 )
 
-        # When finished...
+                progress_bar.progress(value=i * j / total_iter)
+
+        # When finished, remove progress elements
         progress_bar.empty()
-        st.status("Prompting finished!", state="complete")
+        status.update(
+            label=f"Prompting finished successfully for steps: [{','.join(steps)}]",
+            state="complete",
+            expanded=False,
+        )
 
     except Exception as e:
-        st.status(f"{e}", state="error")
+        status.update(label="Error", state="error", expanded=True)
+
+        with status:
+            st.exception(e)
 
 
 def run_batch_benchmarking(models: list, root_dir: str):
@@ -192,3 +211,32 @@ def comp_select_step():
             format_func=get_step_n,
         )
     return selected_step
+
+
+def comp_display_std_output(mode: str = "stdout"):
+    """
+    Display standard output or standard error based on the specified mode.
+
+    Parameters:
+        mode (str, optional): The mode of output to display. Can be "stdout" for standard output or "stderr" for standard error. Defaults to "stdout".
+
+    Raises:
+        NotImplementedError: If an unsupported mode is specified.
+
+    Returns:
+        None
+
+    """
+    # Set header to show which terminal output is being shown
+    st.header(body=mode)
+
+    # Retrieve terminal output
+    stdout, stderr = retrieve_terminal_output()
+
+    # Display the code depending on the mode
+    if mode == "stdout" and stdout:
+        st.code(stdout)
+    elif mode == "stderr" and stdout:
+        st.code(stderr)
+    else:
+        raise NotImplementedError

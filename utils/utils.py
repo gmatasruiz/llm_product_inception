@@ -1,5 +1,6 @@
 # --- Imports ---
 import os
+import subprocess
 
 # --- Lambda Functions ---
 get_step_n = lambda x: x.split("step")[-1] if isinstance(x, str) else x
@@ -31,6 +32,35 @@ def get_available_steps(root_dir: str):
     ]
 
     return sorted(steps)
+
+
+def retrieve_terminal_output() -> str:
+    """
+    Retrieve the terminal output from running a bash command.
+
+    This function executes a bash command using the 'subprocess' module and captures the stdout and stderr outputs. It then processes the outputs to remove any leading or trailing newlines and returns them as a tuple.
+
+    Returns:
+        str: The stdout output of the bash command.
+        str: The stderr output of the bash command.
+
+    Notes:
+        - Subprocess relies on paralelism which can be extremely buggy when using the `transformers` module.
+
+    Example:
+        stdout, stderr = retrieve_terminal_output()
+    """
+    result = subprocess.Popen(
+        ["bash", "run.sh"], stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+    std_outputs = stdout, stderr = result.communicate()
+
+    stdout_str, stderr_str = [
+        "\n".join(std_output.decode().split("\n")[1:][:-1])
+        for std_output in std_outputs
+    ]
+
+    return (stdout_str, stderr_str)
 
 
 # --- Constants ---
