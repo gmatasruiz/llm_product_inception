@@ -67,8 +67,6 @@ def run_batch_prompting(models: list, root_dir: str, steps: list[str]):
 
     try:
         assert len(steps) > 0
-
-        st.status("", state="running")
         progress_bar = st.progress(0, text="Generating LLM responses...")
 
         total_iter = len(models) * len(steps)
@@ -308,7 +306,10 @@ def display_edit_json_sources(root_dir):
         root_dir=ROOT_DIR,
         mode="steps",
         steps=[
-            selected_step,
+            get_step_n(step)
+            for step in [
+                selected_step,
+            ]
         ],
     )
 
