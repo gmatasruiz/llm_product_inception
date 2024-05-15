@@ -229,8 +229,9 @@ def comp_select_step():
 
 
 def display_overview():
-    st.header("Overview Results")
     comp_batch_process_options(root_dir=ROOT_DIR, mode="batch")
+
+    st.title("Overview Results")
     # Placeholder for displaying overall benchmark and drilldowns
     # TODO: Implement benchmark visualization
     st.write("Overall benchmarks and detailed drilldowns go here.")
@@ -263,7 +264,7 @@ def display_step_results():
     )
 
     if selected_step:
-        st.header(f"{selected_step.capitalize()} Results")
+        st.title(f"{selected_step.capitalize()} Results")
 
         # Placeholder for displaying step-specific benchmarks and comparisons
         # TODO: Implement benchmark visualization
@@ -292,21 +293,12 @@ def display_edit_json_sources(root_dir):
     - The 'comp_batch_process_options' function is used to provide batch process options.
 
     """
-    st.title("Edit Sources")
 
     # Define the directory containing the JSON templates
     input_dir = os.path.join(root_dir, "input")
     selected_step = None
     selected_file = None
     selected_step = None
-
-    # Radio group to select the file type to be modified
-    source_types = ["source", "templates", "expected_response"]
-    source_type = st.radio(
-        label="Select a source type:",
-        options=source_types,
-        format_func=lambda x: x.replace("_", " ").capitalize(),
-    )
 
     # Dropdown to select a step
     selected_step = comp_select_step()
@@ -320,12 +312,22 @@ def display_edit_json_sources(root_dir):
         ],
     )
 
+    # Radio group to select the file type to be modified
+    st.title("Edit Sources")
+    source_types = ["source", "templates", "expected_response"]
+    source_type = st.radio(
+        label="Select a source type:",
+        options=source_types,
+        format_func=lambda x: x.replace("_", " ").capitalize(),
+        horizontal=True,
+    )
+
     if selected_step and source_type in source_types:
         source_dir = os.path.join(input_dir, selected_step, source_type)
         source_files = [f for f in os.listdir(source_dir) if f.endswith(".json")]
 
         # Dropdown to select a template file
-        selected_file = st.selectbox("Select Template File", source_files)
+        selected_file = st.selectbox(f"Select {source_type} file:", source_files)
 
     if selected_file:
         source_path = os.path.join(source_dir, selected_file)
@@ -334,14 +336,16 @@ def display_edit_json_sources(root_dir):
         with open(source_path, "r") as file:
             json_data = json.load(file)
 
+        # Allow JSON editing
         json_text = st_monaco(
             value=json.dumps(json_data, indent=4),
-            height="400px",
+            height="300px",
             language="json",
             theme="vs-dark",
         )
 
-        if st.button("Save JSON Prompt"):
+        # If "Save" is clicked, update the JSON file
+        if st.button("💾 Save JSON Prompt"):
             with open(source_path, "w") as file:
                 json.dump(json.loads(json_text), file, indent=4)
             st.toast("JSON Prompt successfully saved!")
