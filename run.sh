@@ -4,4 +4,4 @@
 export CWD=$(pwd)
 
 # Run the Streamlit app
-streamlit run main.py
+streamlit run Home.py
