@@ -205,7 +205,6 @@ def comp_process_button(
             root_dir,
             steps,
         ),
-        # key=f"pbutton_{process}_{mode}_{str(steps)}",
     )
 
 
@@ -226,8 +225,77 @@ def comp_select_step():
     return selected_step
 
 
-def display_overview():
-    comp_batch_process_options(root_dir=ROOT_DIR, mode="batch")
+def comp_show_md_file(file_path: str):
+    """
+    Display the contents of a Markdown file.
+
+    This function takes a file path as input and displays the contents of the file if it has a '.md' extension.
+    The function reads the file, converts it to Markdown format, and displays it using the 'st.markdown' function.
+
+    Parameters:
+        file_path (str): The path of the Markdown file to be displayed.
+
+    Returns:
+        None
+
+    Raises:
+        NotImplementedError: If the file does not have a '.md' extension.
+
+    Example:
+        comp_show_md_file("/path/to/file.md")
+    """
+    if file_path.endswith(".md"):
+        with open(file_path, "r") as f:
+            md_file = f.read()
+        st.markdown(md_file)
+    else:
+        raise NotImplementedError
+
+
+def display_home(root_dir: str, md_file_dir: str, search_substring: str = "README"):
+    """
+    Display the home page of the thesis on LLMs for Product Conception.
+
+    Parameters:
+    - root_dir (str): The root directory of the project.
+    - md_file_dir (str): The directory containing the Markdown files.
+    - search_substring (str, optional): The substring to search for in the Markdown file names. Defaults to "README".
+
+    Returns:
+    None
+
+    Raises:
+    NotImplementedError: If the file extension is not ".md".
+
+    """
+    assets_dir = os.path.join(root_dir, "assets")
+    images_dir = os.path.join(assets_dir, "images")
+
+    # Image
+    with st.columns(5)[2]:
+        st.image(os.path.join(images_dir, "Thesis_AIStreamline.jpeg"))
+
+    # Repo explanation
+    for file in os.listdir(md_file_dir):
+        if file.lower().endswith(".md") and search_substring in file:
+            comp_show_md_file(os.path.join(md_file_dir, file))
+
+
+def display_overview(root_dir: str):
+    """
+    Display the results overview for all available steps.
+
+    This function lets the user have an oversight of the prompting and benchmarking results.
+    If requested, it calls the 'comp_batch_process_options' function to process all steps.
+    After processing, them it displays the results for all steps.
+
+    Parameters:
+        - root_dir (str): The root directory.
+
+    Returns:
+        None
+    """
+    comp_batch_process_options(root_dir=root_dir, mode="batch")
 
     st.title("Overview Results")
     # Placeholder for displaying overall benchmark and drilldowns
@@ -235,16 +303,16 @@ def display_overview():
     st.write("Overall benchmarks and detailed drilldowns go here.")
 
 
-def display_step_results():
+def display_step_results(root_dir: str):
     """
     Display the results for a selected step.
 
-    This function prompts the user to select a step from a list of available steps. It then calls
-    the 'comp_batch_process_options' function to process the selected step. After processing, it
-    displays the results for the selected step.
+    This function prompts the user to select a step from a list of available steps. If requested,
+    it calls the 'comp_batch_process_options' function to process the selected step. After processing,
+    it displays the results for the selected step.
 
     Parameters:
-        None
+        - root_dir (str): The root directory.
 
     Returns:
         None
@@ -254,7 +322,7 @@ def display_step_results():
     """
     selected_step = comp_select_step()
     comp_batch_process_options(
-        root_dir=ROOT_DIR,
+        root_dir=root_dir,
         mode="steps",
         steps=[
             selected_step,
@@ -303,7 +371,7 @@ def display_edit_json_sources(root_dir):
 
     # Add batch process options
     comp_batch_process_options(
-        root_dir=ROOT_DIR,
+        root_dir=root_dir,
         mode="steps",
         steps=[
             get_step_n(step)
@@ -354,9 +422,10 @@ def display_edit_json_sources(root_dir):
 
 # --- Constants ---
 
-ROOT_DIR = os.path.join(os.getcwd(), "prompt_creation", "prompting")
-AVAILABLE_STEPS = get_available_steps(ROOT_DIR)
-AVAILABLE_STEPS_N = list(map(get_step_n, get_available_steps(ROOT_DIR)))
+REPO_ROOT_DIR = os.path.join(os.getcwd())
+PROMPT_ROOT_DIR = os.path.join(os.getcwd(), "prompt_creation", "prompting")
+AVAILABLE_STEPS = get_available_steps(PROMPT_ROOT_DIR)
+AVAILABLE_STEPS_N = list(map(get_step_n, get_available_steps(PROMPT_ROOT_DIR)))
 LLMs = ["Mixtral-8x7B", "Meta-Llama3-8B", "ChatGPT"]
 
 
@@ -375,22 +444,23 @@ def main():
         None
     """
     # App config
-    st.set_page_config(layout="wide")
+    st.set_page_config(layout="wide", initial_sidebar_state="collapsed")
 
     # Sidebar
     st.sidebar.title("Navigation")
     view = st.sidebar.radio(
-        "Select View", ("Overview", "Step Drilldown", "Edit Prompts")
+        "Select View", ("Home", "Overview", "Step Drilldown", "Edit Prompts")
     )
 
     # Main views
-    if view == "Overview":
-        display_overview()
+    if view == "Home":
+        display_home(REPO_ROOT_DIR, REPO_ROOT_DIR)
+    elif view == "Overview":
+        display_overview(PROMPT_ROOT_DIR)
     elif view == "Edit Prompts":
-        display_edit_json_sources(ROOT_DIR)
+        display_edit_json_sources(PROMPT_ROOT_DIR)
     elif view == "Step Drilldown":
-        display_step_results()
-
+        display_step_results(PROMPT_ROOT_DIR)
     else:
         st.warning("Select other option")
 
