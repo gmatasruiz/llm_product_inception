@@ -94,7 +94,7 @@ def process_single_template(
         None
     """
     prompt = instance.read_prompt(source_path, template_path)
-    response = instance.process_prompt(prompt)
+    response = instance.process_prompt(prompt, max_tokens=1500)
     output_filename = os.path.basename(template_path).replace("template", "response")
 
     meta = create_meta(source_path, template_path, instance)
