@@ -22,7 +22,7 @@ def display_overview(root_dir: str):
     """
     comp_batch_process_options(root_dir=root_dir, mode="batch")
 
-    st.title("Overview Results")
+    st.title("📊 Overview")
     # Placeholder for displaying overall benchmark and drilldowns
     # TODO: Implement benchmark visualization
     st.write("Overall benchmarks and detailed drilldowns go here.")

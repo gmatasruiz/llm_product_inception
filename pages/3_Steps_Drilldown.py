@@ -36,7 +36,7 @@ def display_step_results(root_dir: str):
     )
 
     if selected_step:
-        st.title(f"{selected_step.capitalize()} Results")
+        st.title(f"🔎 {selected_step.capitalize()} Drilldown")
 
         # Placeholder for displaying step-specific benchmarks and comparisons
         # TODO: Implement benchmark visualization
@@ -59,7 +59,7 @@ def main():
     """
     # App config
     st.set_page_config(
-        page_title="🔎 Step Drilldown",
+        page_title="🔎 Steps Drilldown",
         layout="wide",
         initial_sidebar_state="auto",
         page_icon="💡",

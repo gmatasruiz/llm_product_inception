@@ -59,7 +59,7 @@ def display_edit_json_sources(root_dir):
     )
 
     # Radio group to select the file type to be modified
-    st.title("Source Editor")
+    st.title("✏️ Source Editor")
     source_types = ["source", "templates", "expected_response"]
     source_type = st.radio(
         label="Select a source type:",
