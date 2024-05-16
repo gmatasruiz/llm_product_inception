@@ -69,6 +69,7 @@ def create_meta(
         "template_filepath": template_data["__meta__"]["template_filepath"],
         "output_generated_on": datetime.datetime.now().isoformat(),
         "model_used": instance.model_name,
+        "doctype": "llm_response",
         "step_number": template_data["__meta__"]["step_number"],
         "iteration_number": template_data["__meta__"]["iteration_number"],
     }
@@ -95,7 +96,7 @@ def process_single_template(
     """
     prompt = instance.read_prompt(source_path, template_path)
     response = instance.process_prompt(prompt, max_tokens=1500)
-    output_filename = os.path.basename(template_path).replace("template", "response")
+    output_filename = os.path.basename(template_path).replace("template", "llm_response")
 
     meta = create_meta(source_path, template_path, instance)
 

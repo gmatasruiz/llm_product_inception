@@ -1,10 +1,11 @@
 {
-    "response": "Here are 3 even numbers:\n\n1. 2\n2. 4\n3. 10",
+    "data": "Here are 3 even numbers:\n\n1. 2\n2. 4\n3. 10",
     "__meta__": {
         "source_filepath": "prompt_creation/prompting/input/step2/source/source_step2.json",
         "template_filepath": "prompt_creation/prompting/input/step2/templates/template1_step2.json",
-        "output_generated_on": "2024-05-14T18:45:59.638224",
+        "output_generated_on": "2024-05-16T02:12:59.787448",
         "model_used": "Meta-Llama-3-8B",
+        "doctype": "llm_response",
         "step_number": "2",
         "iteration_number": "1"
     }
