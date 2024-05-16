@@ -44,19 +44,13 @@ def display_edit_json_sources(root_dir):
     selected_step = None
 
     # Dropdown to select a step
-    selected_step = comp_select_step()
+    selected_step = comp_select_step(
+        mode="single", sidebar=True, multi_checkbox=False, num_only=True
+    )
+    str_selected_step = f"step{''.join(selected_step)}"
 
     # Add batch process options
-    comp_batch_process_options(
-        root_dir=root_dir,
-        mode="steps",
-        steps=[
-            get_step_n(step)
-            for step in [
-                selected_step,
-            ]
-        ],
-    )
+    comp_batch_process_options(root_dir=root_dir, mode="steps", steps=selected_step)
 
     # Radio group to select the file type to be modified
     st.title("✏️ Source Editor")
@@ -68,8 +62,8 @@ def display_edit_json_sources(root_dir):
         horizontal=True,
     )
 
-    if selected_step and source_type in source_types:
-        source_dir = os.path.join(input_dir, selected_step, source_type)
+    if str_selected_step and source_type in source_types:
+        source_dir = os.path.join(input_dir, str_selected_step, source_type)
         source_files = [f for f in os.listdir(source_dir) if f.endswith(".json")]
 
         # Dropdown to select a template file

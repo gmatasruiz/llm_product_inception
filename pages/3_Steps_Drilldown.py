@@ -26,21 +26,23 @@ def display_step_results(root_dir: str):
     Example:
         display_step_results()
     """
-    selected_step = comp_select_step()
-    comp_batch_process_options(
-        root_dir=root_dir,
-        mode="steps",
-        steps=[
-            selected_step,
-        ],
-    )
 
+    # Mandatory select step to drilldown
+    selected_step = comp_select_step(
+        mode="single", sidebar=True, multi_checkbox=False, num_only=True
+    )
+    str_selected_step = f"step{''.join(selected_step)}"
+
+    # Add batch process component
+    comp_batch_process_options(root_dir=root_dir, mode="steps", steps=selected_step)
+
+    # Main view
     if selected_step:
-        st.title(f"🔎 {selected_step.capitalize()} Drilldown")
+        st.title(f"🔎 {str_selected_step.capitalize()} Drilldown")
 
         # Placeholder for displaying step-specific benchmarks and comparisons
         # TODO: Implement benchmark visualization
-        st.write(f"Benchmarks and comparisons for {selected_step} go here.")
+        st.write(f"Benchmarks and comparisons for {str_selected_step} go here.")
 
 
 # --- Main ---

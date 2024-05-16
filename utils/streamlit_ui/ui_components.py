@@ -122,7 +122,11 @@ def comp_batch_process_options(
     with st.columns(3)[-1]:
 
         with st.popover("Process Launcher"):
-            selected_llms = [llm for llm in LLMs if st.checkbox(llm, value=False)]
+            selected_llms = comp_select_model(
+                mode="multiple",
+                sidebar=False,
+                multi_checkbox=True,
+            )
 
             cols = st.columns(2)
 
@@ -196,21 +200,127 @@ def comp_process_button(
     )
 
 
-def comp_select_step():
+def comp_select_step(
+    mode: str = "single",
+    sidebar: bool = True,
+    multi_checkbox: bool = False,
+    num_only: bool = True,
+):
     """
-    This function displays a selectbox in the sidebar to allow the user to choose a step from a list of available steps.
+    This function displays a selectbox or checkboxes to allow the user to choose one or multiple steps from a given list of available steps.
+
+    Parameters:
+        mode (str, optional): The mode of selection. Can be "single" for selecting one step or "multiple" for selecting multiple steps. Defaults to "single".
+        sidebar (bool, optional): Determines whether the selectbox or checkboxes are displayed in the sidebar. Defaults to True.
+        multi_checkbox (bool, optional): Determines whether to use checkboxes for multiple selection. If False, a multiselect dropdown will be used. Defaults to False.
+        numonly (bool, optional): Determines whether to return the whole string or only the numeric part.
 
     Returns:
-        str: The selected step.
+        list: A list of selected steps.
 
+    Example:
+        selected_steps = comp_select_step(mode="single", sidebar=True, multi_checkbox=False)
+        selected_steps = comp_select_step(mode="multiple", sidebar=False, multi_checkbox=True)
     """
-    with st.sidebar:
-        selected_step = st.selectbox(
-            "Step:",
-            AVAILABLE_STEPS,
-            format_func=get_step_n,
+    steps = comp_select_entity(
+        entity_list=AVAILABLE_STEPS,
+        label="Step:",
+        format_func=get_step_n,
+        mode=mode,
+        sidebar=sidebar,
+        multi_checkbox=multi_checkbox,
+    )
+
+    if num_only:
+        steps = list(map(get_step_n, steps))
+
+    return steps
+
+
+def comp_select_model(
+    mode: str = "multiple", sidebar: bool = False, multi_checkbox: bool = True
+):
+    """
+    This function displays a selectbox or checkboxes to allow the user to choose one or multiple models from a given list of available models.
+
+    Parameters:
+        mode (str, optional): The mode of selection. Can be "single" for selecting one model or "multiple" for selecting multiple models. Defaults to "multiple".
+        sidebar (bool, optional): Determines whether the selectbox or checkboxes are displayed in the sidebar. Defaults to False.
+        multi_checkbox (bool, optional): Determines whether to use checkboxes for multiple selection. If False, a multiselect dropdown will be used. Defaults to True.
+
+    Returns:
+        list: A list of selected models.
+
+    Example:
+        selected_models = comp_select_model(mode="single", sidebar=True, multi_checkbox=False)
+        selected_models = comp_select_model(mode="multiple", sidebar=False, multi_checkbox=True)
+    """
+    return comp_select_entity(
+        entity_list=LLMs,
+        label="Model:",
+        format_func=lambda x: x.replace("-", " "),
+        mode=mode,
+        sidebar=sidebar,
+        multi_checkbox=multi_checkbox,
+    )
+
+
+def comp_select_entity(
+    entity_list: list,
+    label: str = "",
+    format_func=None,
+    mode: str = "single",
+    sidebar: bool = False,
+    multi_checkbox: bool = False,
+):
+    """
+    This function displays a selectbox or checkboxes to allow the user to choose one or multiple entities from a given list.
+
+    Parameters:
+        entity_list (list): A list of entities to choose from.
+        label (str, optional): The label to display above the selectbox or checkboxes. Defaults to an empty string.
+        format_func (function, optional): A function to format the display of each entity in the selectbox or checkboxes. Defaults to None.
+        mode (str, optional): The mode of selection. Can be "single" for selecting one entity or "multiple" for selecting multiple entities. Defaults to "single".
+        sidebar (bool, optional): Determines whether the selectbox or checkboxes are displayed in the sidebar. Defaults to False.
+        multi_checkbox (bool, optional): Determines whether to use checkboxes for multiple selection. If False, a multiselect dropdown will be used. Defaults to False.
+
+    Returns:
+        list: A list of selected entities.
+
+    Raises:
+        NotImplementedError: If an unsupported mode is specified.
+
+    Example:
+        selected_entities = comp_select_entity(entity_list=["entity1", "entity2", "entity3"], label="Select Entity", mode="single", sidebar=True)
+        selected_entities = comp_select_entity(entity_list=["entity1", "entity2", "entity3"], label="Select Entities", mode="multiple", sidebar=False, multi_checkbox=True)
+    """
+
+    base_comp = st.sidebar.empty() if sidebar else st.empty()
+
+    if mode == "single":
+        selected_entities = base_comp.selectbox(
+            options=entity_list, label=label, format_func=format_func
         )
-    return selected_step
+        selected_entities = [
+            selected_entities,
+        ]
+
+    elif mode == "multiple":
+        with base_comp.container():
+
+            if multi_checkbox:
+                selected_entities = [
+                    entity for entity in entity_list if st.checkbox(entity, value=False)
+                ]
+            else:
+                selected_entities = st.multiselect(
+                    options=entity_list, label=label, format_func=format_func
+                )
+
+    else:
+        NotImplementedError
+
+    return selected_entities
 
 
 def comp_display_std_output(mode: str = "stdout"):
