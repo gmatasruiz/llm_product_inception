@@ -4,6 +4,7 @@ import streamlit as st
 from utils.utils import *
 from utils.streamlit_ui.ui_components import (
     comp_select_step,
+    comp_select_model,
     comp_batch_process_options,
 )
 
@@ -33,6 +34,12 @@ def display_step_results(root_dir: str):
     )
     str_selected_step = f"step{''.join(selected_step)}"
 
+    # Mandatory select model to drilldown
+    selected_model = comp_select_model(
+        mode="single", sidebar=True, multi_checkbox=False
+    )
+    str_selected_model = f"{''.join(selected_model)}"
+
     # Add batch process component
     comp_batch_process_options(root_dir=root_dir, mode="steps", steps=selected_step)
 
@@ -61,7 +68,7 @@ def main():
     """
     # App config
     st.set_page_config(
-        page_title="🔎 Steps Drilldown",
+        page_title="Thesis on LLMs for Product Conception",
         layout="wide",
         initial_sidebar_state="auto",
         page_icon="💡",
