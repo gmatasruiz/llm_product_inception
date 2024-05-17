@@ -44,7 +44,7 @@ def main():
     """
     # App config
     st.set_page_config(
-        page_title="📊 Overview",
+        page_title="Thesis on LLMs for Product Conception",
         layout="wide",
         initial_sidebar_state="auto",
         page_icon="💡",
