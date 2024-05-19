@@ -51,6 +51,12 @@ class ChatGPTBenchmark(BaseLLMBenchmark):
     ) -> dict:
         return super().evaluate_response(prompt, expected_response, llm_response)
 
+    def write_metrics_df(self, write_to_json_file: bool = False, path: str = None):
+        return super().write_metrics_df(write_to_json_file, path)
+
+    def write_metrics_fig(self):
+        return super().write_metrics_fig()
+
     def plot_metrics(self):
         super().plot_metrics()
 
@@ -103,6 +109,12 @@ class Mixtral8x7BBenchmark(BaseLLMBenchmark):
     ) -> dict:
         return super().evaluate_response(prompt, expected_response, llm_response)
 
+    def write_metrics_df(self, write_to_json_file: bool = False, path: str = None):
+        return super().write_metrics_df(write_to_json_file, path)
+
+    def write_metrics_fig(self):
+        return super().write_metrics_fig()
+
     def plot_metrics(self):
         super().plot_metrics()
 
@@ -154,6 +166,12 @@ class LlamaV38BBenchmark(BaseLLMBenchmark):
         self, prompt: str, expected_response: str, llm_response: str
     ) -> dict:
         return super().evaluate_response(prompt, expected_response, llm_response)
+
+    def write_metrics_df(self, write_to_json_file: bool = False, path: str = None):
+        return super().write_metrics_df(write_to_json_file, path)
+
+    def write_metrics_fig(self):
+        return super().write_metrics_fig()
 
     def plot_metrics(self):
         super().plot_metrics()

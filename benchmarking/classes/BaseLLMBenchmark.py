@@ -1,4 +1,7 @@
 # --- Imports ---
+import os
+import json
+
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
@@ -496,25 +499,64 @@ class BaseLLMBenchmark(ABC):
         self.metrics_history.append(results)
         return results
 
-    def plot_metrics(self):
+    def write_metrics_df(self, write_to_json_file: bool = False, path: str = None):
         """
-        Plot all benchmarking metrics based on the history of evaluations using Plotly Express.
-
-        This method takes the evaluation metrics history stored in the 'metrics_history' attribute and plots them.
-        The metrics are displayed as a bar chart, with each metric represented as a separate bar.
-        The x-axis represents the evaluation instances, while the y-axis represents the scores of the metrics.
+        Write the evaluation metrics history to a DataFrame and optionally to a JSON file.
 
         Parameters:
-            None
+            write_to_json_file (bool, optional): A flag indicating whether to write the metrics to a JSON file. Defaults to False.
+            path (str, optional): The path to the JSON file where the metrics will be written. Required if write_to_json_file is True.
 
         Returns:
-            None
+            pandas.DataFrame: A DataFrame containing the evaluation metrics history.
+
+        Raises:
+            FileNotFoundError: If the specified path does not exist when trying to write to a JSON file.
+
+        Notes:
+            - The method creates a DataFrame from the stored metrics history.
+            - If write_to_json_file is True and a valid path is provided, the metrics will be written to a JSON file.
+            - If the path does not exist when trying to write to a JSON file, a FileNotFoundError will be raised.
 
         Example:
             benchmark = BaseLLMBenchmark()
-            benchmark.plot_metrics()
+            benchmark.evaluate_response("Prompt 1", "Expected Response 1", "LLM Response 1")
+            benchmark.evaluate_response("Prompt 2", "Expected Response 2", "LLM Response 2")
+            metrics_df = benchmark.write_metrics_df(write_to_json_file=True, path="metrics.json")
         """
+        # Create dataframe from metrics history
         metrics_df = pd.DataFrame(self.metrics_history)
+
+        if write_to_json_file and os.path.exists(path):
+
+            # Write metrics to json file
+            with open(path, "w") as f:
+                json.dump(metrics_df.to_dict(), f)
+
+        return metrics_df
+
+    def write_metrics_fig(self):
+        """
+        Generates a bar plot visualizing the benchmarking metrics.
+
+        Returns:
+            plotly.graph_objects.Figure: A bar plot displaying the benchmarking metrics with evaluation instances on the x-axis and scores on the y-axis.
+                The bars are grouped by different metrics, showing the comparison of scores across evaluations.
+
+        Notes:
+            - This method internally calls 'write_metrics_df' to obtain the dataframe containing the benchmarking metrics.
+            - The column names of the metrics dataframe are modified for better readability in the plot.
+            - The bar plot is created using Plotly Express with grouped bars for each metric.
+            - The x-axis represents the evaluation instances, while the y-axis represents the scores of the metrics.
+            - The legend displays the names of the metrics being compared in the plot.
+
+        Example:
+            benchmark = BaseLLMBenchmark()
+            fig = benchmark.write_metrics_fig()
+            fig.show()
+        """
+        metrics_df = self.write_metrics_df()
+
         metrics_df = metrics_df.rename(
             columns={
                 col_name: col_name.replace("_", " ").title()
@@ -537,4 +579,26 @@ class BaseLLMBenchmark(ABC):
             yaxis_title="Scores",
             legend_title="Metrics",
         )
+        return fig
+
+    def plot_metrics(self):
+        """
+        Plot all benchmarking metrics based on the history of evaluations using Plotly Express.
+
+        This method takes the evaluation metrics history stored in the 'metrics_history' attribute and plots them.
+        The metrics are displayed as a bar chart, with each metric represented as a separate bar.
+        The x-axis represents the evaluation instances, while the y-axis represents the scores of the metrics.
+
+        Parameters:
+            None
+
+        Returns:
+            None
+
+        Example:
+            benchmark = BaseLLMBenchmark()
+            benchmark.plot_metrics()
+        """
+        fig = self.write_metrics_fig()
+
         fig.show()
