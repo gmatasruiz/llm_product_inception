@@ -1,10 +1,12 @@
 # --- Imports ---
+import os
+
 import torch
 import transformers
 import mlx_lm
+from openai import OpenAI
 
-
-from prompt_creation.classes.BaseLLMInstance import BaseLLMInstance
+from BaseLLMInstance import BaseLLMInstance
 
 
 # --- Constants ---
@@ -27,23 +29,24 @@ MODEL_DEF = {
 # --- Classes ---
 class ChatGPTInstance(BaseLLMInstance):
     def __init__(self):
-        NotImplemented
+        super().__init__(model_name="ChatGPT", model_id="openai/gpt-4o")
 
-    def init_model(
-        self,
-        device_map: str = "auto",
-        model_kwargs: dict = {},
-    ):
-        NotImplemented
+    def init_model(self, model_kwargs: dict = {}):
+        self.model = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
     def read_prompt(self, source_file_path: str, template_file_path: str):
-        NotImplemented
+        return super().read_prompt(source_file_path, template_file_path)
 
-    def process_prompt(self, prompt: str):
-        NotImplemented
+    def process_prompt(self, prompt: str, **llm_kwargs):
+        response = self.model.chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": prompt}],
+            **llm_kwargs,
+        )
+        return response.choices[0].message.content
 
-    def write_response(self, filepath: str, response: str):
-        NotImplemented
+    def write_response(self, filepath: str, response: str, meta: dict = {}):
+        super().write_response(filepath, response, meta)
 
 
 class Mixtral8x7BInstance(BaseLLMInstance):
@@ -303,11 +306,9 @@ class LlamaV38BInstance(BaseLLMInstance):
 
 if __name__ == "__main__":
     # Instantiate the model class with the desired LLM model name
-    model_instance = LlamaV38BInstance(use_mlx_model=True)
+    model_instance = ChatGPTInstance()
 
     # Process prompts given the paths to source and template JSON files
     prompt = "Provide a list of three states of the USA, only the names."
     print(f"PROMPT: \n {prompt}")
-    print(
-        f"RESPONSE: \n {model_instance.process_prompt(prompt, temp=0.01, max_tokens=100, verbose=True)}"
-    )
+    print(f"RESPONSE: \n {model_instance.process_prompt(prompt)}")
