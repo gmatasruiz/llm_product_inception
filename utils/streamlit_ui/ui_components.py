@@ -2,7 +2,7 @@
 import streamlit as st
 
 from utils.utils import *
-from prompt_creation.local_llm_prompting import *
+from prompt_creation.llm_prompting import *
 from benchmarking.llm_benchmark import *
 
 
