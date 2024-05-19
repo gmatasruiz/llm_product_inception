@@ -15,6 +15,10 @@ import torch
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import plotly.io as pio
+
+pio.kaleido.scope.mathjax = None
+
 from abc import ABC
 from transformers import BertTokenizer, BertModel  # For BERT embeddings
 
@@ -477,13 +481,10 @@ class BaseLLMBenchmark(ABC):
         # Train Word2Vec model on the combined corpus to get vectors for semantic similarity
         model = Word2Vec([prompt_tokens, expected_tokens, response_tokens], min_count=1)
 
-        # Semantic similarity between expected and LLM response
-        relevance_score = self.semantic_similarity(
-            model, expected_tokens, response_tokens
-        )
-
         results = {
-            "relevance_score": relevance_score,
+            "semantic_similarity": self.semantic_similarity(
+                model, expected_tokens, response_tokens
+            ),
             "accuracy_score": self.evaluate_accuracy(expected_response, llm_response),
             "coherence_score": self.evaluate_coherence(llm_response),
             "creativity_score": self.evaluate_creativity(
@@ -527,11 +528,9 @@ class BaseLLMBenchmark(ABC):
         # Create dataframe from metrics history
         metrics_df = pd.DataFrame(self.metrics_history)
 
-        if write_to_json_file and os.path.exists(path):
-
+        if write_to_json_file and os.path.exists(os.path.dirname(path)):
             # Write metrics to json file
-            with open(path, "w") as f:
-                json.dump(metrics_df.to_dict(), f)
+            metrics_df.to_json(path)
 
         return metrics_df
 
@@ -571,7 +570,6 @@ class BaseLLMBenchmark(ABC):
             title="LLM Benchmarking Metrics",
         )
         fig.update_xaxes(
-            showticklabels=False,
             type="category",
         )
         fig.update_layout(
@@ -580,6 +578,24 @@ class BaseLLMBenchmark(ABC):
             legend_title="Metrics",
         )
         return fig
+
+    def save_metrics_to_file(
+        self,
+        output_fname: str,
+        metrics_path: str,
+        figures_path: str,
+    ):
+
+        self.write_metrics_df(
+            write_to_json_file=True,
+            path=os.path.join(metrics_path, f"table_{output_fname}.json"),
+        )
+
+        fig = self.write_metrics_fig()
+
+        fig.write_image(os.path.join(figures_path, f"{output_fname}.png"))
+        fig.write_html(os.path.join(figures_path, f"{output_fname}.html"))
+        fig.write_json(os.path.join(figures_path, f"{output_fname}.json"))
 
     def plot_metrics(self):
         """

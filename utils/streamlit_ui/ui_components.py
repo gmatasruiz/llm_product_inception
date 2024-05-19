@@ -3,6 +3,7 @@ import streamlit as st
 
 from utils.utils import *
 from prompt_creation.local_llm_prompting import *
+from benchmarking.llm_benchmark import *
 
 
 # --- Functions ---
@@ -77,13 +78,18 @@ def run_batch_prompting(models: list, root_dir: str, steps: list[str]):
             st.exception(e)
 
 
-def run_batch_benchmarking(models: list, root_dir: str):
+def run_batch_benchmarking(models: list, root_dir: str, steps: list[str]):
     """
-    Run batch benchmarking for a list of models.
+    Run batch prompbenchmarkingting for a list of models and steps, with progress updates.
+
+    This function initiates a batch benchmarking process for each specified model and step.
+    It updates a progress bar and status messages throughout the operation to provide
+    feedback on the current state of the process.
 
     Parameters:
         models (list): A list of models to run benchmarking on.
         root_dir (str): The root directory.
+        steps (list[str]): A list of steps to perform benchmarking on.
 
     Returns:
         None
@@ -91,16 +97,55 @@ def run_batch_benchmarking(models: list, root_dir: str):
     Raises:
         Exception: If an error occurs during benchmarking.
 
+    Features:
+        - Progress Bar: Displays the progress of the benchmarking process.
+        - Status Messages: Provides real-time updates on the process state, including completion and error notifications.
+
     Example:
-        run_batch_benchmarking(["model1", "model2"], "/path/to/root/dir")
+        run_batch_benchmarking(["model1", "model2"], "/path/to/root/dir", ["1", "2", "3"])
     """
+
     try:
-        # Placeholder for actual benchmarking logic
-        st.write(f"Running benchmarking for models: {models}")
-        # TODO: Implement benchmark processing
-        st.status("Benchmarking finished!", status="complete")
+        # Assert at least one step has been selected
+        assert len(steps) > 0
+
+        # Initialize progress bar
+        status = st.status(
+            label="Generating LLM responses...", state="running", expanded=False
+        )
+        progress_bar = st.progress(0)
+
+        # Define for loop for operations
+        total_iter = len(models) * len(steps)
+        for model in models:
+            i = models.index(model) + 1
+            for step in steps:  # Assuming steps 1, 2, 3; adjust range as needed
+                j = steps.index(step) + 1
+                step_dir = f"step{step}"
+
+                # Run the prompting process
+                benchmark_model_step(root_dir, model, step_dir)
+
+                # Update display elements (progress)
+                status.update(
+                    label="Generating LLM responses...", state="running", expanded=True
+                )
+
+                progress_bar.progress(value=i * j / total_iter)
+
+        # When finished, remove progress elements
+        progress_bar.empty()
+        status.update(
+            label=f"Prompting finished successfully for steps: [{','.join(steps)}]",
+            state="complete",
+            expanded=False,
+        )
+
     except Exception as e:
-        st.status(e, state="error")
+        status.update(label="Error", state="error", expanded=True)
+
+        with status:
+            st.exception(e)
 
 
 def comp_batch_process_options(
