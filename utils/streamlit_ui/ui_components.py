@@ -78,6 +78,7 @@ def run_batch_prompting(models: list, root_dir: str, steps: list[str]):
             st.exception(e)
 
 
+@st.experimental_dialog("LLM Benchmarking", width="large")
 def run_batch_benchmarking(models: list, root_dir: str, steps: list[str]):
     """
     Run batch prompbenchmarkingting for a list of models and steps, with progress updates.
@@ -111,7 +112,7 @@ def run_batch_benchmarking(models: list, root_dir: str, steps: list[str]):
 
         # Initialize progress bar
         status = st.status(
-            label="Generating LLM responses...", state="running", expanded=False
+            label="Benchmarking LLM responses...", state="running", expanded=False
         )
         progress_bar = st.progress(0)
 
@@ -128,7 +129,9 @@ def run_batch_benchmarking(models: list, root_dir: str, steps: list[str]):
 
                 # Update display elements (progress)
                 status.update(
-                    label="Generating LLM responses...", state="running", expanded=True
+                    label="Benchmarking LLM responses...",
+                    state="running",
+                    expanded=True,
                 )
 
                 progress_bar.progress(value=i * j / total_iter)
@@ -136,7 +139,7 @@ def run_batch_benchmarking(models: list, root_dir: str, steps: list[str]):
         # When finished, remove progress elements
         progress_bar.empty()
         status.update(
-            label=f"Prompting finished successfully for steps: [{','.join(steps)}]",
+            label=f"Benchmarking finished successfully for steps: [{','.join(steps)}]",
             state="complete",
             expanded=False,
         )
