@@ -6,7 +6,7 @@ import transformers
 import mlx_lm
 from openai import OpenAI
 
-from BaseLLMInstance import BaseLLMInstance
+from prompt_creation.classes.BaseLLMInstance import BaseLLMInstance
 
 
 # --- Constants ---

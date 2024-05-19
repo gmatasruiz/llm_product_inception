@@ -1,5 +1,5 @@
 # --- Imports ---
-from classes.BaseLLMBenchmark import BaseLLMBenchmark
+from benchmarking.classes.BaseLLMBenchmark import BaseLLMBenchmark
 
 
 # --- Classes ---
