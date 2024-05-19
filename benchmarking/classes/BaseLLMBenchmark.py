@@ -586,10 +586,10 @@ class BaseLLMBenchmark(ABC):
         figures_path: str,
     ):
 
-        self.write_metrics_df(
-            write_to_json_file=True,
-            path=os.path.join(metrics_path, f"table_{output_fname}.json"),
-        )
+        # self.write_metrics_df(
+        #     write_to_json_file=True,
+        #     path=os.path.join(metrics_path, f"table_{output_fname}.json"),
+        # )
 
         fig = self.write_metrics_fig()
 

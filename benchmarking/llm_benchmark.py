@@ -14,7 +14,7 @@ def get_benchmark_instance(model: str) -> BaseLLMBenchmark:
     benchmarks = {
         "Mixtral-8x7B": Mixtral8x7BBenchmark,
         "Meta-Llama3-8B": LlamaV38BBenchmark,
-        "ChatGPT": ChatGPTBenchmark
+        "ChatGPT": ChatGPTBenchmark,
     }
     if model in benchmarks:
         return benchmarks[model]()
@@ -26,7 +26,7 @@ def load_json_file(filepath: str) -> dict:
     """
     Load and return the content of a JSON file.
     """
-    with open(filepath, 'r') as file:
+    with open(filepath, "r") as file:
         return json.load(file)
 
 
@@ -35,13 +35,15 @@ def read_input_data(base_dir: str, step_dir: str) -> tuple:
     Read input data from the specified directories.
     """
     input_dir = os.path.join(base_dir, "input", step_dir)
-    
-    expected_response_path = os.path.join(input_dir, "expected_response", f"expected_response_{step_dir}.json")
+
+    expected_response_path = os.path.join(
+        input_dir, "expected_response", f"expected_response_{step_dir}.json"
+    )
     expected_response_data = load_json_file(expected_response_path)["data"]
 
     source_path = os.path.join(input_dir, "source", f"source_{step_dir}.json")
     source_data = load_json_file(source_path)["data"]
-    
+
     template_dir = os.path.join(input_dir, "templates")
 
     return expected_response_data, source_data, template_dir
@@ -61,7 +63,13 @@ def read_generated_response(output_filepath: str) -> str:
     return load_json_file(output_filepath)["data"]
 
 
-def evaluate_responses(benchmark: BaseLLMBenchmark, expected_response: str, source_data: str, template_dir: str, output_path: str) -> list:
+def evaluate_responses(
+    benchmark: BaseLLMBenchmark,
+    expected_response: str,
+    source_data: str,
+    template_dir: str,
+    output_path: str,
+) -> list:
     """
     Evaluate responses for all templates in the template directory.
     """
@@ -83,12 +91,22 @@ def evaluate_responses(benchmark: BaseLLMBenchmark, expected_response: str, sour
     return all_results
 
 
-def save_benchmark_results(benchmark: BaseLLMBenchmark, metrics_path: str, figures_path: str, results: list) -> None:
+def save_benchmark_results(
+    benchmark: BaseLLMBenchmark,
+    metrics_fname: str,
+    metrics_path: str,
+    figures_path: str,
+    results: list,
+) -> None:
     """
     Save the benchmark results to files.
     """
-    metrics_df = pd.DataFrame(results)
-    benchmark.save_metrics_to_file(metrics_df, metrics_path, figures_path)
+
+    # Save figures
+    benchmark.save_metrics_to_file(metrics_fname, metrics_path, figures_path)
+
+    # Save per-step CSV
+    pd.DataFrame(results).to_csv(os.path.join(metrics_path, f"{metrics_fname}.csv"))
 
 
 def benchmark_model_step(base_dir: str, model: str, step_dir: str) -> None:
@@ -105,8 +123,15 @@ def benchmark_model_step(base_dir: str, model: str, step_dir: str) -> None:
     os.makedirs(figures_path, exist_ok=True)
 
     benchmark = get_benchmark_instance(model)
-    results = evaluate_responses(benchmark, expected_response, source_data, template_dir, output_dir)
-    save_benchmark_results(benchmark, metrics_path, figures_path, results)
+    results = evaluate_responses(
+        benchmark, expected_response, source_data, template_dir, output_dir
+    )
+
+    metrics_fname = f"metrics_{step_dir}"
+
+    save_benchmark_results(
+        benchmark, metrics_fname, metrics_path, figures_path, results
+    )
 
 
 if __name__ == "__main__":
@@ -118,7 +143,11 @@ if __name__ == "__main__":
 
     input_path = os.path.join(root_dir, "input")
     if os.path.exists(input_path):
-        steps = [d for d in os.listdir(input_path) if os.path.isdir(os.path.join(input_path, d))]
+        steps = [
+            d
+            for d in os.listdir(input_path)
+            if os.path.isdir(os.path.join(input_path, d))
+        ]
         for model in models:
             for step in steps:
                 benchmark_model_step(root_dir, model, step)
