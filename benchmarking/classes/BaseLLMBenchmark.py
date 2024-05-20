@@ -586,6 +586,27 @@ class BaseLLMBenchmark(ABC):
         metrics_path: str,
         figures_path: str,
     ):
+        """
+        Save the evaluation metrics to files in different formats.
+
+        Parameters:
+            output_fname (str): The base filename for the output files.
+            metrics_path (str): The path where the metrics file will be saved.
+            figures_path (str): The path where the figures will be saved.
+
+        Returns:
+            None
+
+        Notes:
+            - This method generates a figure based on the evaluation metrics.
+            - The figure is saved in JSON format at the specified 'figures_path' with the given 'output_fname'.
+            - The metrics table can be saved in JSON format by uncommenting the 'write_metrics_df' method call.
+            - The figure can also be saved in other formats like PNG or HTML by uncommenting the respective lines.
+
+        Example:
+            benchmark = BaseLLMBenchmark()
+            benchmark.save_metrics_to_file(output_fname="evaluation_results", metrics_path="metrics/", figures_path="figures/")
+        """
 
         # self.write_metrics_df(
         #     write_to_json_file=True,

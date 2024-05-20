@@ -439,7 +439,21 @@ def comp_display_text_alongside(
     elem_per_col: int = 1,
     height: int = 350,
 ):
+    """
+    Display text alongside labels in multiple columns.
 
+    Parameters:
+        text_array (list[str]): List of text values to display.
+        label_array (list[str]): List of labels corresponding to the text values.
+        elem_per_col (int, optional): Number of elements to display per column. Defaults to 1.
+        height (int, optional): Height of each column. Defaults to 350.
+
+    Returns:
+        None
+
+    Raises:
+        st.error: If the number of labels does not match the number of text values.
+    """
     if len(label_array) != len(text_array):
         st.error("Mismatch between the number of labels and values...")
         return
@@ -459,6 +473,16 @@ def comp_display_text_alongside(
 
 
 def st_markdown_color_text(text: str, bgcolor: str = "white"):
+    """
+    Display colored text using Markdown syntax.
+
+    Parameters:
+        text (str): The text to be displayed.
+        bgcolor (str, optional): The background color of the text. Defaults to "white".
+
+    Returns:
+        None
+    """
     st.markdown(
         f'<span style="color:{bgcolor}"> {text}</span>',
         unsafe_allow_html=True,
@@ -466,6 +490,15 @@ def st_markdown_color_text(text: str, bgcolor: str = "white"):
 
 
 def st_markdown_spacer():
+    """
+    This function inserts a markdown spacer in the Streamlit app.
+
+    Parameters:
+        None
+
+    Returns:
+        None
+    """
     st.markdown(
         f"<br>",
         unsafe_allow_html=True,
