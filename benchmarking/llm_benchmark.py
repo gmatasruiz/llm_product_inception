@@ -1,9 +1,12 @@
 # --- Imports ---
 import os
 import json
+
+import pandas as pd
+
+from utils.utils import *
 from benchmarking.classes.SpecificLLMBenchmark import *
 from benchmarking.classes.BaseLLMBenchmark import BaseLLMBenchmark
-import pandas as pd
 
 
 # --- Functions ---
@@ -20,14 +23,6 @@ def get_benchmark_instance(model: str) -> BaseLLMBenchmark:
         return benchmarks[model]()
     else:
         raise ValueError(f"No benchmark instance available for model: {model}")
-
-
-def load_json_file(filepath: str) -> dict:
-    """
-    Load and return the content of a JSON file.
-    """
-    with open(filepath, "r") as file:
-        return json.load(file)
 
 
 def read_input_data(base_dir: str, step_dir: str) -> tuple:
@@ -47,20 +42,6 @@ def read_input_data(base_dir: str, step_dir: str) -> tuple:
     template_dir = os.path.join(input_dir, "templates")
 
     return expected_response_data, source_data, template_dir
-
-
-def create_prompt(template_data: str, source_data: str) -> str:
-    """
-    Create a prompt by replacing placeholders in the template with source data.
-    """
-    return template_data.replace("%%source", source_data)
-
-
-def read_generated_response(output_filepath: str) -> str:
-    """
-    Read the generated response from the specified file.
-    """
-    return load_json_file(output_filepath)["data"]
 
 
 def evaluate_responses(
@@ -86,7 +67,7 @@ def evaluate_responses(
 
         results = benchmark.evaluate_response(prompt, expected_response, llm_response)
         all_results.append(results)
-        print(f"Results for {template_file}: {results}")
+        # print(f"Results for {template_file}: {results}")
 
     return all_results
 

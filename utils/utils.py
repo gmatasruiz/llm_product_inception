@@ -1,6 +1,7 @@
 # --- Imports ---
 import os
 import subprocess
+import json
 
 # --- Lambda Functions ---
 get_step_n = lambda x: x.split("step")[-1] if isinstance(x, str) else x
@@ -61,6 +62,28 @@ def retrieve_terminal_output() -> str:
     ]
 
     return (stdout_str, stderr_str)
+
+
+def load_json_file(filepath: str) -> dict:
+    """
+    Load and return the content of a JSON file.
+    """
+    with open(filepath, "r") as file:
+        return json.load(file)
+
+
+def create_prompt(template_data: str, source_data: str) -> str:
+    """
+    Create a prompt by replacing placeholders in the template with source data.
+    """
+    return template_data.replace("%%source", source_data)
+
+
+def read_generated_response(output_filepath: str) -> str:
+    """
+    Read the generated response from the specified file.
+    """
+    return load_json_file(output_filepath)["data"]
 
 
 # --- Constants ---
