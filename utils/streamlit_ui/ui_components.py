@@ -1,5 +1,6 @@
 # --- Imports ---
 import streamlit as st
+import math
 
 from utils.utils import *
 from prompt_creation.llm_prompting import *
@@ -398,3 +399,74 @@ def comp_display_std_output(mode: str = "stdout"):
         st.code(stderr)
     else:
         raise NotImplementedError
+
+
+def comp_display_chart_from_file(filepath: str):
+    """
+    Display a Plotly chart from a JSON file.
+
+    Parameters:
+        filepath (str): The file path to the JSON file containing the Plotly chart data.
+
+    Returns:
+        True if successfull, otherwise False
+
+    Raises:
+        None
+    """
+
+    successful = False
+
+    if os.path.exists(filepath) and filepath.endswith("json"):
+        with open(filepath, "r") as file:
+            fig_data = json.load(file)
+
+        st.plotly_chart(figure_or_data=fig_data, use_container_width=True)
+
+        successful = True
+
+    else:
+        st.warning(
+            "No valid data could be found. Please, run the benchmark process for the selected model and step."
+        )
+
+    return successful
+
+
+def comp_display_text_alongside(
+    text_array: list[str],
+    label_array: list[str],
+    elem_per_col: int = 1,
+    height: int = 350,
+):
+
+    if len(label_array) != len(text_array):
+        st.error("Mismatch between the number of labels and values...")
+        return
+
+    n_cols = int(math.ceil(len(text_array) / elem_per_col))
+
+    # Set Styling
+    cols = [col.container(border=True, height=height) for col in st.columns(n_cols)]
+
+    # Fill in information
+    for idx, (text, label) in enumerate(zip(text_array, label_array)):
+        col_idx = idx // elem_per_col
+        with cols[col_idx]:
+            st_markdown_color_text(f"**{label}**", "#68C3E0")
+            st_markdown_color_text(f"""*"{text}"*""", "white")
+            st_markdown_spacer()
+
+
+def st_markdown_color_text(text: str, bgcolor: str = "white"):
+    st.markdown(
+        f'<span style="color:{bgcolor}"> {text}</span>',
+        unsafe_allow_html=True,
+    )
+
+
+def st_markdown_spacer():
+    st.markdown(
+        f"<br>",
+        unsafe_allow_html=True,
+    )

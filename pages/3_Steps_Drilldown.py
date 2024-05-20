@@ -6,26 +6,21 @@ from utils.streamlit_ui.ui_components import (
     comp_select_step,
     comp_select_model,
     comp_batch_process_options,
+    comp_display_chart_from_file,
+    comp_display_text_alongside,
 )
 
 
 # --- Functions ---
 def display_step_results(root_dir: str):
     """
-    Display the results for a selected step.
-
-    This function prompts the user to select a step from a list of available steps. If requested,
-    it calls the 'comp_batch_process_options' function to process the selected step. After processing,
-    it displays the results for the selected step.
+    Display the results of a selected step and model by drilling down into the data.
 
     Parameters:
-        - root_dir (str): The root directory.
+        root_dir (str): The root directory where the data is stored.
 
     Returns:
         None
-
-    Example:
-        display_step_results()
     """
 
     # Mandatory select step to drilldown
@@ -44,12 +39,109 @@ def display_step_results(root_dir: str):
     comp_batch_process_options(root_dir=root_dir, mode="steps", steps=selected_step)
 
     # Main view
-    if selected_step:
+
+    ## Filesystem dirs init
+    ### Input
+    source_dir = os.path.join(root_dir, "input", str_selected_step, "source")
+    selected_source = os.path.join(source_dir, f"source_{str_selected_step}.json")
+
+    templates_dir = os.path.join(root_dir, "input", str_selected_step, "templates")
+
+    expected_response_dir = os.path.join(
+        root_dir, "input", str_selected_step, "expected_response"
+    )
+    selected_expected_response = os.path.join(
+        expected_response_dir, f"expected_response_{str_selected_step}.json"
+    )
+
+    ### Ouput
+    figure_dir = os.path.join(
+        root_dir, "results", str_selected_model, str_selected_step, "figures"
+    )
+
+    metrics_dir = os.path.join(
+        root_dir, "results", str_selected_model, str_selected_step, "metrics"
+    )
+
+    llm_response_dir = os.path.join(
+        root_dir, "results", str_selected_model, str_selected_step, "output"
+    )
+
+    # Display components
+    if selected_step and selected_model:
         st.title(f"🔎 {str_selected_step.capitalize()} Drilldown")
 
-        # Placeholder for displaying step-specific benchmarks and comparisons
-        # TODO: Implement benchmark visualization
-        st.write(f"Benchmarks and comparisons for {str_selected_step} go here.")
+        # Display results figure
+        data_is_available = comp_display_chart_from_file(
+            os.path.join(figure_dir, f"metrics_{str_selected_step}.json")
+        )
+
+        if data_is_available:
+            display_step_response_comparative(
+                selected_source,
+                selected_expected_response,
+                templates_dir,
+                llm_response_dir,
+            )
+
+
+def display_step_response_comparative(
+    selected_source: str,
+    selected_expected_response: str,
+    templates_dir: str,
+    llm_response_dir: str,
+):
+    """
+    Display the prompt, LLM response, and expected response for a selected source.
+
+    Parameters:
+        - selected_source (str): The path to the selected source file.
+        - selected_expected_response (str): The path to the selected expected response file.
+        - templates_dir (str): The directory containing templates.
+        - llm_response_dir (str): The directory containing LLM responses.
+
+    Returns:
+        None
+    """
+
+    # Display prompt
+    with st.columns(2)[0]:
+        # Show prompt and LLM response
+        ## Extract files from selection
+        selected_template_fname = st.selectbox(
+            "Template:", sorted(os.listdir(templates_dir))
+        )
+
+    try:
+        selected_template = os.path.join(templates_dir, selected_template_fname)
+
+        selected_llm_response = os.path.join(
+            llm_response_dir,
+            selected_template_fname.replace("template", "llm_response"),
+        )
+
+        ## Extract data from selected files
+        prompt = create_prompt(
+            *[
+                read_generated_response(fpath)
+                for fpath in (selected_template, selected_source)
+            ]
+        )
+        llm_response = read_generated_response(selected_llm_response)
+        expected_response = read_generated_response(selected_expected_response)
+
+        ## Display text
+        comp_display_text_alongside(
+            text_array=(prompt, llm_response, expected_response),
+            label_array=("Prompt:", "LLM Response:", "Expected Response:"),
+            elem_per_col=2,
+            height=500,
+        )
+
+    except:
+        st.error(
+            "No valid data could be found. Please, run the benchmark process for the selected model and step."
+        )
 
 
 # --- Main ---
