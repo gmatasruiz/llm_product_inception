@@ -565,6 +565,7 @@ class BaseLLMBenchmark(ABC):
         fig = px.bar(
             metrics_df,
             y=metrics_df.columns,
+            orientation="v",
             barmode="group",
             text_auto=".3f",
             title="LLM Benchmarking Metrics",
@@ -573,7 +574,7 @@ class BaseLLMBenchmark(ABC):
             type="category",
         )
         fig.update_layout(
-            xaxis_title="Evaluation Instance",
+            xaxis_title="Template Number",
             yaxis_title="Scores",
             legend_title="Metrics",
         )
@@ -593,8 +594,8 @@ class BaseLLMBenchmark(ABC):
 
         fig = self.write_metrics_fig()
 
-        fig.write_image(os.path.join(figures_path, f"{output_fname}.png"))
-        fig.write_html(os.path.join(figures_path, f"{output_fname}.html"))
+        # fig.write_image(os.path.join(figures_path, f"{output_fname}.png"))
+        # fig.write_html(os.path.join(figures_path, f"{output_fname}.html"))
         fig.write_json(os.path.join(figures_path, f"{output_fname}.json"))
 
     def plot_metrics(self):
