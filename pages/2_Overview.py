@@ -20,7 +20,9 @@ def display_overview(root_dir: str):
     Returns:
         None
     """
-    comp_batch_process_options(root_dir=root_dir, mode="batch")
+    comp_batch_process_options(
+        root_dir=root_dir, mode="batch", on_sidebar=True, spacer_n=1
+    )
 
     st.title("📊 Overview")
     # Placeholder for displaying overall benchmark and drilldowns

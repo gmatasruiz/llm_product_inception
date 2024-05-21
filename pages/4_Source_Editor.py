@@ -50,7 +50,13 @@ def display_edit_json_sources(root_dir):
     str_selected_step = f"step{''.join(selected_step)}"
 
     # Add batch process options
-    comp_batch_process_options(root_dir=root_dir, mode="steps", steps=selected_step)
+    comp_batch_process_options(
+        root_dir=root_dir,
+        mode="steps",
+        steps=selected_step,
+        on_sidebar=True,
+        spacer_n=1,
+    )
 
     # Radio group to select the file type to be modified
     st.title("✏️ Source Editor")

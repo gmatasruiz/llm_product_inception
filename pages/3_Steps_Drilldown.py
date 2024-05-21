@@ -99,7 +99,13 @@ def display_step_results(root_dir: str):
     str_selected_model = f"{''.join(selected_model)}"
 
     # Add batch process component
-    comp_batch_process_options(root_dir=root_dir, mode="steps", steps=selected_step)
+    comp_batch_process_options(
+        root_dir=root_dir,
+        mode="steps",
+        steps=selected_step,
+        on_sidebar=True,
+        spacer_n=1,
+    )
 
     # Main view
 
