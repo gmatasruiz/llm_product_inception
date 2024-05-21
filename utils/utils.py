@@ -151,8 +151,9 @@ def gather_all_metrics(
             else:
                 df_list.append(pd.DataFrame([{}]))
 
-    total_metrics_long_df = pd.concat(df_list)
-    print(total_metrics_long_df)
+    all_metrics_long_df = pd.concat(df_list)
+
+    return all_metrics_long_df
 
 
 # --- Constants ---

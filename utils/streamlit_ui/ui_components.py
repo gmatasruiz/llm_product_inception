@@ -487,9 +487,8 @@ def comp_display_table_from_file(
             df.set_index(index_column, inplace=True)
 
         ## If beautify_col_names, apply transformation to col_names
-        st_column_config = {
-            col: col.capitalize().replace("_", " ") for col in df.columns
-        }
+        if beautify_col_names:
+            st_column_config = st_df_beautify_colnames(df)
 
         st.dataframe(
             data=df,
@@ -597,4 +596,25 @@ def st_markdown_spacer(on_sidebar: bool = False):
     spacer_.markdown(
         f"<br>",
         unsafe_allow_html=True,
+    )
+
+
+def st_df_beautify_colnames(df: pd.DataFrame):
+    """
+    Beautify column names of a pandas DataFrame by capitalizing and replacing underscores with spaces.
+
+    Parameters:
+        df (pd.DataFrame): The pandas DataFrame whose column names are to be beautified.
+
+    Returns:
+        dict: A dictionary mapping original column names to beautified column names.
+
+    Example:
+        df = pd.DataFrame({"first_name": ["Alice", "Bob"], "last_name": ["Smith", "Doe"]})
+        beautified_cols = st_df_beautify_colnames(df)
+    """
+    return (
+        {col: col.capitalize().replace("_", " ") for col in df.columns}
+        if not df.empty
+        else {}
     )
