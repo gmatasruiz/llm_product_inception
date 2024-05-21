@@ -562,14 +562,12 @@ class BaseLLMBenchmark(ABC):
         )
         fig = px.bar(
             metrics_df,
+            x=metrics_df.index + 1,
             y=metrics_df.columns,
             orientation="v",
             barmode="group",
             text_auto=".3f",
             title="LLM Benchmarking Metrics",
-        )
-        fig.update_xaxes(
-            type="category",
         )
         fig.update_layout(
             xaxis_title="Template Number",
