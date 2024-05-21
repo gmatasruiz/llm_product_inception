@@ -7,82 +7,13 @@ from utils.streamlit_ui.ui_components import (
     comp_select_model,
     comp_batch_process_options,
     comp_display_chart_from_file,
+    comp_display_table_from_file,
     comp_display_text_alongside,
+    st_markdown_spacer,
 )
 
 
 # --- Functions ---
-def display_step_results(root_dir: str):
-    """
-    Display the results of a selected step and model by drilling down into the data.
-
-    Parameters:
-        root_dir (str): The root directory where the data is stored.
-
-    Returns:
-        None
-    """
-
-    # Mandatory select step to drilldown
-    selected_step = comp_select_step(
-        mode="single", sidebar=True, multi_checkbox=False, num_only=True
-    )
-    str_selected_step = f"step{''.join(selected_step)}"
-
-    # Mandatory select model to drilldown
-    selected_model = comp_select_model(
-        mode="single", sidebar=True, multi_checkbox=False
-    )
-    str_selected_model = f"{''.join(selected_model)}"
-
-    # Add batch process component
-    comp_batch_process_options(root_dir=root_dir, mode="steps", steps=selected_step)
-
-    # Main view
-
-    ## Filesystem dirs init
-    ### Input
-    source_dir = os.path.join(root_dir, "input", str_selected_step, "source")
-    selected_source = os.path.join(source_dir, f"source_{str_selected_step}.json")
-
-    templates_dir = os.path.join(root_dir, "input", str_selected_step, "templates")
-
-    expected_response_dir = os.path.join(
-        root_dir, "input", str_selected_step, "expected_response"
-    )
-    selected_expected_response = os.path.join(
-        expected_response_dir, f"expected_response_{str_selected_step}.json"
-    )
-
-    ### Ouput
-    figure_dir = os.path.join(
-        root_dir, "results", str_selected_model, str_selected_step, "figures"
-    )
-
-    metrics_dir = os.path.join(
-        root_dir, "results", str_selected_model, str_selected_step, "metrics"
-    )
-
-    llm_response_dir = os.path.join(
-        root_dir, "results", str_selected_model, str_selected_step, "output"
-    )
-
-    # Display components
-    if selected_step and selected_model:
-        st.title(f"🔎 {str_selected_step.capitalize()} Drilldown")
-
-        # Display results figure
-        data_is_available = comp_display_chart_from_file(
-            os.path.join(figure_dir, f"metrics_{str_selected_step}.json")
-        )
-
-        if data_is_available:
-            display_step_response_comparative(
-                selected_source,
-                selected_expected_response,
-                templates_dir,
-                llm_response_dir,
-            )
 
 
 def display_step_response_comparative(
@@ -142,6 +73,97 @@ def display_step_response_comparative(
         st.error(
             "No valid data could be found. Please, run the benchmark process for the selected model and step."
         )
+
+
+def display_step_results(root_dir: str):
+    """
+    Display the results of a selected step and model by drilling down into the data.
+
+    Parameters:
+        root_dir (str): The root directory where the data is stored.
+
+    Returns:
+        None
+    """
+
+    # Mandatory select step to drilldown
+    selected_step = comp_select_step(
+        mode="single", sidebar=True, multi_checkbox=False, num_only=True
+    )
+    str_selected_step = f"step{''.join(selected_step)}"
+
+    # Mandatory select model to drilldown
+    selected_model = comp_select_model(
+        mode="single", sidebar=True, multi_checkbox=False
+    )
+    str_selected_model = f"{''.join(selected_model)}"
+
+    # Add batch process component
+    comp_batch_process_options(root_dir=root_dir, mode="steps", steps=selected_step)
+
+    # Main view
+
+    ## Filesystem dirs init
+    ### Input
+    source_dir = os.path.join(root_dir, "input", str_selected_step, "source")
+    selected_source = os.path.join(source_dir, f"source_{str_selected_step}.json")
+
+    templates_dir = os.path.join(root_dir, "input", str_selected_step, "templates")
+
+    expected_response_dir = os.path.join(
+        root_dir, "input", str_selected_step, "expected_response"
+    )
+    selected_expected_response = os.path.join(
+        expected_response_dir, f"expected_response_{str_selected_step}.json"
+    )
+
+    ### Ouput
+    figure_dir = os.path.join(
+        root_dir, "results", str_selected_model, str_selected_step, "figures"
+    )
+
+    metrics_dir = os.path.join(
+        root_dir, "results", str_selected_model, str_selected_step, "metrics"
+    )
+
+    llm_response_dir = os.path.join(
+        root_dir, "results", str_selected_model, str_selected_step, "output"
+    )
+
+    # Display components
+    if selected_step and selected_model:
+        st.title(f"🔎 {str_selected_step.capitalize()} Drilldown")
+        st_markdown_spacer()
+
+        # Display results figure
+        with st.expander("Benchmark Results", expanded=True):
+            st_markdown_spacer()
+            tabs = st.tabs(("📈 Chart", "🗃 Table"))
+            with tabs[0]:
+                fig_is_available = comp_display_chart_from_file(
+                    filepath=os.path.join(
+                        figure_dir, f"metrics_{str_selected_step}.json"
+                    )
+                )
+
+            with tabs[1]:
+                data_is_available = comp_display_table_from_file(
+                    filepath=os.path.join(
+                        metrics_dir, f"metrics_{str_selected_step}.csv"
+                    ),
+                    ignore_index=True,
+                    beautify_col_names=True,
+                )
+
+        if fig_is_available and data_is_available:
+            with st.expander("Comparative", expanded=True):
+                st_markdown_spacer()
+                display_step_response_comparative(
+                    selected_source,
+                    selected_expected_response,
+                    templates_dir,
+                    llm_response_dir,
+                )
 
 
 # --- Main ---

@@ -433,6 +433,62 @@ def comp_display_chart_from_file(filepath: str):
     return successful
 
 
+def comp_display_table_from_file(
+    filepath: str,
+    ignore_index: bool = False,
+    index_column: str = None,
+    beautify_col_names: bool = True,
+):
+    """
+    Display a table from a CSV file.
+
+    Parameters:
+        filepath (str): The file path to the CSV file containing the table data.
+        ignore_index (bool, optional): Whether to ignore the index column. Defaults to False.
+        index_column (str, optional): The column to set as the index. Defaults to None.
+        beautify_col_names (bool, optional): Whether to beautify column names by capitalizing and replacing underscores with spaces. Defaults to True.
+
+    Returns:
+        bool: True if the table is displayed successfully, otherwise False.
+
+    Raises:
+        None
+    """
+
+    successful = False
+    st_column_config = {}
+
+    # Load data from CSV file
+    if os.path.exists(filepath) and filepath.endswith("csv"):
+        df = pd.read_csv(filepath, index_col=None)
+
+        # DF Configuration
+        ## If index_column in column, set index
+        if (not ignore_index) and (index_column in df.columns):
+            df.set_index(index_column, inplace=True)
+
+        ## If beautify_col_names, apply transformation to col_names
+        st_column_config = {
+            col: col.capitalize().replace("_", " ") for col in df.columns
+        }
+
+        st.dataframe(
+            data=df,
+            use_container_width=True,
+            hide_index=ignore_index,
+            column_config=st_column_config,
+        )
+
+        successful = True
+
+    else:
+        st.warning(
+            "No valid data could be found. Please, run the benchmark process for the selected model and step."
+        )
+
+    return successful
+
+
 def comp_display_text_alongside(
     text_array: list[str],
     label_array: list[str],
