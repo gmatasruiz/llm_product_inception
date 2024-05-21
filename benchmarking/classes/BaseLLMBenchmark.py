@@ -15,9 +15,6 @@ import torch
 import numpy as np
 import pandas as pd
 import plotly.express as px
-import plotly.io as pio
-
-pio.kaleido.scope.mathjax = None
 
 from abc import ABC
 from transformers import BertTokenizer, BertModel  # For BERT embeddings
