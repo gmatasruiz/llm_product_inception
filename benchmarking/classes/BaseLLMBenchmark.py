@@ -80,6 +80,7 @@ class BaseLLMBenchmark(ABC):
     """
 
     def __init__(self):
+        self.llm_model = None
         self.vectorizer = TfidfVectorizer()
         self.stop_words = set(stopwords.words("english"))
         self.metrics_history = []

@@ -15,6 +15,7 @@ class ChatGPTBenchmark(BaseLLMBenchmark):
 
     def __init__(self):
         super().__init__()
+        self.llm_model = "ChatGPT"
 
     def preprocess(self, text: str):
         return super().preprocess(text)
@@ -73,6 +74,7 @@ class Mixtral8x7BBenchmark(BaseLLMBenchmark):
 
     def __init__(self):
         super().__init__()
+        self.llm_model = "Mixtral-8x7B"
 
     def preprocess(self, text: str):
         return super().preprocess(text)
@@ -131,6 +133,7 @@ class LlamaV38BBenchmark(BaseLLMBenchmark):
 
     def __init__(self):
         super().__init__()
+        self.llm_model = "Meta-Llama3-8B"
 
     def preprocess(self, text: str):
         return super().preprocess(text)
