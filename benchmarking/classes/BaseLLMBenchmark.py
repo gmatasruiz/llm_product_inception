@@ -494,6 +494,11 @@ class BaseLLMBenchmark(ABC):
             ),
         }
 
+        # Calculate the overall score
+        overall_score = {"overall_score": sum([v for v in results.values()])}
+
+        results = overall_score | results
+
         # Store results for plotting
         self.metrics_history.append(results)
         return results
@@ -553,6 +558,7 @@ class BaseLLMBenchmark(ABC):
             fig.show()
         """
         metrics_df = self.write_metrics_df()
+        metrics_df.pop("overall_score")
 
         metrics_df = metrics_df.rename(
             columns={
