@@ -159,11 +159,12 @@ def comp_batch_process_options(
     **kwargs,
 ):
     """
-    This function generates a batch process options component for launching batch prompting or benchmarking.
+    This function creates a UI component for batch processing options, including selecting multiple models, prompting, and benchmarking.
 
     Parameters:
-        root_dir (str): The root directory to retrieve the input files from.
-        mode (str, optional): The mode of operation. Can be "batch" for batch processing or "steps" for step-wise processing. Defaults to "steps".
+        root_dir (str): The root directory.
+        mode (str, optional): The mode of operation. Can be "steps" for step-wise processing. Defaults to "steps".
+        on_sidebar (bool, optional): Determines whether the UI component is displayed on the sidebar. Defaults to False.
         **kwargs: Additional keyword arguments.
 
     Returns:
@@ -546,18 +547,28 @@ def comp_display_text_alongside(
             st_markdown_spacer()
 
 
-def st_markdown_color_text(text: str, bgcolor: str = "white"):
+def st_markdown_color_text(text: str, bgcolor: str = "white", on_sidebar: bool = False):
     """
-    Display colored text using Markdown syntax.
+    Display colored text using Markdown in a Streamlit app.
 
     Parameters:
-        text (str): The text to be displayed.
+        text (str): The text to display.
         bgcolor (str, optional): The background color of the text. Defaults to "white".
+        on_sidebar (bool, optional): Determines whether the colored text is displayed on the sidebar. Defaults to False.
 
     Returns:
         None
+
+    Example:
+        st_markdown_color_text("Hello, World!", bgcolor="blue", on_sidebar=True)
     """
-    st.markdown(
+    if on_sidebar:
+        md_text = st.sidebar.empty()
+
+    else:
+        md_text = st.empty()
+
+    md_text.markdown(
         f'<span style="color:{bgcolor}"> {text}</span>',
         unsafe_allow_html=True,
     )
@@ -565,13 +576,16 @@ def st_markdown_color_text(text: str, bgcolor: str = "white"):
 
 def st_markdown_spacer(on_sidebar: bool = False):
     """
-    This function inserts a markdown spacer in the Streamlit app.
+    This function creates a markdown spacer in the Streamlit app interface.
 
     Parameters:
-        None
+        on_sidebar (bool, optional): Determines whether the spacer is displayed on the sidebar. Defaults to False.
 
     Returns:
         None
+
+    Example:
+        st_markdown_spacer(on_sidebar=True)
     """
 
     if on_sidebar:
