@@ -120,4 +120,4 @@ REPO_ROOT_DIR = os.path.join(os.getcwd())
 PROMPT_ROOT_DIR = os.path.join(os.getcwd(), "prompt_creation", "prompting")
 AVAILABLE_STEPS = get_available_steps(PROMPT_ROOT_DIR)
 AVAILABLE_STEPS_N = list(map(get_step_n, get_available_steps(PROMPT_ROOT_DIR)))
-LLMs = ["Mixtral-8x7B", "Meta-Llama3-8B", "ChatGPT"]
+LLMs = ["ChatGPT", "Meta-Llama3-8B", "Mixtral-8x7B"]

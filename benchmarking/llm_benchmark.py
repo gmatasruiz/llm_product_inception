@@ -136,8 +136,10 @@ def save_benchmark_results(
 
     # Save per-step CSV
     results_per_step_df = pd.DataFrame(results)
-    results_per_step_df["llm_model"] = benchmark.llm_model
-    results_per_step_df.to_csv(os.path.join(metrics_path, f"{metrics_fname}.csv"))
+    results_per_step_df.insert(0, "llm_model", benchmark.llm_model)  # Insert model type
+    results_per_step_df.to_csv(
+        os.path.join(metrics_path, f"{metrics_fname}.csv"), index=None
+    )
 
 
 def benchmark_model_step(base_dir: str, model: str, step_dir: str) -> None:
