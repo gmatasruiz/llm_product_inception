@@ -155,6 +155,7 @@ def run_batch_benchmarking(models: list, root_dir: str, steps: list[str]):
 def comp_batch_process_options(
     root_dir: str,
     mode: str = "steps",
+    on_sidebar: bool = False,
     **kwargs,
 ):
     """
@@ -168,9 +169,26 @@ def comp_batch_process_options(
     Returns:
         None
     """
+
     with st.columns(3)[-1]:
 
-        with st.popover("Process Launcher"):
+        # Get values depending on `on_sidebar` argument
+        if on_sidebar:
+            sidebar_ = st.sidebar
+            spacer_n = 1
+
+        else:
+            sidebar_ = st.empty()
+            spacer_n = 0
+
+        # Add spaces
+        spacer_n = (
+            kwargs.get("spacer_n", 0) if kwargs.get("spacer_n", 0) >= 0 else spacer_n
+        )
+        spaces = [st_markdown_spacer(on_sidebar=on_sidebar) for i in range(spacer_n)]
+
+        # Using the popover
+        with sidebar_.popover("Process Launcher"):
             selected_llms = comp_select_model(
                 mode="multiple",
                 sidebar=False,
@@ -545,7 +563,7 @@ def st_markdown_color_text(text: str, bgcolor: str = "white"):
     )
 
 
-def st_markdown_spacer():
+def st_markdown_spacer(on_sidebar: bool = False):
     """
     This function inserts a markdown spacer in the Streamlit app.
 
@@ -555,7 +573,14 @@ def st_markdown_spacer():
     Returns:
         None
     """
-    st.markdown(
+
+    if on_sidebar:
+        spacer_ = st.sidebar.empty()
+
+    else:
+        spacer_ = st.empty()
+
+    spacer_.markdown(
         f"<br>",
         unsafe_allow_html=True,
     )
