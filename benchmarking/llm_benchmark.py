@@ -95,7 +95,7 @@ def evaluate_responses(
 
     for template_file in os.listdir(template_dir):
         template_path = os.path.join(template_dir, template_file)
-        template_data = load_json_file(template_path)["data"]
+        template_data = read_generated_response(template_path)
         prompt = create_prompt(template_data, source_data)
 
         output_filename = template_file.replace("template", "llm_response")
@@ -103,6 +103,17 @@ def evaluate_responses(
         llm_response = read_generated_response(output_filepath)
 
         results = benchmark.evaluate_response(prompt, expected_response, llm_response)
+
+        # Add additional data
+
+        additional_data = {
+            "llm_model": benchmark.llm_model,
+            "step_number": read_meta(output_filepath)["step_number"],
+            "template_number": read_meta(output_filepath)["iteration_number"],
+        }
+
+        results = additional_data | results
+
         all_results.append(results)
         # print(f"Results for {template_file}: {results}")
 
@@ -136,7 +147,6 @@ def save_benchmark_results(
 
     # Save per-step CSV
     results_per_step_df = pd.DataFrame(results)
-    results_per_step_df.insert(0, "llm_model", benchmark.llm_model)  # Insert model type
     results_per_step_df.to_csv(
         os.path.join(metrics_path, f"{metrics_fname}.csv"), index=None
     )

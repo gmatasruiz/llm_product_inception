@@ -3,6 +3,9 @@ import os
 import subprocess
 import json
 
+import pandas as pd
+import numpy as np
+
 # --- Lambda Functions ---
 get_step_n = lambda x: x.split("step")[-1] if isinstance(x, str) else x
 
@@ -112,6 +115,44 @@ def read_generated_response(output_filepath: str) -> str:
         read_generated_response("/path/to/output.json")
     """
     return load_json_file(output_filepath)["data"]
+
+
+def read_meta(output_filepath: str) -> str:
+    """
+    Read and return the '__meta__' field from a JSON file located at the specified filepath.
+
+    Parameters:
+        output_filepath (str): The path to the JSON file containing the data.
+
+    Returns:
+        str: The value of the '__meta__' field from the JSON file as a string.
+
+    Example:
+        read_meta("/path/to/output.json")
+    """
+    return load_json_file(output_filepath)["__meta__"]
+
+
+def gather_all_metrics(
+    root_dir: str,
+    models: list[str],
+    steps: list[str],
+):
+    df_list = []
+
+    # Iterate through each model and step
+    for model in models:
+        for step in steps:
+            metrics_dir = os.path.join(root_dir, "results", model, step, "metrics")
+            metrics_path = os.path.join(metrics_dir, f"metrics_{step}.csv")
+
+            if metrics_path and os.path.exists(metrics_path):
+                df_list.append(pd.read_csv(metrics_path, index_col=None))
+            else:
+                df_list.append(pd.DataFrame([{}]))
+
+    total_metrics_long_df = pd.concat(df_list)
+    print(total_metrics_long_df)
 
 
 # --- Constants ---
