@@ -107,7 +107,7 @@ def display_overview_table(df: pd.DataFrame, ignore_index: bool = True):
     st_column_config = st_df_beautify_colnames(df)
 
     st.dataframe(
-        data=df,
+        data=df.dropna(),
         use_container_width=True,
         hide_index=ignore_index,
         column_config=st_column_config,
