@@ -1,6 +1,7 @@
 # --- Imports ---
 import streamlit as st
 import math
+import toml
 
 from utils.utils import *
 from prompt_creation.llm_prompting import *
@@ -542,24 +543,24 @@ def comp_display_text_alongside(
         col_idx = idx // elem_per_col
         with cols[col_idx]:
             st_markdown_color_text(f"**{label}**", "#68C3E0")
-            st_markdown_color_text(f"""*"{text}"*""", "white")
+            st.markdown(f"""*"{text}"*""")
             st_markdown_spacer()
 
 
-def st_markdown_color_text(text: str, bgcolor: str = "white", on_sidebar: bool = False):
+def st_markdown_color_text(text: str, txtcolor: str = None, on_sidebar: bool = False):
     """
     Display colored text using Markdown in a Streamlit app.
 
     Parameters:
         text (str): The text to display.
-        bgcolor (str, optional): The background color of the text. Defaults to "white".
+        txtcolor (str, optional): The color of the text. Defaults to None.
         on_sidebar (bool, optional): Determines whether the colored text is displayed on the sidebar. Defaults to False.
 
     Returns:
         None
 
     Example:
-        st_markdown_color_text("Hello, World!", bgcolor="blue", on_sidebar=True)
+        st_markdown_color_text("Hello, World!", txtcolor="blue", on_sidebar=True)
     """
     if on_sidebar:
         md_text = st.sidebar.empty()
@@ -567,8 +568,13 @@ def st_markdown_color_text(text: str, bgcolor: str = "white", on_sidebar: bool =
     else:
         md_text = st.empty()
 
+    contrast_theme_color = (
+        "white" if get_streamlit_theme()["base"] == "dark" else "black"
+    )
+    txtcolor = txtcolor if txtcolor else contrast_theme_color
+
     md_text.markdown(
-        f'<span style="color:{bgcolor}"> {text}</span>',
+        f'<span style="color:{txtcolor}"> {text}</span>',
         unsafe_allow_html=True,
     )
 
@@ -618,3 +624,51 @@ def st_df_beautify_colnames(df: pd.DataFrame):
         if not df.empty
         else {}
     )
+
+
+def get_streamlit_config():
+    """
+    Get the Streamlit configuration from the .streamlit/config.toml file.
+
+    This function reads the Streamlit configuration from the specified path, which is typically the .streamlit/config.toml file in the project directory. It checks if the configuration file exists and then loads the configuration using the TOML library.
+
+    Returns:
+        dict: The Streamlit configuration loaded from the config.toml file.
+
+    Raises:
+        FileNotFoundError: If the .streamlit/config.toml file is not found.
+
+    Example:
+        config = get_streamlit_config()
+    """
+    st_config_path = os.path.join(REPO_ROOT_DIR, ".streamlit", "config.toml")
+
+    # Check if the config.toml file exists
+    if not os.path.exists(st_config_path):
+        raise FileNotFoundError(f"Theme configuration file not found: {st_config_path}")
+
+    # Load the theme configuration
+    config = toml.load(st_config_path)
+    return config
+
+
+def get_streamlit_theme():
+    """
+    Get the Streamlit theme settings from the Streamlit configuration.
+
+    This function calls the 'get_streamlit_config' function to retrieve the Streamlit configuration, which includes the theme settings. It then extracts and returns the theme settings from the configuration.
+
+    Returns:
+        dict: The theme settings extracted from the Streamlit configuration.
+
+    Raises:
+        FileNotFoundError: If the .streamlit/config.toml file is not found.
+
+    Example:
+        theme_settings = get_streamlit_theme()
+    """
+
+    config = get_streamlit_config()
+
+    # Extract and return the theme settings
+    return config.get("theme", {})
