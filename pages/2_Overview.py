@@ -1,7 +1,6 @@
 # --- Imports ---
 import streamlit as st
 import plotly.express as px
-import matplotlib.pyplot as plt
 
 from utils.utils import *
 from utils.streamlit_ui.ui_components import (
@@ -106,14 +105,6 @@ def display_overview_table(df: pd.DataFrame, ignore_index: bool = True):
     """
 
     st_column_config = st_df_beautify_colnames(df)
-
-    df.dropna(inplace=True)
-
-    color_columns = list(
-        set(df.columns) - set(["llm_model", "template_number", "step_number"])
-    )
-    cmap = plt.colormaps.get_cmap("RdYlGn")
-    df[color_columns].style.background_gradient(cmap=cmap, vmin=0, vmax=6, axis=None)
 
     st.dataframe(
         data=df,
