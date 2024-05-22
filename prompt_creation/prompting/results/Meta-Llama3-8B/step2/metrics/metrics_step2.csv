@@ -1,2 +1,2 @@
-llm_model,semantic_similarity,accuracy_score,coherence_score,creativity_score,engagement_score,sentiment_alignment
-Meta-Llama3-8B,0.3518006943166256,0.525808,0.21333333333333335,0.5714285714285714,0.0164,1.0
+llm_model,step_number,template_number,overall_score,semantic_similarity,accuracy_score,coherence_score,creativity_score,engagement_score,sentiment_alignment
+Meta-Llama3-8B,2,1,2.6787705758012477,0.3518006943166256,0.525808,0.21333333333333335,0.5714285714285714,0.0164,1.0
