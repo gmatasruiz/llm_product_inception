@@ -60,6 +60,7 @@ def display_edit_json_sources(root_dir):
 
     # Radio group to select the file type to be modified
     st.title("✏️ Source Editor")
+    st.divider()
     source_types = ["source", "templates", "expected_response"]
     source_type = st.radio(
         label="Select a source type:",
@@ -86,7 +87,7 @@ def display_edit_json_sources(root_dir):
         with st.container(border=True):
             json_text = st_monaco(
                 value=json.dumps(json_data, indent=4),
-                height="280px",
+                height="250px",
                 language="json",
                 theme="vs-dark",
             )

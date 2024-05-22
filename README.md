@@ -1,6 +1,8 @@
 
 # Thesis on LLMs for Product Conception
 
+----
+
 This repository is dedicated to the research conducted for a Master's thesis on the use of Large Language Models (LLMs) to enhance efficiency in the product conception process. It contains a Python-based framework designed to interface with various language models using the MLX software suite and the Hugging Face Transformers library. The study compares traditional human-driven product conception against product conceptions developed with the guidance of ChatGPT, Mixtral, Llama3, and similar models, aiming to evaluate the potential of LLMs in streamlining and innovating the conceptual phase of product development.
 
 ## Repository Structure

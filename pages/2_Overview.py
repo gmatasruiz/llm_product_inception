@@ -17,7 +17,19 @@ from utils.streamlit_ui.ui_components import (
 def display_overview_chart(
     df: pd.DataFrame, x_col: str, y_col: str, z_col: str, color: str
 ):
+    """
+    Display a 3D line chart based on the provided DataFrame.
 
+    Parameters:
+        - df (pd.DataFrame): The DataFrame containing the data to be plotted.
+        - x_col (str): The column name for the x-axis values.
+        - y_col (str): The column name for the y-axis values.
+        - z_col (str): The column name for the z-axis values.
+        - color (str): The column name for color differentiation.
+
+    Returns:
+        None
+    """
     # Drop NaN values
     df = df.dropna()
 
@@ -33,7 +45,7 @@ def display_overview_chart(
         height=700,
         width=700,
         markers=True,
-        color_discrete_sequence=px.colors.qualitative.Plotly,
+        color_discrete_sequence=px.colors.qualitative.Pastel,
     )
 
     # Update layout to set axis ranges and steps
@@ -82,6 +94,16 @@ def display_overview_chart(
 
 
 def display_overview_table(df: pd.DataFrame, ignore_index: bool = True):
+    """
+    Display the overview table based on the provided DataFrame.
+
+    Parameters:
+        - df (pd.DataFrame): The DataFrame containing the data to be displayed.
+        - ignore_index (bool): Whether to hide the index column in the displayed table. Default is True.
+
+    Returns:
+        None
+    """
 
     st_column_config = st_df_beautify_colnames(df)
 
@@ -120,7 +142,7 @@ def display_overview(root_dir: str):
     )
 
     st.title("📊 Overview")
-    st_markdown_spacer()
+    st.divider()
 
     # Gather all metrics together
     all_metrics_df = gather_all_metrics(

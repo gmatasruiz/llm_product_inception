@@ -139,7 +139,7 @@ def display_step_results(root_dir: str):
     # Display components
     if selected_step and selected_model:
         st.title(f"🔎 {str_selected_step.capitalize()} Drilldown")
-        st_markdown_spacer()
+        st.divider()
 
         # Display results figure
         with st.expander("Benchmark Results", expanded=True):

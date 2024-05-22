@@ -574,7 +574,7 @@ class BaseLLMBenchmark(ABC):
             barmode="group",
             text_auto=".3f",
             title="LLM Benchmarking Metrics",
-            color_discrete_sequence=px.colors.qualitative.Plotly,
+            color_discrete_sequence=px.colors.qualitative.Pastel,
         )
         fig.update_layout(
             xaxis_title="Template Number",
