@@ -1,0 +1,11 @@
+{
+    "data": "Here are examples of key objectives for a product: 1) Improve user engagement by 20%. 2) Reduce training costs by 15%. 3) Increase safety compliance rates by 25%. Define 3 key objectives within the development of the product PREVENT-IA using the following information: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step3/templates/template_step3.json",
+        "doctype": "prompt_template",
+        "step_number": "3",
+        "iteration_number": "2",
+        "technique": "Few-shot",
+        "comments": "This file should contain a template using the %%source placeholder for few-shot prompting."
+    }
+}

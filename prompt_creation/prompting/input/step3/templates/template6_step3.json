@@ -1,0 +1,11 @@
+{
+    "data": "First, identify the primary goal of the product PREVENT-IA. Then, determine a secondary goal that supports the primary goal. Finally, define a tertiary objective that complements the first two. Use the following information to guide your process: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step3/templates/template_step3.json",
+        "doctype": "prompt_template",
+        "step_number": "3",
+        "iteration_number": "6",
+        "technique": "Prompt Chaining",
+        "comments": "This file should contain a template using the %%source placeholder for prompt chaining."
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "data": "Think step-by-step to define the key objectives for the product PREVENT-IA. Start by identifying the primary goal, then consider secondary goals, and finally, list a third objective. Use the following information: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step3/templates/template_step3.json",
+        "doctype": "prompt_template",
+        "step_number": "3",
+        "iteration_number": "3",
+        "technique": "Chain-of-Thought",
+        "comments": "This file should contain a template using the %%source placeholder for chain-of-thought prompting."
+    }
+}

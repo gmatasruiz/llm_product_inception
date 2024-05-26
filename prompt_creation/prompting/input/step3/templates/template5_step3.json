@@ -1,0 +1,11 @@
+{
+    "data": "Generate relevant background information about the goals of AI-powered education platforms and use this knowledge to define 3 key objectives for the development of the product PREVENT-IA using the following information: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step3/templates/template_step3.json",
+        "doctype": "prompt_template",
+        "step_number": "3",
+        "iteration_number": "5",
+        "technique": "Generated Knowledge",
+        "comments": "This file should contain a template using the %%source placeholder for generated knowledge prompting."
+    }
+}

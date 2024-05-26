@@ -1,0 +1,11 @@
+{
+    "data": "Explore multiple potential objectives for the development of the product PREVENT-IA by considering different aspects of occupational risk prevention. Choose the 3 most relevant objectives using the following information: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step3/templates/template_step3.json",
+        "doctype": "prompt_template",
+        "step_number": "3",
+        "iteration_number": "7",
+        "technique": "Tree of Thoughts",
+        "comments": "This file should contain a template using the %%source placeholder for tree of thoughts prompting."
+    }
+}
