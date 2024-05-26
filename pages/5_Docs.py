@@ -36,7 +36,7 @@ def display_docs(root_dir: str, md_file_dir: str, search_substring: str = ""):
         options=[
             file for file in os.listdir(md_file_dir) if file.lower().endswith(".md")
         ],
-        format_func=lambda x: os.path.basename(x).replace("_", " ").capitalize(),
+        format_func=lambda x: os.path.basename(x),
     )
 
     if doc_file.lower().endswith(".md") and search_substring in doc_file:
