@@ -4,7 +4,7 @@
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template2_step1.json",
         "doctype": "prompt_template",
         "step_number": "1",
-        "iteration_number": "1",
+        "iteration_number": "2",
         "technique": "Few-shot Prompting",
         "comments": "This template provides few-shot examples for defining the product idea and name."
     }

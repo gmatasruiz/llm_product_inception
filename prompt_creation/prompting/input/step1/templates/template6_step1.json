@@ -4,7 +4,7 @@
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template6_step1.json",
         "doctype": "prompt_template",
         "step_number": "1",
-        "iteration_number": "1",
+        "iteration_number": "6",
         "technique": "Prompt Chaining",
         "comments": "This template uses prompt chaining to define the product idea and name."
     }

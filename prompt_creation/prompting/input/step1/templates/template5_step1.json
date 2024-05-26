@@ -4,7 +4,7 @@
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template5_step1.json",
         "doctype": "prompt_template",
         "step_number": "1",
-        "iteration_number": "1",
+        "iteration_number": "5",
         "technique": "Generated Knowledge Prompting",
         "comments": "This template uses generated knowledge prompting to define the product idea and name."
     }
