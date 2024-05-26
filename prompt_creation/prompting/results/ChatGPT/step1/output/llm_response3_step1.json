@@ -1,0 +1,12 @@
+{
+    "data": "Product Definition: PREVENT-IA is an AI-powered education platform designed to provide workers with interactive and personalized training on Occupational Risk Prevention to enhance workplace safety.\n\nProduct Name: PREVENT-IA",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template3_step1.json",
+        "output_generated_on": "2024-05-27T00:24:46.124610",
+        "model_used": "ChatGPT",
+        "doctype": "llm_response",
+        "step_number": "1",
+        "iteration_number": "1"
+    }
+}

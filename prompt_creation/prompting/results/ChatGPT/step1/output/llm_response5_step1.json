@@ -1,0 +1,12 @@
+{
+    "data": "PREVENT-IA is an AI-powered educational platform designed to provide personalized training and resources to workers for effectively understanding and managing occupational risks and safety.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template5_step1.json",
+        "output_generated_on": "2024-05-27T00:24:19.913269",
+        "model_used": "ChatGPT",
+        "doctype": "llm_response",
+        "step_number": "1",
+        "iteration_number": "1"
+    }
+}
