@@ -1,0 +1,10 @@
+{
+    "data": "Your task is to follow the user instructions: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step2/templates/template1_step2.json",
+        "doctype": "prompt_template",
+        "step_number": "2",
+        "iteration_number": "1",
+        "comments": "This file should contain a template including the %%source placeholder>>"
+    }
+}

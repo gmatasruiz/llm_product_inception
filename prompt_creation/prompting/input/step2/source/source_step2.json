@@ -1,0 +1,10 @@
+{
+    "data": "Initial Prompt. Write 3 even numbers.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step2/source/source_step2.json",
+        "doctype": "prompt_source",
+        "step_number": "2",
+        "iteration_number": 0,
+        "comments": "<<additional info about the source>>"
+    }
+}

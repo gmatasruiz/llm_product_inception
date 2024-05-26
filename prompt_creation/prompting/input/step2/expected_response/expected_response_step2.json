@@ -1,0 +1,9 @@
+{
+    "data": "3, 5, 7",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step2/source/source_step2.json",
+        "doctype": "expected_response",
+        "step_number": "2",
+        "comments": "Expected response as defined by the user"
+    }
+}

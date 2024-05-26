@@ -187,7 +187,7 @@ class BaseLLMInstance(ABC):
         Raises:
             None
         """
-        data_dict = {"response": response}
+        data_dict = {"data": response}
         meta_dict = {"__meta__": {k: v for k, v in meta.items()}}
 
         with open(filepath, "w") as file:

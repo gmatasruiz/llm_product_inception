@@ -1,4 +1,7 @@
 # --- Imports ---
+import os
+import json
+
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
@@ -12,6 +15,7 @@ import torch
 import numpy as np
 import pandas as pd
 import plotly.express as px
+
 from abc import ABC
 from transformers import BertTokenizer, BertModel  # For BERT embeddings
 
@@ -76,6 +80,7 @@ class BaseLLMBenchmark(ABC):
     """
 
     def __init__(self):
+        self.llm_model = None
         self.vectorizer = TfidfVectorizer()
         self.stop_words = set(stopwords.words("english"))
         self.metrics_history = []
@@ -474,13 +479,10 @@ class BaseLLMBenchmark(ABC):
         # Train Word2Vec model on the combined corpus to get vectors for semantic similarity
         model = Word2Vec([prompt_tokens, expected_tokens, response_tokens], min_count=1)
 
-        # Semantic similarity between expected and LLM response
-        relevance_score = self.semantic_similarity(
-            model, expected_tokens, response_tokens
-        )
-
         results = {
-            "relevance_score": relevance_score,
+            "semantic_similarity": self.semantic_similarity(
+                model, expected_tokens, response_tokens
+            ),
             "accuracy_score": self.evaluate_accuracy(expected_response, llm_response),
             "coherence_score": self.evaluate_coherence(llm_response),
             "creativity_score": self.evaluate_creativity(
@@ -492,9 +494,133 @@ class BaseLLMBenchmark(ABC):
             ),
         }
 
+        # Calculate the overall score
+        overall_score = {"overall_score": sum([v for v in results.values()])}
+
+        results = overall_score | results
+
         # Store results for plotting
         self.metrics_history.append(results)
         return results
+
+    def write_metrics_df(self, write_to_json_file: bool = False, path: str = None):
+        """
+        Write the evaluation metrics history to a DataFrame and optionally to a JSON file.
+
+        Parameters:
+            write_to_json_file (bool, optional): A flag indicating whether to write the metrics to a JSON file. Defaults to False.
+            path (str, optional): The path to the JSON file where the metrics will be written. Required if write_to_json_file is True.
+
+        Returns:
+            pandas.DataFrame: A DataFrame containing the evaluation metrics history.
+
+        Raises:
+            FileNotFoundError: If the specified path does not exist when trying to write to a JSON file.
+
+        Notes:
+            - The method creates a DataFrame from the stored metrics history.
+            - If write_to_json_file is True and a valid path is provided, the metrics will be written to a JSON file.
+            - If the path does not exist when trying to write to a JSON file, a FileNotFoundError will be raised.
+
+        Example:
+            benchmark = BaseLLMBenchmark()
+            benchmark.evaluate_response("Prompt 1", "Expected Response 1", "LLM Response 1")
+            benchmark.evaluate_response("Prompt 2", "Expected Response 2", "LLM Response 2")
+            metrics_df = benchmark.write_metrics_df(write_to_json_file=True, path="metrics.json")
+        """
+        # Create dataframe from metrics history
+        metrics_df = pd.DataFrame(self.metrics_history)
+
+        if write_to_json_file and os.path.exists(os.path.dirname(path)):
+            # Write metrics to json file
+            metrics_df.to_json(path)
+
+        return metrics_df
+
+    def write_metrics_fig(self):
+        """
+        Generates a bar plot visualizing the benchmarking metrics.
+
+        Returns:
+            plotly.graph_objects.Figure: A bar plot displaying the benchmarking metrics with evaluation instances on the x-axis and scores on the y-axis.
+                The bars are grouped by different metrics, showing the comparison of scores across evaluations.
+
+        Notes:
+            - This method internally calls 'write_metrics_df' to obtain the dataframe containing the benchmarking metrics.
+            - The column names of the metrics dataframe are modified for better readability in the plot.
+            - The bar plot is created using Plotly Express with grouped bars for each metric.
+            - The x-axis represents the evaluation instances, while the y-axis represents the scores of the metrics.
+            - The legend displays the names of the metrics being compared in the plot.
+
+        Example:
+            benchmark = BaseLLMBenchmark()
+            fig = benchmark.write_metrics_fig()
+            fig.show()
+        """
+        metrics_df = self.write_metrics_df()
+        metrics_df.pop("overall_score")
+
+        metrics_df = metrics_df.rename(
+            columns={
+                col_name: col_name.replace("_", " ").title()
+                for col_name in metrics_df.columns
+            }
+        )
+        fig = px.bar(
+            metrics_df,
+            x=metrics_df.index + 1,
+            y=metrics_df.columns,
+            orientation="v",
+            barmode="group",
+            text_auto=".3f",
+            title="LLM Benchmarking Metrics",
+            color_discrete_sequence=px.colors.qualitative.Pastel,
+        )
+        fig.update_layout(
+            xaxis_title="Template Number",
+            yaxis_title="Scores",
+            legend_title="Metrics",
+        )
+        return fig
+
+    def save_metrics_to_file(
+        self,
+        output_fname: str,
+        metrics_path: str,
+        figures_path: str,
+    ):
+        """
+        Save the evaluation metrics to files in different formats.
+
+        Parameters:
+            output_fname (str): The base filename for the output files.
+            metrics_path (str): The path where the metrics file will be saved.
+            figures_path (str): The path where the figures will be saved.
+
+        Returns:
+            None
+
+        Notes:
+            - This method generates a figure based on the evaluation metrics.
+            - The figure is saved in JSON format at the specified 'figures_path' with the given 'output_fname'.
+            - The metrics table can be saved in JSON format by uncommenting the 'write_metrics_df' method call.
+            - The figure can also be saved in other formats like PNG or HTML by uncommenting the respective lines.
+
+        Example:
+            benchmark = BaseLLMBenchmark()
+            benchmark.save_metrics_to_file(output_fname="evaluation_results", metrics_path="metrics/", figures_path="figures/")
+        """
+
+        # self.write_metrics_df(
+        #     write_to_json_file=True,
+        #     path=os.path.join(metrics_path, f"table_{output_fname}.json"),
+        # )
+
+        fig = self.write_metrics_fig()
+
+        # fig.write_image(os.path.join(figures_path, f"{output_fname}.png"))
+        # fig.write_html(os.path.join(figures_path, f"{output_fname}.html"))
+        fig.write_json(os.path.join(figures_path, f"{output_fname}.json"))
 
     def plot_metrics(self):
         """
@@ -514,27 +640,6 @@ class BaseLLMBenchmark(ABC):
             benchmark = BaseLLMBenchmark()
             benchmark.plot_metrics()
         """
-        metrics_df = pd.DataFrame(self.metrics_history)
-        metrics_df = metrics_df.rename(
-            columns={
-                col_name: col_name.replace("_", " ").title()
-                for col_name in metrics_df.columns
-            }
-        )
-        fig = px.bar(
-            metrics_df,
-            y=metrics_df.columns,
-            barmode="group",
-            text_auto=".3f",
-            title="LLM Benchmarking Metrics",
-        )
-        fig.update_xaxes(
-            showticklabels=False,
-            type="category",
-        )
-        fig.update_layout(
-            xaxis_title="Evaluation Instance",
-            yaxis_title="Scores",
-            legend_title="Metrics",
-        )
+        fig = self.write_metrics_fig()
+
         fig.show()
