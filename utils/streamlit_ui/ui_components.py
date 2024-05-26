@@ -672,3 +672,30 @@ def get_streamlit_theme():
 
     # Extract and return the theme settings
     return config.get("theme", {})
+
+
+def comp_show_md_file(file_path: str):
+    """
+    Display the contents of a Markdown file.
+
+    This function takes a file path as input and displays the contents of the file if it has a '.md' extension.
+    The function reads the file, converts it to Markdown format, and displays it using the 'st.markdown' function.
+
+    Parameters:
+        file_path (str): The path of the Markdown file to be displayed.
+
+    Returns:
+        None
+
+    Raises:
+        NotImplementedError: If the file does not have a '.md' extension.
+
+    Example:
+        comp_show_md_file("/path/to/file.md")
+    """
+    if file_path.endswith(".md"):
+        with open(file_path, "r") as f:
+            md_file = f.read()
+        st.markdown(md_file)
+    else:
+        raise NotImplementedError

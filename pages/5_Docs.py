@@ -7,7 +7,7 @@ from utils.streamlit_ui.ui_components import comp_show_md_file
 
 
 # --- Functions ---
-def display_home(root_dir: str, md_file_dir: str, search_substring: str = "README"):
+def display_docs(root_dir: str, md_file_dir: str, search_substring: str = ""):
     """
     Display the home page of the thesis on LLMs for Product Conception.
 
@@ -30,10 +30,17 @@ def display_home(root_dir: str, md_file_dir: str, search_substring: str = "READM
     with st.columns(5)[2]:
         st.image(os.path.join(images_dir, "Thesis_AIStreamline.jpeg"))
 
-    # Repo explanation
-    for file in os.listdir(md_file_dir):
-        if file.lower().endswith(".md") and search_substring in file:
-            comp_show_md_file(os.path.join(md_file_dir, file))
+    # Doc search
+    doc_file = st.selectbox(
+        "Select a document:",
+        options=[
+            file for file in os.listdir(md_file_dir) if file.lower().endswith(".md")
+        ],
+        format_func=lambda x: os.path.basename(x).replace("_", " ").capitalize(),
+    )
+
+    if doc_file.lower().endswith(".md") and search_substring in doc_file:
+        comp_show_md_file(os.path.join(md_file_dir, doc_file))
 
 
 # --- Main ---
@@ -67,7 +74,7 @@ def main():
         },
     )
 
-    display_home(REPO_ROOT_DIR, REPO_ROOT_DIR)
+    display_docs(REPO_ROOT_DIR, DOCS_ROOT_DIR)
 
 
 if __name__ == "__main__":
