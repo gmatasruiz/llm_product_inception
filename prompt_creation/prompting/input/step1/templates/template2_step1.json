@@ -1,10 +1,11 @@
 {
-    "data": "Solve the following task: ``` %%source ```",
+    "data": "Here are examples of product ideas and names:\n1. A wearable device to monitor health - HealthMonitor\n2. An app to help manage personal finance - FinanceBuddy\nNow, define the product idea in one sentence and provide a product name for %%source",
     "__meta__": {
-        "template_filepath": "prompt_creation/prompting/input/step1/templates/template1_step1.json",
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template2_step1.json",
         "doctype": "prompt_template",
         "step_number": "1",
-        "iteration_number": "2",
-        "comments": "This file should contain a template including the %%source placeholder>>"
+        "iteration_number": "1",
+        "technique": "Few-shot Prompting",
+        "comments": "This template provides few-shot examples for defining the product idea and name."
     }
 }

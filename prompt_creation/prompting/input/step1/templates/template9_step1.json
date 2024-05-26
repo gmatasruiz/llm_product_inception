@@ -1,0 +1,11 @@
+{
+    "data": "Reflect on the key elements of the product, such as its purpose and target audience, and then generate the product idea and name based on the following information: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template9_step1.json",
+        "doctype": "prompt_template",
+        "step_number": "1",
+        "iteration_number": "9",
+        "technique": "Reflexion",
+        "comments": "This template uses the Reflexion prompt technique."
+    }
+}

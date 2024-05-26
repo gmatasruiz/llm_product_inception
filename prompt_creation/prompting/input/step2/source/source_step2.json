@@ -1,10 +1,10 @@
 {
-    "data": "Initial Prompt. Write 3 even numbers.",
+    "data": "PREVENT-IA an AI-powered education platform to educate workers on Occupational Risk Prevention",
     "__meta__": {
-        "source_filepath": "prompt_creation/prompting/input/step2/source/source_step2.json",
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
         "doctype": "prompt_source",
         "step_number": "2",
-        "iteration_number": 0,
-        "comments": "<<additional info about the source>>"
+        "iteration_number": "0",
+        "comments": "Initial step to define the product name and idea."
     }
 }

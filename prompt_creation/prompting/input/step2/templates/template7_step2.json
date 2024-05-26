@@ -1,0 +1,11 @@
+{
+    "data": "Explore multiple potential ideas by considering different aspects of each category (Features, Architecture, Risks, Business). Generate at least 20 ideas (3 words maximum) for each category and highlight key ideas using the following information: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step2/templates/template7_step2.json",
+        "doctype": "prompt_template",
+        "step_number": "2",
+        "iteration_number": "7",
+        "technique": "Tree of Thoughts",
+        "comments": "This file should contain a template using the %%source placeholder for tree of thoughts prompting."
+    }
+}

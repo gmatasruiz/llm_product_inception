@@ -1,0 +1,11 @@
+{
+    "data": "First, generate ideas for Features. Then, use those ideas to inform ideas for Architecture. Next, consider the potential Risks associated with the features and architecture. Finally, generate ideas for Business (Goals, Markets, Users, Targets). Generate at least 20 ideas (3 words maximum) for each category and highlight key ideas using the following information: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step2/templates/template6_step2.json",
+        "doctype": "prompt_template",
+        "step_number": "2",
+        "iteration_number": "6",
+        "technique": "Prompt Chaining",
+        "comments": "This file should contain a template using the %%source placeholder for prompt chaining."
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "data": "Generate multiple sets of 20 ideas (3 words maximum) for each of these categories: Features, Architecture, Risks, Business (Goals, Markets, Users, Targets). Select the most consistent and relevant ideas for each category using the following information: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step2/templates/template4_step2.json",
+        "doctype": "prompt_template",
+        "step_number": "2",
+        "iteration_number": "4",
+        "technique": "Self-Consistency",
+        "comments": "This file should contain a template using the %%source placeholder for self-consistency prompting."
+    }
+}

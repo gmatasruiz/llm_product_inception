@@ -1,0 +1,11 @@
+{
+    "data": "Explore multiple paths to generate the product idea and name: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template7_step1.json",
+        "doctype": "prompt_template",
+        "step_number": "1",
+        "iteration_number": "7",
+        "technique": "Tree of Thoughts",
+        "comments": "Template using tree of thoughts technique."
+    }
+}
