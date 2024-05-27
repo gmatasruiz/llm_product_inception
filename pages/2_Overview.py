@@ -33,7 +33,7 @@ def display_overview_chart(
     df = df.dropna()
 
     # Generate figure
-    fig = px.line_3d(
+    fig = px.scatter_3d(
         df,
         x=x_col,
         y=y_col,
@@ -43,7 +43,7 @@ def display_overview_chart(
         labels=st_df_beautify_colnames(df),
         height=700,
         width=700,
-        markers=True,
+        # markers=True,
         color_discrete_sequence=px.colors.qualitative.Pastel,
     )
 
@@ -77,7 +77,7 @@ def display_overview_chart(
             camera=dict(
                 eye=dict(
                     x=0,
-                    y=-(df[y_col].max() + 0.25),
+                    y=-(df[x_col].max() * 0.7),
                     z=0,
                 )  # Adjust the view to be perpendicular to the y-plane and parallel to the z-plane
             ),
