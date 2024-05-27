@@ -1,9 +1,9 @@
 {
-    "data": "Here is a one-sentence definition and a product name:\n\n**Definition:** PREVENT-IA is an AI-powered education platform that provides personalized training and simulations to educate workers on occupational risk prevention, enabling them to identify and mitigate hazards in their workplaces.\n\n**Product Name:** PREVENT-IA - \"Proactive Risk Education and Training for Industry and Academia\"",
+    "data": "Here is the definition:\n\nName: RiskShield\nIdea: An AI-powered education platform to educate workers on Occupational Risk Prevention",
     "__meta__": {
         "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template1_step1.json",
-        "output_generated_on": "2024-05-27T00:28:39.002231",
+        "output_generated_on": "2024-05-28T00:55:15.752525",
         "model_used": "Meta-Llama-3-8B",
         "doctype": "llm_response",
         "step_number": "1",

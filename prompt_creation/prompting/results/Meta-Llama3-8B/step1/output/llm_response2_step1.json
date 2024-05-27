@@ -1,9 +1,9 @@
 {
-    "data": "Here is the definition and product name:\n\n**Product Idea:** PREVENT-IA is an AI-powered education platform that provides interactive training modules and personalized learning paths to educate workers on occupational risk prevention, reducing the risk of accidents and injuries in various industries.\n\n**Product Name:** PREVENT-IA (pronounced \"Prevent-ee-ah\")",
+    "data": "Here is the definition:\n\nName: Preventia\nIdea: An AI-powered education platform to educate workers on Occupational Risk Prevention, providing personalized training and simulations to reduce workplace accidents and injuries.",
     "__meta__": {
         "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template2_step1.json",
-        "output_generated_on": "2024-05-27T00:28:28.419547",
+        "output_generated_on": "2024-05-28T00:55:10.404892",
         "model_used": "Meta-Llama-3-8B",
         "doctype": "llm_response",
         "step_number": "1",
