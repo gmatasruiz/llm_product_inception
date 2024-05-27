@@ -1,0 +1,12 @@
+{
+    "data": "Product Idea: \"PREVENT-IA, an AI-powered education platform that provides personalized training and assessment for workers to enhance their knowledge and skills in Occupational Risk Prevention, ensuring a safer and healthier work environment.\"",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template3_step1.json",
+        "output_generated_on": "2024-05-27T08:20:37.970212",
+        "model_used": "mixtral-8x-7b",
+        "doctype": "llm_response",
+        "step_number": "1",
+        "iteration_number": "3"
+    }
+}
