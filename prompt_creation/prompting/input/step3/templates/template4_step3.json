@@ -1,5 +1,5 @@
 {
-    "data": "Generate multiple sets of 3 key objectives for the development of the product PREVENT-IA. Select the most consistent and relevant objectives using the following information: %%source",
+    "data": "Generate multiple sets of 3 key objectives for the development of the product PREVENT-IA. Select the most consistent and relevant objectives using the following information: %%source\n Provide them in a numbered list.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step3/templates/template4_step3.json",
         "doctype": "prompt_template",

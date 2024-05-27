@@ -1,0 +1,9 @@
+{
+    "data": "Key Objectives of PREVENT-IA:\n1. Reduce the number of workplace accidents.\n2. Facilitate access to on-site ORP (Occupational Risk Prevention) training.\n3. Ensure the monitoring of ORP (Occupational Risk Prevention) training.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step3/source/source_step3.json",
+        "doctype": "expected_response",
+        "step_number": "3",
+        "comments": "Key objectives from the product idea and traits."
+    }
+}

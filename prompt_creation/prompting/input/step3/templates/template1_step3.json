@@ -1,7 +1,7 @@
 {
-    "data": "Define 3 key objectives within the development of the product PREVENT-IA using the following information: %%source",
+    "data": "Define 3 key objectives within the development of the product PREVENT-IA using the following information: %%source\n Provide them in a numbered list.",
     "__meta__": {
-        "template_filepath": "prompt_creation/prompting/input/step3/templates/template_step3.json",
+        "template_filepath": "prompt_creation/prompting/input/step3/templates/template1_step3.json",
         "doctype": "prompt_template",
         "step_number": "3",
         "iteration_number": "1",
