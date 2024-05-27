@@ -1,11 +1,11 @@
 {
-    "data": "Reflect on the key elements of each category (Features, Architecture, Risks, Business), and then generate at least 20 ideas (3 words maximum) for each category. Highlight key ideas using the following information: %%source",
+    "data": "Reflect on the key elements of each category (Features, Architecture, Risks, Business), and then generate at least 20 ideas (3 words maximum) for each category. Highlight key ideas per category using the following information: %%source\nProvide the results as two lists per category, where one of them will contain all the ideas, while the other will contain only the key ideas.",
     "__meta__": {
-        "template_filepath": "prompt_creation/prompting/input/step2/templates/template9_step2.json",
+        "template_filepath": "prompt_creation/prompting/input/step2/templates/template5_step2.json",
         "doctype": "prompt_template",
         "step_number": "2",
         "iteration_number": "5",
         "technique": "Reflexion",
-        "comments": "This file should contain a template using the %%source placeholder for reflexion prompting."
+        "comments": "Template using the reflexion prompting technique."
     }
 }

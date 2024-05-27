@@ -6,6 +6,6 @@
         "step_number": "3",
         "iteration_number": "3",
         "technique": "Chain-of-Thought",
-        "comments": "This file should contain a template using the %%source placeholder for chain-of-thought prompting."
+        "comments": "Template using chain-of-thought prompting technique."
     }
 }

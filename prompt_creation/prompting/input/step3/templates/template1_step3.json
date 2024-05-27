@@ -6,6 +6,6 @@
         "step_number": "3",
         "iteration_number": "1",
         "technique": "Zero-shot",
-        "comments": "This file should contain a template using the %%source placeholder for zero-shot prompting."
+        "comments": "Template using zero-shot prompting technique."
     }
 }

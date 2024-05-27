@@ -1,0 +1,10 @@
+{
+    "data": "The product name is 'PREVENT-IA' and its core idea is being an 'AI-powered education platform to educate workers on Occupational Risk Prevention'.\n Given this context, the product should display the following traits:\n- Features:Chat for resolving doubts, Link to certification pages, Generate content from updated sources, Evaluate learning outcomes, Report generation, Contents annotation, Complement content with verified sources, Organize information by topics/chapters, Include corporate content, Assign training to workers, User profile management;\n - Architecture: AWS, PDF Editor, Jira, Email, Github, Cloud Computing, pgVector, CI/CD, Autoscaling Groups, Code Builder, Web Platform, Secrets Management, Python, REST API, UI/UX, React, Figma, Scalability, GPT;\n - Risks: Negative public opinion on the use of AI, Energy consumption, Dependence on AI model providers, Unfriendly interfaces, Lack of feedback, Poor prioritization of functionalities, Low visibility on social media, Difficulty in measuring training quality, AI use regulations;\n Business (Goals, Markets, Users, Targets): Reduce accidents, Training tracking, On-site training access, Personalized training, Dynamic training, Oriented to specific activities, Learning results dashboard, Workers with risk activities, Managers, Certification candidates, Site Managers, Transporters, Logistics, Commissioning, Assembly;",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step3/source/source_step3.json",
+        "doctype": "prompt_source",
+        "step_number": "3",
+        "iteration_number": "0",
+        "comments": "Define 3 key objectives within the development of this product."
+    }
+}

@@ -1,5 +1,5 @@
 {
-    "data": "Think about the key benefits and target audience of the product. Now, define the product idea in one sentence and provide a product name: %%source",
+    "data": "Think about the key benefits and target audience of the product. Now, define the product idea in one sentence and provide a product name: %%source\nUse the following format: 'Name:`product name`\n Idea:`product_idea'",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template3_step1.json",
         "doctype": "prompt_template",

@@ -1,11 +1,11 @@
 {
-    "data": "Think step-by-step to generate ideas for each category. Start with Features, then move to Architecture, followed by Risks, and finally Business. Generate at least 20 ideas (3 words maximum) for each category and highlight key ideas using the following information: %%source",
+    "data": "Think step-by-step to generate ideas for each category. Start with Features, then move to Architecture, followed by Risks, and finally Business. Generate at least 20 ideas (3 words maximum) for each category and highlight key ideas per category using the following information: %%source\nProvide the results as two lists per category, where one of them will contain all the ideas, while the other will contain only the key ideas.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step2/templates/template3_step2.json",
         "doctype": "prompt_template",
         "step_number": "2",
         "iteration_number": "3",
         "technique": "Chain-of-Thought",
-        "comments": "This file should contain a template using the %%source placeholder for chain-of-thought prompting."
+        "comments": "Template using chain-of-thought prompting technique."
     }
 }

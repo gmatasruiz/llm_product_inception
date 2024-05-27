@@ -1,5 +1,5 @@
 {
-    "data": "Here are examples of product ideas and names:\n1. A wearable device to monitor health - HealthMonitor\n2. An app to help manage personal finance - FinanceBuddy\nNow, define the product idea in one sentence and provide a product name for %%source",
+    "data": "Here are examples of product ideas and names:\n1. A wearable device to monitor health - HealthMonitor\n2. An app to help manage personal finance - FinanceBuddy\nNow, define the product idea in one sentence and provide a product name for %%source\nUse the following format: 'Name:`product name`\n Idea:`product_idea'",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template2_step1.json",
         "doctype": "prompt_template",
