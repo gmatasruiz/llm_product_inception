@@ -1,9 +1,9 @@
 {
-    "data": "\"PREVENT-IA: Revolutionizing Occupational Risk Prevention through AI-driven education and training for the modern workforce.\"",
+    "data": "Name: Prevent-IA\nIdea: An AI-powered education platform that provides comprehensive training to workers on Occupational Risk Prevention, ensuring safety and compliance in the workplace.",
     "__meta__": {
         "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template1_step1.json",
-        "output_generated_on": "2024-05-27T05:42:03.075530",
+        "output_generated_on": "2024-05-28T02:25:02.570980",
         "model_used": "mixtral-8x-7b",
         "doctype": "llm_response",
         "step_number": "1",
