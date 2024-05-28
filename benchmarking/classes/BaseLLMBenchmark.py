@@ -363,7 +363,11 @@ class BaseLLMBenchmark(ABC):
             return 0
         return len(unique_response_tokens) / len(set(response_tokens))
 
-    def evaluate_engagement(self, response: str):
+    def evaluate_engagement(
+        self,
+        expected_response: str,
+        llm_response: str,
+    ):
         """
         Calculate the engagement score of a response based on sentiment polarity, subjectivity, and normalized length.
 
@@ -382,14 +386,16 @@ class BaseLLMBenchmark(ABC):
         W_POLARITY, W_SUBJECTIVITY, W_NORMLENGTH = (0.3, 0.3, 0.4)
 
         # Use TextBlob to get sentiment polarity and subjectivity to indicate emotional engagement
-        sentiment = TextBlob(response).sentiment
+        sentiment = TextBlob(llm_response).sentiment
         polarity = abs(sentiment.polarity)  # Emotional intensity
         subjectivity = sentiment.subjectivity  # Personal engagement
 
         # Calculate engagement score as weighted sum of polarity, subjectivity, and normalized length
-        normalized_length = (
-            len(response) / 1000
-        )  # Normalize by a suitable factor, like average length
+        normalized_length = len(llm_response) / len(expected_response)
+
+        normalized_length = 1 if normalized_length > 1 else normalized_length
+
+        # Calculate the final score
         engagement_score = (
             W_POLARITY * polarity
             + W_SUBJECTIVITY * subjectivity
@@ -488,7 +494,9 @@ class BaseLLMBenchmark(ABC):
             "creativity_score": self.evaluate_creativity(
                 prompt_tokens, response_tokens
             ),
-            "engagement_score": self.evaluate_engagement(llm_response),
+            "engagement_score": self.evaluate_engagement(
+                expected_response, llm_response
+            ),
             "sentiment_alignment": self.evaluate_sentiment_alignment(
                 expected_response, llm_response
             ),
@@ -539,48 +547,79 @@ class BaseLLMBenchmark(ABC):
 
     def write_metrics_fig(self):
         """
-        Generates a bar plot visualizing the benchmarking metrics.
+        Generates a radar chart using Plotly Express to visualize the benchmarking metrics of the Language Model (LLM).
 
         Returns:
-            plotly.graph_objects.Figure: A bar plot displaying the benchmarking metrics with evaluation instances on the x-axis and scores on the y-axis.
-                The bars are grouped by different metrics, showing the comparison of scores across evaluations.
+            plotly.graph_objs._figure.Figure: A radar chart displaying the benchmarking metrics of the LLM.
 
-        Notes:
-            - This method internally calls 'write_metrics_df' to obtain the dataframe containing the benchmarking metrics.
-            - The column names of the metrics dataframe are modified for better readability in the plot.
-            - The bar plot is created using Plotly Express with grouped bars for each metric.
-            - The x-axis represents the evaluation instances, while the y-axis represents the scores of the metrics.
-            - The legend displays the names of the metrics being compared in the plot.
+        Steps:
+            1. Generates a DataFrame containing the benchmarking metrics using the 'write_metrics_df' method.
+            2. Removes the 'overall_score' column from the DataFrame.
+            3. Renames the columns to have titles with spaces and capitalized words for better readability.
+            4. Transforms the DataFrame to long format for Plotly Express visualization.
+            5. Creates a radar chart with each metric as a spoke, template numbers as different lines, and scores as the distance from the center.
+            6. Adds markers to the lines for better visibility and uses pastel colors for line colors.
+            7. Adjusts the range of the radial axis if needed to ensure proper scaling of the scores.
+            8. Shows a legend with the title 'Template Number' to indicate the different templates.
+            9. Sets the title of the radar chart as 'LLM Benchmarking Metrics'.
 
         Example:
             benchmark = BaseLLMBenchmark()
             fig = benchmark.write_metrics_fig()
             fig.show()
         """
+        # Generate the metrics DataFrame
         metrics_df = self.write_metrics_df()
+
+        # Remove the 'overall_score' column from the DataFrame
         metrics_df.pop("overall_score")
 
+        # Rename the columns to have titles with spaces and capitalized words
         metrics_df = metrics_df.rename(
             columns={
                 col_name: col_name.replace("_", " ").title()
                 for col_name in metrics_df.columns
             }
         )
-        fig = px.bar(
-            metrics_df,
-            x=metrics_df.index + 1,
-            y=metrics_df.columns,
-            orientation="v",
-            barmode="group",
-            text_auto=".3f",
+
+        # List of metrics to include in the radar chart, excluding non-metric columns
+        metrics = list(metrics_df.columns)
+
+        # Melt the DataFrame to long format for Plotly Express
+        df_melted = metrics_df.reset_index()
+        df_melted["index"] = df_melted["index"] + 1
+
+        df_melted = df_melted.melt(
+            id_vars=["index"], value_vars=metrics, var_name="Metric", value_name="Score"
+        )
+
+        # Rename the 'index' column to 'Template Number'
+        df_melted.rename(columns={"index": "Template Number"}, inplace=True)
+
+        # Create the radar chart using Plotly Express
+        fig = px.line_polar(
+            df_melted,
+            r="Score",
+            theta="Metric",
+            color="Template Number",
+            line_close=True,
             title="LLM Benchmarking Metrics",
-            color_discrete_sequence=px.colors.qualitative.Pastel,
+            markers=True,  # Add markers to the lines
+            color_discrete_sequence=px.colors.qualitative.Pastel,  # Use pastel colors
         )
+
+        # Update the layout of the figure
         fig.update_layout(
-            xaxis_title="Template Number",
-            yaxis_title="Scores",
-            legend_title="Metrics",
+            polar=dict(
+                radialaxis=dict(
+                    visible=True, range=[0, 1]  # Adjust the range if needed
+                )
+            ),
+            showlegend=True,
+            legend_title="Template Number",
+            title="LLM Benchmarking Metrics",
         )
+
         return fig
 
     def save_metrics_to_file(
