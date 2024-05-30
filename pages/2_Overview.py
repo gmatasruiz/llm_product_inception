@@ -7,6 +7,7 @@ from utils.streamlit_ui.ui_components import (
     comp_batch_process_options,
     st_markdown_spacer,
     st_df_beautify_colnames,
+    st_setup_logo
 )
 
 
@@ -187,6 +188,9 @@ def main():
             """,
         },
     )
+
+    # Setup logo
+    st_setup_logo(REPO_ROOT_DIR)
 
     # Display view
     display_overview(PROMPT_ROOT_DIR)

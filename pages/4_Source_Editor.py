@@ -8,6 +8,7 @@ from utils.utils import *
 from utils.streamlit_ui.ui_components import (
     comp_select_step,
     comp_batch_process_options,
+    st_setup_logo,
 )
 
 
@@ -131,6 +132,9 @@ def main():
             """,
         },
     )
+
+    # Setup logo
+    st_setup_logo(REPO_ROOT_DIR)
 
     # Display view
     display_edit_json_sources(PROMPT_ROOT_DIR)

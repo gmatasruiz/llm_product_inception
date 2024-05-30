@@ -10,6 +10,7 @@ from utils.streamlit_ui.ui_components import (
     comp_display_table_from_file,
     comp_display_text_alongside,
     st_markdown_spacer,
+    st_setup_logo,
 )
 
 
@@ -142,7 +143,7 @@ def display_step_results(root_dir: str):
         st.divider()
 
         # Display results figure
-        with st.expander("Benchmark Results", expanded=True):
+        with st.expander(f"Benchmark Results for {selected_model[0]}", expanded=True):
             st_markdown_spacer()
             tabs = st.tabs(("📈 Chart", "🗃 Table"))
             with tabs[0]:
@@ -202,6 +203,9 @@ def main():
             """,
         },
     )
+
+    # Setup logo
+    st_setup_logo(REPO_ROOT_DIR)
 
     # Display view
     display_step_results(PROMPT_ROOT_DIR)
