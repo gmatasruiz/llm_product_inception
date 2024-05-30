@@ -1,0 +1,12 @@
+{
+    "data": "1. Primary Goal: To develop an AI-powered education platform, PREVENT-IA, that specializes in Occupational Risk Prevention, providing high-quality content, personalized training, and dynamic evaluation for workers involved in risk activities.\n2. Secondary Goals:\na. Implement features such as chat for resolving doubts, report generation, contents annotation, and complement content with verified sources to ensure interactive learning and effective knowledge acquisition.\nb. Utilize AWS, Python, REST API, UI/UX, React, Figma, and other technologies to build a scalable, user-friendly platform with easy-to-use interfaces, effective feedback mechanisms, and seamless integration with corporate content.\nc. Ensure the platform aligns with AI use regulations, addresses energy consumption concerns, and maintains a diverse network of AI model providers to minimize dependence.\nd. Develop a strong marketing strategy to increase visibility on social media, target specific markets (managers, site managers, transporters, logistics, commissioning, and assembly), and reach certification candidates.\ne. Establish key performance indicators (KPIs) to measure training quality, such as learning outcomes, user engagement, and reduction in workplace accidents.\n3. Tertiary Objective:\na. Implement a robust CI/CD pipeline, along with autoscaling groups and code builders, to ensure the platform remains up-to-date with the latest content from verified sources and can handle increased user loads during high-traffic periods.\nb. Integrate with tools like Jira, Email, Github, and Cloud Computing to streamline development, communication, and collaboration between the development team and stakeholders.\nc. Continuously improve the platform based on user feedback, ensuring a user-friendly experience and addressing any challenges in prioritizing functionalities.\nd. Offer a learning results dashboard for users to track their progress and performance, fostering a data-driven approach to continuous learning and development.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step3/source/source_step3.json",
+        "template_filepath": "prompt_creation/prompting/input/step3/templates/template3_step3.json",
+        "output_generated_on": "2024-05-30T06:59:24.521308",
+        "model_used": "mixtral-8x-7b",
+        "doctype": "llm_response",
+        "step_number": "3",
+        "iteration_number": "3"
+    }
+}
