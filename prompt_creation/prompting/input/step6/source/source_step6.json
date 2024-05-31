@@ -1,0 +1,10 @@
+{
+    "data": "Create a list of all the features that are out of the product's scope.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step6/source/source_step6.json",
+        "doctype": "prompt_source",
+        "step_number": "6",
+        "iteration_number": "0",
+        "comments": "Create a list of features that are out of scope."
+    }
+}

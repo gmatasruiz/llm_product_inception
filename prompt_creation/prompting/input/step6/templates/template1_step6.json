@@ -1,0 +1,11 @@
+{
+    "data": "Your task is to create a list of all the features that are out of the product's scope: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step6/templates/template1_step6.json",
+        "doctype": "prompt_template",
+        "step_number": "6",
+        "iteration_number": "1",
+        "technique": "Zero-shot",
+        "comments": "This template uses zero-shot prompting."
+    }
+}

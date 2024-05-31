@@ -1,0 +1,11 @@
+{
+    "data": "Reflect on previous projects and their stakeholder involvement. Consider their roles and implications. Now, create a graphical representation and a table listing the stakeholders for this product: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step7/templates/template5_step7.json",
+        "doctype": "prompt_template",
+        "step_number": "7",
+        "iteration_number": "5",
+        "technique": "Reflexion",
+        "comments": "This template uses reflexion prompting."
+    }
+}

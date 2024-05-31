@@ -1,0 +1,10 @@
+{
+    "data": "Create a graphical representation (three concentric circles) of the involvement of each stakeholder in the development of the product. The more important and involved, the closer to the core. Additionally, create a table listing the stakeholders in order of involvement and showing an explanation of their implication.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step7/source/source_step7.json",
+        "doctype": "prompt_source",
+        "step_number": "7",
+        "iteration_number": "0",
+        "comments": "Create a graphical representation and table of stakeholder involvement."
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "data": "Here are some examples of stakeholder involvement: Core: 'Product Managers, Lead Developers', Middle: 'Marketing Team, Sales Team', Outer: 'End Users, External Partners'. Now, create a graphical representation and a table listing the stakeholders and explaining their involvement: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step7/templates/template2_step7.json",
+        "doctype": "prompt_template",
+        "step_number": "7",
+        "iteration_number": "2",
+        "technique": "Few-shot",
+        "comments": "This template uses few-shot prompting."
+    }
+}

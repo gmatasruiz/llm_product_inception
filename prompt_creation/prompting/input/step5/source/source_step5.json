@@ -1,0 +1,10 @@
+{
+    "data": "Create a product box containing: Name of the product, Slogan, Three key benefits of the product, a listing of the main product features, an attractive image related to the product.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step5/source/source_step5.json",
+        "doctype": "prompt_source",
+        "step_number": "5",
+        "iteration_number": "0",
+        "comments": "Create a product box with specified content."
+    }
+}

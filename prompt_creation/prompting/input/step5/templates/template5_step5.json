@@ -1,0 +1,11 @@
+{
+    "data": "Reflect on previous product boxes you have created. Consider their strengths and weaknesses. Now, create a new product box with the following content: Name of the product, Slogan, Three key benefits of the product, a listing of the main product features, an attractive image related to the product. %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step5/templates/template5_step5.json",
+        "doctype": "prompt_template",
+        "step_number": "5",
+        "iteration_number": "5",
+        "technique": "Reflexion",
+        "comments": "This template uses reflexion prompting."
+    }
+}

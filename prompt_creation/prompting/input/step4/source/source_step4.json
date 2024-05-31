@@ -1,0 +1,10 @@
+{
+    "data": "Create an elevator pitch that answers the following questions: Who is this product for? Which necessity/problem does it solve? What is the product name? What is the type of the product? What is its purpose? What does the competing product do? How does our product best the competition?",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step4/source/source_step4.json",
+        "doctype": "prompt_source",
+        "step_number": "4",
+        "iteration_number": "0",
+        "comments": "Create an elevator pitch based on the specified questions."
+    }
+}

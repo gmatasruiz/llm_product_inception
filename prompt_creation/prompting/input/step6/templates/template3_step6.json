@@ -1,0 +1,11 @@
+{
+    "data": "Think about the core functionalities of the product. Now, identify and list the features that fall outside these core functionalities step by step: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step6/templates/template3_step6.json",
+        "doctype": "prompt_template",
+        "step_number": "6",
+        "iteration_number": "3",
+        "technique": "Chain-of-Thought",
+        "comments": "This template uses chain-of-thought prompting."
+    }
+}

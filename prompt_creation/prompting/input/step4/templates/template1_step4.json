@@ -1,0 +1,11 @@
+{
+    "data": "Your task is to create an elevator pitch answering the following questions: Who is this product for? Which necessity/problem does it solve? What is the product name? What is the type of the product? What is its purpose? What does the competing product do? How does our product best the competition? %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step4/templates/template1_step4.json",
+        "doctype": "prompt_template",
+        "step_number": "4",
+        "iteration_number": "1",
+        "technique": "Zero-shot",
+        "comments": "This template uses zero-shot prompting."
+    }
+}

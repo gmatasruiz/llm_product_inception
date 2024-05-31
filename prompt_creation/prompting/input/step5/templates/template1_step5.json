@@ -1,0 +1,11 @@
+{
+    "data": "Your task is to create a product box containing: Name of the product, Slogan, Three key benefits of the product, a listing of the main product features, an attractive image related to the product. %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step5/templates/template1_step5.json",
+        "doctype": "prompt_template",
+        "step_number": "5",
+        "iteration_number": "1",
+        "technique": "Zero-shot",
+        "comments": "This template uses zero-shot prompting."
+    }
+}
