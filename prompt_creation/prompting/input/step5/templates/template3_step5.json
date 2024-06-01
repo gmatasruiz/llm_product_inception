@@ -1,5 +1,5 @@
 {
-    "data": "Think about the key elements of the product: its name, slogan, benefits, and features. Consider how to present these elements attractively. Create a product box step by step: %%source",
+    "data": "Given this infomation about the product: %%source\nThink about the key elements of the product: its name, slogan, benefits, features and an attractive image description related to the product. Consider how to present these elements attractively. Create a product box step by step.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step5/templates/template3_step5.json",
         "doctype": "prompt_template",
