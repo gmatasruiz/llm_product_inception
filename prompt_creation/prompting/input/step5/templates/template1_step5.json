@@ -1,5 +1,5 @@
 {
-    "data": "Your task is to create a product box containing: Name of the product, Slogan, Three key benefits of the product, a listing of the main product features, an attractive image related to the product. %%source",
+    "data": "Your task is to create a product box containing: Name of the product, Slogan, Three key benefits of the product, a listing of the main product features, and (if possible) an attractive image related to the product. %%source",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step5/templates/template1_step5.json",
         "doctype": "prompt_template",

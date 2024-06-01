@@ -1,5 +1,5 @@
 {
-    "data": "Here are examples of key objectives for a product: 1) Improve user engagement by 20%. 2) Reduce training costs by 15%. 3) Increase safety compliance rates by 25%. \nDefine 3 key objectives within the development of the product PREVENT-IA using the following information: %%source\n Provide them in a numbered list.",
+    "data": "Here are examples of key objectives for a product: 1) Improve user engagement. 2) Reduce training costs. 3) Increase safety compliance rates. \nDefine 3 key objectives within the development of the product PREVENT-IA using the following information: %%source\n Provide them in a numbered list.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step3/templates/template2_step3.json",
         "doctype": "prompt_template",
