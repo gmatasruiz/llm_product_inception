@@ -4,6 +4,6 @@
         "source_filepath": "prompt_creation/prompting/input/step6/source/source_step6.json",
         "doctype": "expected_response",
         "step_number": "6",
-        "comments": "Key objectives from the product idea and traits."
+        "comments": "Create a list of features that are out of scope."
     }
 }

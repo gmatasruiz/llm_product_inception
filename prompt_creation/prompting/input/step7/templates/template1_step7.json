@@ -1,5 +1,5 @@
 {
-    "data": "Your task is to create a graphical representation (three concentric circles) of stakeholder involvement. The more important and involved, the closer to the core. Additionally, create a table listing the stakeholders in order of involvement and explaining their implication: %%source",
+    "data": "Given this infomation about the product: %%source\nYour task is to create four stakeholder groups (Core Team, Frequent Involvement Stakeholders, Occasional Involvement Stakeholders and Seldom Involvement Stakeholders) of stakeholder involvement. The more important and involved, the closer to the core. Additionally, create a table listing the stakeholders in order of involvement and explaining their implication.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step7/templates/template1_step7.json",
         "doctype": "prompt_template",

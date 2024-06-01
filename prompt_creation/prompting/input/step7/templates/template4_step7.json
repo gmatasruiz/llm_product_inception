@@ -1,5 +1,5 @@
 {
-    "data": "Generate multiple representations and tables of stakeholder involvement. Review them and select the most consistent and accurate representation: %%source",
+    "data": "Given this infomation about the product: %%source\nGenerate four stakeholder groups (Core Team, Frequent Involvement Stakeholders, Occasional Involvement Stakeholders and Seldom Involvement Stakeholders) and tables of stakeholder involvement. Review them and select the most consistent and accurate representation.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step7/templates/template4_step7.json",
         "doctype": "prompt_template",
