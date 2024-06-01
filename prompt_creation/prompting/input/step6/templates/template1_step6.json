@@ -1,5 +1,5 @@
 {
-    "data": "Your task is to create a list of all the features that are out of the product's scope: %%source",
+    "data": "Given this infomation about the product: %%source\nYour task is to create a list of all the features that are out of the product's scope. Present the list as a bulleted list.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step6/templates/template1_step6.json",
         "doctype": "prompt_template",

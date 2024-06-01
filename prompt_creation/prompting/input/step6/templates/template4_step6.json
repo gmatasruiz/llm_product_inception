@@ -1,5 +1,5 @@
 {
-    "data": "Generate multiple lists of out-of-scope features. Review them and select the most consistent and comprehensive list: %%source",
+    "data": "Given this infomation about the product: %%source\nGenerate multiple lists of out-of-scope features. Review them and select the most consistent and comprehensive list. Present the list as a bulleted list.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step6/templates/template4_step6.json",
         "doctype": "prompt_template",

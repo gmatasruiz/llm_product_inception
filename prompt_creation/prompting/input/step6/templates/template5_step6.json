@@ -1,5 +1,5 @@
 {
-    "data": "Reflect on previous products and their features. Identify which features were not included in their scope. Now, create a list of out-of-scope features for this product: %%source",
+    "data": "Given this infomation about the product: %%source\nReflect on previous products and their features. Identify which features were not included in their scope. Now, create a list of out-of-scope features for this product. Present the list as a bulleted list.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step6/templates/template5_step6.json",
         "doctype": "prompt_template",
