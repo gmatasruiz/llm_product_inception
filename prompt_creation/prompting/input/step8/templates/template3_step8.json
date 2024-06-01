@@ -1,0 +1,11 @@
+{
+    "data": "Think about the key components of the product's architecture. Consider the stakeholders, common uses, and associated risks. Propose the architecture and provide use scenarios step by step: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step8/templates/template3_step8.json",
+        "doctype": "prompt_template",
+        "step_number": "8",
+        "iteration_number": "3",
+        "technique": "Chain-of-Thought",
+        "comments": "This template uses chain-of-thought prompting."
+    }
+}

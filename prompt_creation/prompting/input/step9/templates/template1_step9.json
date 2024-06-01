@@ -1,0 +1,11 @@
+{
+    "data": "Your task is to identify possible risks and create a table classifying the risks in High, Medium, Low, and Discarded. Include a mitigation plan for each classified risk: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step9/templates/template1_step9.json",
+        "doctype": "prompt_template",
+        "step_number": "9",
+        "iteration_number": "1",
+        "technique": "Zero-shot",
+        "comments": "This template uses zero-shot prompting."
+    }
+}

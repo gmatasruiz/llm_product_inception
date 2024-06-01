@@ -1,0 +1,11 @@
+{
+    "data": "Generate multiple technical architectures and use scenarios. Review them and select the most consistent and robust architecture with comprehensive use scenarios: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step8/templates/template4_step8.json",
+        "doctype": "prompt_template",
+        "step_number": "8",
+        "iteration_number": "4",
+        "technique": "Self-Consistency",
+        "comments": "This template uses self-consistency prompting."
+    }
+}

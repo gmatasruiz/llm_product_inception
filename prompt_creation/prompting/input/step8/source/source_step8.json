@@ -1,0 +1,10 @@
+{
+    "data": "Propose a technical architecture for the product. If the model has image support, create a diagram of the architecture. Additionally, provide the use scenarios, including: Stakeholder, common uses of the product, risks associated with those uses.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step8/source/source_step8.json",
+        "doctype": "prompt_source",
+        "step_number": "8",
+        "iteration_number": "0",
+        "comments": "Propose a technical architecture and provide use scenarios."
+    }
+}

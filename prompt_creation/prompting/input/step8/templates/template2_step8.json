@@ -1,0 +1,11 @@
+{
+    "data": "Here are some examples of technical architectures and use scenarios: Architecture: 'Modular microservices, Cloud-based storage, Secure API gateway', Use Scenarios: 'Stakeholder: Developers, Uses: API integration, Risk: Data breach'. Now, propose a technical architecture and provide use scenarios: %%source",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step8/templates/template2_step8.json",
+        "doctype": "prompt_template",
+        "step_number": "8",
+        "iteration_number": "2",
+        "technique": "Few-shot",
+        "comments": "This template uses few-shot prompting."
+    }
+}
