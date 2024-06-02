@@ -1,5 +1,5 @@
 {
-    "data": "Your task is to propose a technical architecture for the product. If the model has image support, create a diagram of the architecture. Additionally, provide the use scenarios, including: Stakeholder, common uses of the product, risks associated with those uses: %%source",
+    "data": "Given this infomation about the product: %%source\nYour task is to propose a technical architecture for the product. If the model has image support, create a diagram of the architecture. Additionally, provide the use scenarios, including: Stakeholder, common uses of the product, risks associated with those uses.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step8/templates/template1_step8.json",
         "doctype": "prompt_template",

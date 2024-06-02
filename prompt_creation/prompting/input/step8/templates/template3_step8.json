@@ -1,5 +1,5 @@
 {
-    "data": "Think about the key components of the product's architecture. Consider the stakeholders, common uses, and associated risks. Propose the architecture and provide use scenarios step by step: %%source",
+    "data": "Given this infomation about the product: %%source\n.Think about the key components of the product's architecture. Consider the stakeholders, common uses, and associated risks. Propose the architecture and provide use scenarios step by step.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step8/templates/template3_step8.json",
         "doctype": "prompt_template",
