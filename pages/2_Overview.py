@@ -7,7 +7,7 @@ from utils.streamlit_ui.ui_components import (
     comp_batch_process_options,
     st_markdown_spacer,
     st_df_beautify_colnames,
-    st_setup_logo
+    st_setup_logo,
 )
 
 
@@ -78,7 +78,7 @@ def display_overview_chart(
             camera=dict(
                 eye=dict(
                     x=0,
-                    y=-(df[x_col].max() * 0.7),
+                    y=-2,
                     z=0,
                 )  # Adjust the view to be perpendicular to the y-plane and parallel to the z-plane
             ),
