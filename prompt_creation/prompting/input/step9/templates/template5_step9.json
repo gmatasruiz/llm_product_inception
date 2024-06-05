@@ -1,5 +1,5 @@
 {
-    "data": "Reflect on previous projects and their risks. Consider the effectiveness of their mitigation plans. Now, identify possible risks for this product, classify them, and provide mitigation plans: %%source",
+    "data": "Given this infomation about the product: %%source\nReflect on previous projects and their risks. Consider the effectiveness of their mitigation plans. Now, identify possible risks for this product, classify them, and provide mitigation plans. Display the table in markdown format.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step9/templates/template5_step9.json",
         "doctype": "prompt_template",

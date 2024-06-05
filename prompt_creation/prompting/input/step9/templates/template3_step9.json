@@ -1,5 +1,5 @@
 {
-    "data": "Think about potential risks associated with the product. Break down the risks into categories and classify them as High, Medium, Low, or Discarded. Provide a mitigation plan for each classified risk step by step: %%source",
+    "data": "Given this infomation about the product: %%source\nThink about potential risks associated with the product. Break down the risks into categories and classify them as High, Medium, Low, or Discarded. Provide a mitigation plan for each classified risk step by step. Display the table in markdown format.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step9/templates/template3_step9.json",
         "doctype": "prompt_template",

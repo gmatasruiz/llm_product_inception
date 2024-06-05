@@ -1,5 +1,5 @@
 {
-    "data": "Here are some example risks and their classifications: High: 'Data breach, Mitigation: Implement strong encryption and access controls', Medium: 'System downtime, Mitigation: Ensure robust backup and recovery plans', Low: 'User interface issues, Mitigation: Conduct regular user testing'. Now, identify possible risks and create a table classifying them with mitigation plans: %%source",
+    "data": "Given this infomation about the product: %%source\nHere are some example risks and their classifications: High: 'Data breach, Mitigation: Implement strong encryption and access controls', Medium: 'System downtime, Mitigation: Ensure robust backup and recovery plans', Low: 'User interface issues, Mitigation: Conduct regular user testing'. Now, identify possible risks and create a table classifying them with mitigation plans: Display the table in markdown format.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step9/templates/template2_step9.json",
         "doctype": "prompt_template",
