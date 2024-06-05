@@ -5,6 +5,6 @@
         "doctype": "prompt_source",
         "step_number": "9",
         "iteration_number": "0",
-        "comments": "Propose a technical architecture and provide use scenarios."
+        "comments": "Identify and classify risks with mitigation plans."
     }
 }
