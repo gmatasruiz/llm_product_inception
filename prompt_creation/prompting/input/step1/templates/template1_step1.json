@@ -1,5 +1,5 @@
 {
-    "data": "Your task is to define the product idea in one sentence and a product name given this information: %%source\nUse the following format: 'Name:`product name`\n Idea:`product_idea`",
+    "data": "Your task is to define the product idea in one sentence and a product name given this information: %%source\n\nUse the following format: 'Name:`product name`\n Idea:`product_idea`",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template1_step1.json",
         "doctype": "prompt_template",

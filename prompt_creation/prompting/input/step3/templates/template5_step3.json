@@ -1,5 +1,5 @@
 {
-    "data": "Reflect on the key elements of the product PREVENT-IA, such as its purpose and target audience, and then generate 3 key objectives for its development using the following information: %%source\n Provide them in a numbered list.",
+    "data": "Reflect on the key elements of the product PREVENT-IA, such as its purpose and target audience, and then generate 3 key objectives for its development using the following information: %%source\n\n Provide them in a numbered list.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step3/templates/template5_step3.json",
         "doctype": "prompt_template",

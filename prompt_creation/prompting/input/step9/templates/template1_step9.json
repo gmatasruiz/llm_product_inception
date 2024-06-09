@@ -1,5 +1,5 @@
 {
-    "data": "Given this infomation about the product: %%source\nYour task is to identify possible risks and create a table classifying the risks in High, Medium, Low, and Discarded. Include a mitigation plan for each classified risk. Display the table in markdown format.",
+    "data": "Given this infomation about the product: %%source\n\nYour task is to identify possible risks and create a table classifying the risks in High, Medium, Low, and Discarded. \nInclude a mitigation plan for each classified risk. Display the table in markdown format.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step9/templates/template1_step9.json",
         "doctype": "prompt_template",

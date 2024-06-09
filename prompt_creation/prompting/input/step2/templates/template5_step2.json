@@ -1,5 +1,5 @@
 {
-    "data": "Reflect on the key elements of each category (Features, Architecture, Risks, Business), and then generate at least 20 ideas (3 words maximum) for each category. Highlight key ideas per category using the following information: %%source\nProvide the results as two lists per category, where one of them will contain all the ideas, while the other will contain only the key ideas.",
+    "data": "Reflect on the key elements of each category (Features, Architecture, Risks, Business), and then generate at least 20 ideas (3 words maximum) for each category. \n\nHighlight key ideas per category using the following information: %%source\n\nProvide the results as two lists per category, where one of them will contain all the ideas, while the other will contain only the key ideas.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step2/templates/template5_step2.json",
         "doctype": "prompt_template",

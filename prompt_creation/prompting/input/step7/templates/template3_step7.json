@@ -1,5 +1,5 @@
 {
-    "data": "Given this infomation about the product: %%source\nThink about the key stakeholders involved in the product development. Organize them by their level of involvement and importance. Create four stakeholder groups (Core Team, Frequent Involvement Stakeholders, Occasional Involvement Stakeholders and Seldom Involvement Stakeholders) and a table explaining their involvement step by step.",
+    "data": "Given this infomation about the product: %%source\n\nThink about the key stakeholders involved in the product development. Organize them by their level of involvement and importance. \n\nCreate four stakeholder groups (Core Team, Frequent Involvement Stakeholders, Occasional Involvement Stakeholders and Seldom Involvement Stakeholders) and a table explaining their involvement step by step.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step7/templates/template3_step7.json",
         "doctype": "prompt_template",

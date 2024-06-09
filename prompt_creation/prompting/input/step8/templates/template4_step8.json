@@ -1,5 +1,5 @@
 {
-    "data": "Given this infomation about the product: %%source\nGenerate multiple technical architectures and use scenarios. Review them and select the most consistent and robust architecture with comprehensive use scenarios.",
+    "data": "Given this infomation about the product: %%source\n\nGenerate multiple technical architectures and use scenarios. \n\nReview them and select the most consistent and robust architecture with comprehensive use scenarios.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step8/templates/template4_step8.json",
         "doctype": "prompt_template",

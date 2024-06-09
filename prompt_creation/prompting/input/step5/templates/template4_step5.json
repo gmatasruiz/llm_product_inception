@@ -1,5 +1,5 @@
 {
-    "data": "Given this infomation about the product: %%source\nGenerate multiple versions of the product box content. Review them and select the most consistent and appealing version.",
+    "data": "Given this infomation about the product: %%source\n\nGenerate multiple versions of the product box content. \n\nReview them and select the most consistent and appealing version.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step5/templates/template4_step5.json",
         "doctype": "prompt_template",

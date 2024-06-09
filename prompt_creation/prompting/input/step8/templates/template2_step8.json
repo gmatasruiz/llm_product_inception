@@ -1,5 +1,5 @@
 {
-    "data": "Given this infomation about the product: %%source\nHere are some examples of technical architectures and use scenarios: Architecture: 'Modular microservices, Cloud-based storage, Secure API gateway', Use Scenarios: 'Stakeholder: Developers, Uses: API integration, Risk: Data breach'. Now, propose a technical architecture and provide use scenarios.",
+    "data": "Given this infomation about the product: %%source\n\nHere are some examples of technical architectures and use scenarios: Architecture: 'Modular microservices, Cloud-based storage, Secure API gateway', Use Scenarios: 'Stakeholder: Developers, Uses: API integration, Risk: Data breach'. \n\nNow, propose a technical architecture and provide use scenarios.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step8/templates/template2_step8.json",
         "doctype": "prompt_template",

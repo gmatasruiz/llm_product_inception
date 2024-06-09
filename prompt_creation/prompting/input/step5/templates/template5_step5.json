@@ -1,5 +1,5 @@
 {
-    "data": "Given this infomation about the product: %%source\nReflect on previous product boxes you have created. Consider their strengths and weaknesses. Now, create a new product box with the following content: Name of the product, Slogan, Three key benefits of the product, a listing of the main product features, an attractive image descriptionrelated to the product.",
+    "data": "Given this infomation about the product: %%source\n\nReflect on previous product boxes you have created. Consider their strengths and weaknesses. \n\nNow, create a new product box with the following content: Name of the product, Slogan, Three key benefits of the product, a listing of the main product features, an attractive image descriptionrelated to the product.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step5/templates/template5_step5.json",
         "doctype": "prompt_template",

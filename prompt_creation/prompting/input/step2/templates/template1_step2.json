@@ -1,5 +1,5 @@
 {
-    "data": "Generate at least 20 ideas (3 words maximum) for each of these categories: Features, Architecture, Risks, Business (Goals, Markets, Users, Targets). Highlight key ideas for each category. Use the following information: %%source\nProvide the results as two lists per category, where one of them will contain all the ideas, while the other will contain only the key ideas.",
+    "data": "Generate at least 20 ideas (3 words maximum) for each of these categories: Features, Architecture, Risks, Business (Goals, Markets, Users, Targets). Highlight key ideas for each category. \n\nUse the following information: %%source\n\nProvide the results as two lists per category, where one of them will contain all the ideas, while the other will contain only the key ideas.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step2/templates/template1_step2.json",
         "doctype": "prompt_template",

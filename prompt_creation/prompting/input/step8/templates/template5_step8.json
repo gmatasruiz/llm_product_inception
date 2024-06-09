@@ -1,5 +1,5 @@
 {
-    "data": "Given this infomation about the product: %%source\nReflect on previous technical architectures and use scenarios you have created. Consider their strengths and weaknesses. Now, propose a technical architecture for the product and provide use scenarios.∫∫∫",
+    "data": "Given this infomation about the product: %%source\n\nReflect on previous technical architectures and use scenarios you have created. Consider their strengths and weaknesses. \n\nNow, propose a technical architecture for the product and provide use scenarios.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step8/templates/template5_step8.json",
         "doctype": "prompt_template",

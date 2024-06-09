@@ -1,5 +1,5 @@
 {
-    "data": "Given this infomation about the product: %%source\nThink about the core functionalities of the product. Now, identify and list the features that fall outside these core functionalities step by step. Present the list as a bulleted list.",
+    "data": "Given this infomation about the product: %%source\n\nThink about the core functionalities of the product. \n\nNow, identify and list the features that fall outside these core functionalities step by step. Present the list as a bulleted list.",
     "__meta__": {
         "template_filepath": "prompt_creation/prompting/input/step6/templates/template3_step6.json",
         "doctype": "prompt_template",
