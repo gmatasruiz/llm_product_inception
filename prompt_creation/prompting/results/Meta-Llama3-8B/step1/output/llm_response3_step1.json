@@ -1,9 +1,9 @@
 {
-    "data": "Here is the definition:\n\nName: RiskShield\nIdea: An AI-powered education platform that educates workers on occupational risk prevention, providing personalized training and real-time feedback to reduce workplace accidents and injuries.",
+    "data": "Here is the definition:\n\nName: RiskShield\nIdea: PREVENT-IA is an AI-powered education platform to educate workers on Occupational Risk Prevention",
     "__meta__": {
         "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template3_step1.json",
-        "output_generated_on": "2024-06-02T12:00:35.802330",
+        "output_generated_on": "2024-06-10T00:40:13.271686",
         "model_used": "Meta-Llama-3-8B",
         "doctype": "llm_response",
         "step_number": "1",

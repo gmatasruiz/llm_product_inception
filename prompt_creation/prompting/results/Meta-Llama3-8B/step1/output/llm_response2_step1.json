@@ -1,9 +1,9 @@
 {
-    "data": "Here is the definition:\n\nName: Preventia\nIdea: An AI-powered education platform to educate workers on Occupational Risk Prevention, providing personalized training and simulations to reduce workplace accidents and injuries.",
+    "data": "Here is the definition:\n\nName: PREVENT-IA\nIdea: An AI-powered education platform to educate workers on Occupational Risk Prevention, providing personalized training and resources to reduce workplace accidents and injuries.",
     "__meta__": {
         "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
         "template_filepath": "prompt_creation/prompting/input/step1/templates/template2_step1.json",
-        "output_generated_on": "2024-06-02T12:00:00.010555",
+        "output_generated_on": "2024-06-10T00:39:35.067469",
         "model_used": "Meta-Llama-3-8B",
         "doctype": "llm_response",
         "step_number": "1",
