@@ -67,7 +67,7 @@ def display_step_response_comparative(
             text_array=(prompt, llm_response, expected_response),
             label_array=("Prompt:", "LLM Response:", "Expected Response:"),
             elem_per_col=2,
-            height=500,
+            height=700,
         )
 
     except:
@@ -140,6 +140,12 @@ def display_step_results(root_dir: str):
     # Display components
     if selected_step and selected_model:
         st.title(f"🔎 {str_selected_step.capitalize()} Drilldown")
+
+        step_explanation = load_json_file(selected_source)["__meta__"]["comments"]
+        st.subheader(
+            f"{step_explanation}",
+        )
+
         st.divider()
 
         # Display results figure

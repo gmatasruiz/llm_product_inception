@@ -543,7 +543,7 @@ def comp_display_text_alongside(
         col_idx = idx // elem_per_col
         with cols[col_idx]:
             st_markdown_color_text(f"**{label}**", "#68C3E0")
-            st.markdown(f"""*"{text}"*""")
+            st.markdown(f"{text}")
             st_markdown_spacer()
 
 
