@@ -543,7 +543,7 @@ def comp_display_text_alongside(
         col_idx = idx // elem_per_col
         with cols[col_idx]:
             st_markdown_color_text(f"**{label}**", "#68C3E0")
-            st.markdown(f"""*"{text}"*""")
+            st.markdown(f"{text}")
             st_markdown_spacer()
 
 
@@ -699,3 +699,23 @@ def comp_show_md_file(file_path: str):
         st.markdown(md_file)
     else:
         raise NotImplementedError
+
+
+def st_setup_logo(root_dir: str, image_fname: str = "Thesis_AIStreamline.jpeg"):
+    """
+    Sets up the logo for the Streamlit application by specifying the path to the logo image.
+
+    This function constructs the path to the logo image based on the provided root directory and sets it as the logo
+    and icon image in the Streamlit application.
+
+    Parameters:
+    root_dir (str): The root directory where the assets are located.
+    image_fname (str): The image filename including extensions.
+
+    Returns:
+    None
+    """
+    assets_dir = os.path.join(root_dir, "assets")
+    images_dir = os.path.join(assets_dir, "images")
+    logo_path = os.path.join(images_dir, image_fname)
+    st.logo(image=logo_path, icon_image=logo_path)

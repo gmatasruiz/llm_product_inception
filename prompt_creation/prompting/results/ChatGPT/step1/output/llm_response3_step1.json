@@ -1,0 +1,12 @@
+{
+    "data": "Name: `PREVENT-IA`\nIdea: `An AI-powered education platform designed to educate workers on Occupational Risk Prevention.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template3_step1.json",
+        "output_generated_on": "2024-05-28T00:52:39.576340",
+        "model_used": "ChatGPT",
+        "doctype": "llm_response",
+        "step_number": "1",
+        "iteration_number": "3"
+    }
+}

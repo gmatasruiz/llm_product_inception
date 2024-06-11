@@ -1,0 +1,11 @@
+{
+    "data": "Given this infomation about the product: %%source\n\nGenerate multiple tables of risks and their classifications. Review them and select the most consistent and comprehensive table with effective mitigation plans. \nDisplay the table in markdown format.",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step9/templates/template4_step9.json",
+        "doctype": "prompt_template",
+        "step_number": "9",
+        "iteration_number": "4",
+        "technique": "Self-Consistency",
+        "comments": "This template uses self-consistency prompting."
+    }
+}

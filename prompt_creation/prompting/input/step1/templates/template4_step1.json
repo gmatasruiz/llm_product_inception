@@ -1,0 +1,11 @@
+{
+    "data": "Generate multiple definitions of the product idea in one sentence and provide different product names. Choose the most consistent and relevant one: %%source\n\nUse the following format: 'Name:`product name`\n Idea:`product_idea`",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template4_step1.json",
+        "doctype": "prompt_template",
+        "step_number": "1",
+        "iteration_number": "4",
+        "technique": "Self-Consistency",
+        "comments": "This template uses self-consistency to define the product idea and name."
+    }
+}

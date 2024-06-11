@@ -1,0 +1,11 @@
+{
+    "data": "Given this product information: %%source\n\nReflect on previous elevator pitches you have created. Consider their strengths and weaknesses. \n\nNow, create a new elevator pitch answering the following questions: \n - Who is this product for? \n - Which necessity/problem does it solve? \n - What is the product name? \n - What is the type of the product? What is its purpose? \n - What does the competing product do? \n - How does our product best the competition? \n\nProvide only the elevator pitch.",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step4/templates/template5_step4.json",
+        "doctype": "prompt_template",
+        "step_number": "4",
+        "iteration_number": "5",
+        "technique": "Reflexion",
+        "comments": "This template uses reflexion prompting."
+    }
+}

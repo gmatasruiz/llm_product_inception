@@ -1,0 +1,12 @@
+{
+    "data": "Name: PreventAI\nIdea: An AI-powered education platform that provides personalized training to workers on Occupational Risk Prevention, reducing workplace accidents and promoting safety.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template2_step1.json",
+        "output_generated_on": "2024-06-02T13:20:53.090784",
+        "model_used": "mixtral-8x-7b",
+        "doctype": "llm_response",
+        "step_number": "1",
+        "iteration_number": "2"
+    }
+}

@@ -41,8 +41,8 @@ class ChatGPTBenchmark(BaseLLMBenchmark):
     def evaluate_creativity(self, prompt_tokens: str, response_tokens: str):
         return super().evaluate_creativity(prompt_tokens, response_tokens)
 
-    def evaluate_engagement(self, response: str):
-        return super().evaluate_engagement(response)
+    def evaluate_engagement(self, expected_response: str, llm_response: str):
+        return super().evaluate_engagement(expected_response, llm_response)
 
     def evaluate_sentiment_alignment(self, expected_response: str, llm_response: str):
         return super().evaluate_sentiment_alignment(expected_response, llm_response)
@@ -100,8 +100,8 @@ class Mixtral8x7BBenchmark(BaseLLMBenchmark):
     def evaluate_creativity(self, prompt_tokens: str, response_tokens: str):
         return super().evaluate_creativity(prompt_tokens, response_tokens)
 
-    def evaluate_engagement(self, response: str):
-        return super().evaluate_engagement(response)
+    def evaluate_engagement(self, expected_response: str, llm_response: str):
+        return super().evaluate_engagement(expected_response, llm_response)
 
     def evaluate_sentiment_alignment(self, expected_response: str, llm_response: str):
         return super().evaluate_sentiment_alignment(expected_response, llm_response)
@@ -159,8 +159,8 @@ class LlamaV38BBenchmark(BaseLLMBenchmark):
     def evaluate_creativity(self, prompt_tokens: str, response_tokens: str):
         return super().evaluate_creativity(prompt_tokens, response_tokens)
 
-    def evaluate_engagement(self, response: str):
-        return super().evaluate_engagement(response)
+    def evaluate_engagement(self, expected_response: str, llm_response: str):
+        return super().evaluate_engagement(expected_response, llm_response)
 
     def evaluate_sentiment_alignment(self, expected_response: str, llm_response: str):
         return super().evaluate_sentiment_alignment(expected_response, llm_response)

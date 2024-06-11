@@ -1,0 +1,9 @@
+{
+    "data": "1. Slogan:\n\nYour smart shield against workplace hazards\n\n2. Key Benefits:\n - Accessible and tailored training\n - Reduction of workplace accidents\n - Continuous monitoring and improvement\n3. Main Features:\n - Generate updated and relevant content on ORP\n - Include corporate and private source content\n - Enhance content with verified sources\n - Organize content into topics and chapters\n - Annotate on the contents\n - Chat with the content to resolve your doubts\n - Evaluate learning outcomes\n - Generate tracking and progress reports\n - Assign training to organization members\n - Manage the profiles and roles of each worker\n - Inform users about relevant certifications\n4. Cover Image Description:\n\nCute cartoon robot. It features a safety helmet and is dressed in a suit representing a worker.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step5/source/source_step5.json",
+        "doctype": "expected_response",
+        "step_number": "5",
+        "comments": "Create a product box with specified content."
+    }
+}

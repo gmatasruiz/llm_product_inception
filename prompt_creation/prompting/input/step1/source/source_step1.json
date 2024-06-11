@@ -1,10 +1,10 @@
 {
-    "data": "Initial Prompt. Write 3 odd numbers.",
+    "data": "PREVENT-IA is an AI-powered education platform to educate workers on Occupational Risk Prevention",
     "__meta__": {
         "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
         "doctype": "prompt_source",
         "step_number": "1",
-        "iteration_number": 0,
-        "comments": "<<additional info about the source>>"
+        "iteration_number": "0",
+        "comments": "Name the Product: Initial step to define the product name and idea."
     }
 }

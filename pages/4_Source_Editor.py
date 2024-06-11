@@ -8,6 +8,7 @@ from utils.utils import *
 from utils.streamlit_ui.ui_components import (
     comp_select_step,
     comp_batch_process_options,
+    st_setup_logo,
 )
 
 
@@ -74,7 +75,9 @@ def display_edit_json_sources(root_dir):
         source_files = [f for f in os.listdir(source_dir) if f.endswith(".json")]
 
         # Dropdown to select a template file
-        selected_file = st.selectbox(f"Select {source_type} file:", source_files)
+        selected_file = st.selectbox(
+            f"Select {source_type} file:", sorted(source_files)
+        )
 
     if selected_file:
         source_path = os.path.join(source_dir, selected_file)
@@ -129,6 +132,9 @@ def main():
             """,
         },
     )
+
+    # Setup logo
+    st_setup_logo(REPO_ROOT_DIR)
 
     # Display view
     display_edit_json_sources(PROMPT_ROOT_DIR)

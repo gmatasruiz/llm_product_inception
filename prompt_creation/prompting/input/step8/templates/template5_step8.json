@@ -1,0 +1,11 @@
+{
+    "data": "Given this infomation about the product: %%source\n\nReflect on previous technical architectures and use scenarios you have created. Consider their strengths and weaknesses. \n\nNow, propose a technical architecture for the product and provide use scenarios.",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step8/templates/template5_step8.json",
+        "doctype": "prompt_template",
+        "step_number": "8",
+        "iteration_number": "5",
+        "technique": "Reflexion",
+        "comments": "This template uses reflexion prompting."
+    }
+}

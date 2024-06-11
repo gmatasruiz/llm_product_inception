@@ -1,0 +1,12 @@
+{
+    "data": "Name: Prevent-IA\n\nIdea: An AI-powered education platform designed to educate workers on Occupational Risk Prevention, providing personalized learning experiences and real-time risk assessment to enhance workplace safety.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step1/source/source_step1.json",
+        "template_filepath": "prompt_creation/prompting/input/step1/templates/template3_step1.json",
+        "output_generated_on": "2024-06-02T15:07:51.312006",
+        "model_used": "mixtral-8x-7b",
+        "doctype": "llm_response",
+        "step_number": "1",
+        "iteration_number": "3"
+    }
+}

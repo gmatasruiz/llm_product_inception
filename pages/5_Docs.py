@@ -3,7 +3,7 @@ import os
 import streamlit as st
 
 from utils.utils import *
-from utils.streamlit_ui.ui_components import comp_show_md_file
+from utils.streamlit_ui.ui_components import comp_show_md_file, st_setup_logo
 
 
 # --- Functions ---
@@ -73,6 +73,10 @@ def main():
             """,
         },
     )
+
+
+    # Setup logo
+    st_setup_logo(REPO_ROOT_DIR)
 
     display_docs(REPO_ROOT_DIR, DOCS_ROOT_DIR)
 

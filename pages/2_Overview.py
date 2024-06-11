@@ -7,6 +7,7 @@ from utils.streamlit_ui.ui_components import (
     comp_batch_process_options,
     st_markdown_spacer,
     st_df_beautify_colnames,
+    st_setup_logo,
 )
 
 
@@ -33,7 +34,7 @@ def display_overview_chart(
     df = df.dropna()
 
     # Generate figure
-    fig = px.line_3d(
+    fig = px.scatter_3d(
         df,
         x=x_col,
         y=y_col,
@@ -43,7 +44,7 @@ def display_overview_chart(
         labels=st_df_beautify_colnames(df),
         height=700,
         width=700,
-        markers=True,
+        # markers=True,
         color_discrete_sequence=px.colors.qualitative.Pastel,
     )
 
@@ -77,7 +78,7 @@ def display_overview_chart(
             camera=dict(
                 eye=dict(
                     x=0,
-                    y=-(df[y_col].max() + 0.25),
+                    y=-2,
                     z=0,
                 )  # Adjust the view to be perpendicular to the y-plane and parallel to the z-plane
             ),
@@ -107,7 +108,7 @@ def display_overview_table(df: pd.DataFrame, ignore_index: bool = True):
     st_column_config = st_df_beautify_colnames(df)
 
     st.dataframe(
-        data=df.dropna(),
+        data=df.sort_values(by=["step_number", "template_number"]).dropna(),
         use_container_width=True,
         hide_index=ignore_index,
         column_config=st_column_config,
@@ -187,6 +188,9 @@ def main():
             """,
         },
     )
+
+    # Setup logo
+    st_setup_logo(REPO_ROOT_DIR)
 
     # Display view
     display_overview(PROMPT_ROOT_DIR)

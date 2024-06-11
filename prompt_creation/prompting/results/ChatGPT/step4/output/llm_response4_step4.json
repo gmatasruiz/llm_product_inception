@@ -1,0 +1,12 @@
+{
+    "data": "Introducing PREVENT-IA: the revolutionary AI-powered platform designed to transform workplace safety. By offering smart, accessible, and dynamic Occupational Risk Prevention (ORP) training, PREVENT-IA aims to significantly reduce workplace accidents. Key features include instant doubt resolution, certification links, and outcome evaluations, all powered by advanced AI and cloud technology. Our platform not only tracks and organizes training but also personalizes it to fit specific job roles and activities. Empower your workforce with essential safety knowledge, manage training seamlessly, and create a safer workplace with PREVENT-IA. Join us in our mission to prioritize safety through innovation.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step4/source/source_step4.json",
+        "template_filepath": "prompt_creation/prompting/input/step4/templates/template4_step4.json",
+        "output_generated_on": "2024-06-05T23:16:23.469399",
+        "model_used": "ChatGPT",
+        "doctype": "llm_response",
+        "step_number": "4",
+        "iteration_number": "4"
+    }
+}

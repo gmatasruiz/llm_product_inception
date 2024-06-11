@@ -1,0 +1,11 @@
+{
+    "data": "Given this infomation about the product: %%source\n\nGenerate four stakeholder groups (Core Team, Frequent Involvement Stakeholders, Occasional Involvement Stakeholders and Seldom Involvement Stakeholders) and tables of stakeholder involvement. \n\nReview them and select the most consistent and accurate representation.",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step7/templates/template4_step7.json",
+        "doctype": "prompt_template",
+        "step_number": "7",
+        "iteration_number": "4",
+        "technique": "Self-Consistency",
+        "comments": "This template uses self-consistency prompting."
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "data": "Given this product information: %%source\n\nGenerate multiple elevator pitches answering the specified questions. Review them and select the most consistent and compelling pitch.\n\nProvide only the elevator pitch.",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step4/templates/template4_step4.json",
+        "doctype": "prompt_template",
+        "step_number": "4",
+        "iteration_number": "4",
+        "technique": "Self-Consistency",
+        "comments": "This template uses self-consistency prompting."
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "data": "For companies engaged in high-risk activities that seek to prevent accidents and ensure the safety of their workers, PREVENT-IA is the solution you need.\nThis AI-based training platform guides users through learning about Occupational Risk Prevention (ORP). Unlike competitors, who provide monotonous and generic material, PREVENT-IA offers an interactive and personalized learning experience.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step4/source/source_step4.json",
+        "doctype": "expected_response",
+        "step_number": "4",
+        "comments": "Create an elevator pitch based on the specified questions."
+    }
+}

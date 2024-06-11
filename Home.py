@@ -3,7 +3,7 @@ import os
 import streamlit as st
 
 from utils.utils import *
-from utils.streamlit_ui.ui_components import comp_show_md_file
+from utils.streamlit_ui.ui_components import comp_show_md_file, st_setup_logo
 
 
 # --- Functions ---
@@ -26,9 +26,11 @@ def display_home(root_dir: str, md_file_dir: str, search_substring: str = "READM
     assets_dir = os.path.join(root_dir, "assets")
     images_dir = os.path.join(assets_dir, "images")
 
+    logo_path = os.path.join(images_dir, "Thesis_AIStreamline.jpeg")
+
     # Image
     with st.columns(5)[2]:
-        st.image(os.path.join(images_dir, "Thesis_AIStreamline.jpeg"))
+        st.image(logo_path)
 
     # Repo explanation
     for file in os.listdir(md_file_dir):
@@ -66,6 +68,9 @@ def main():
             """,
         },
     )
+    
+    # Setup logo
+    st_setup_logo(REPO_ROOT_DIR)
 
     display_home(REPO_ROOT_DIR, REPO_ROOT_DIR)
 

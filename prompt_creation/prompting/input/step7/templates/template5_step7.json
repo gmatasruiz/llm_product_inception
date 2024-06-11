@@ -1,0 +1,11 @@
+{
+    "data": "Given this infomation about the product: %%source\n\nReflect on previous projects and their stakeholder involvement. Consider their roles and implications. \n\nNow, create four stakeholder groups (Core Team, Frequent Involvement Stakeholders, Occasional Involvement Stakeholders and Seldom Involvement Stakeholders) and a table listing the stakeholders for this product.",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step7/templates/template5_step7.json",
+        "doctype": "prompt_template",
+        "step_number": "7",
+        "iteration_number": "5",
+        "technique": "Reflexion",
+        "comments": "This template uses reflexion prompting."
+    }
+}

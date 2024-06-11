@@ -1,0 +1,12 @@
+{
+    "data": "PREVENT-IA is for companies and workers involved in high-risk occupations such as logistics, commissioning, transport, and assembly. This AI-powered education platform addresses the critical need to reduce workplace accidents, facilitating access to comprehensive on-site Occupational Risk Prevention (ORP) training. Unlike traditional methods that are often cumbersome and static, PREVENT-IA offers dynamic and personalized training modules, real-time support through chat, and robust tracking and reporting features. By leveraging cutting-edge AI and cloud technologies, our platform ensures continuous learning improvement, making it far superior to static, one-size-fits-all training programs. This way, PREVENT-IA not only enhances safety but also streamlines the entire ORP training process, providing a measurable impact on accident reduction and regulatory compliance.",
+    "__meta__": {
+        "source_filepath": "prompt_creation/prompting/input/step4/source/source_step4.json",
+        "template_filepath": "prompt_creation/prompting/input/step4/templates/template1_step4.json",
+        "output_generated_on": "2024-06-05T23:16:27.461044",
+        "model_used": "ChatGPT",
+        "doctype": "llm_response",
+        "step_number": "4",
+        "iteration_number": "1"
+    }
+}

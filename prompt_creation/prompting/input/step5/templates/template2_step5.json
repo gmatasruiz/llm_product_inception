@@ -1,0 +1,11 @@
+{
+    "data": "Here are some examples of product box content: \n\nName: 'AI Health Assistant', Slogan: 'Your Health, Our Priority', Benefits: 'Real-time monitoring, Personalized insights, Easy to use', Features: 'AI-driven analytics, User-friendly interface, Multi-platform support', Image: [Provide an attractive image description]. \n\nNow, given this infomation about the product: %%source\n\n ,create a product box with similar content.",
+    "__meta__": {
+        "template_filepath": "prompt_creation/prompting/input/step5/templates/template2_step5.json",
+        "doctype": "prompt_template",
+        "step_number": "5",
+        "iteration_number": "2",
+        "technique": "Few-shot",
+        "comments": "This template uses few-shot prompting."
+    }
+}
