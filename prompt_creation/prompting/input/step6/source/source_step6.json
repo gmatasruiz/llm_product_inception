@@ -5,6 +5,6 @@
         "doctype": "prompt_source",
         "step_number": "6",
         "iteration_number": "0",
-        "comments": "Create a list of features that are out of scope."
+        "comments": "Not List: Create a list of features that are out of scope."
     }
 }
