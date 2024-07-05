@@ -93,7 +93,7 @@ def evaluate_responses(
     """
     all_results = []
 
-    for template_file in os.listdir(template_dir):
+    for template_file in sorted(os.listdir(template_dir)):
         template_path = os.path.join(template_dir, template_file)
         template_data = read_generated_response(template_path)
         prompt = create_prompt(template_data, source_data)
@@ -146,7 +146,7 @@ def save_benchmark_results(
     benchmark.save_metrics_to_file(metrics_fname, metrics_path, figures_path)
 
     # Save per-step CSV
-    results_per_step_df = pd.DataFrame(results)
+    results_per_step_df = pd.DataFrame(results).sort_values(by="template_number")
     results_per_step_df.to_csv(
         os.path.join(metrics_path, f"{metrics_fname}.csv"), index=None
     )
@@ -208,5 +208,5 @@ if __name__ == "__main__":
             if os.path.isdir(os.path.join(input_path, d))
         ]
         for model in models:
-            for step in steps:
+            for step in sorted(steps):
                 benchmark_model_step(root_dir, model, step)
